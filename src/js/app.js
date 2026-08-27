@@ -1421,35 +1421,27 @@ function initHeroRandomSlider() {
   let index = 0;
   let activeImg = 1;
 
-  // Change hero image every 6 seconds smoothly after image is verified decoded
+  // Change hero background image every 5.5 seconds smoothly
   setInterval(() => {
     index = (index + 1) % HERO_HOME_IMAGES.length;
     const nextSrc = HERO_HOME_IMAGES[index];
 
     if (activeImg === 1) {
-      const tempImg = new Image();
-      tempImg.onload = () => {
-        img2.src = nextSrc;
-        requestAnimationFrame(() => {
-          img2.style.opacity = '1';
-          img1.style.opacity = '0';
-          activeImg = 2;
-        });
-      };
-      tempImg.src = nextSrc;
+      img2.src = nextSrc;
+      setTimeout(() => {
+        img2.style.opacity = '1';
+        img1.style.opacity = '0';
+        activeImg = 2;
+      }, 50);
     } else {
-      const tempImg = new Image();
-      tempImg.onload = () => {
-        img1.src = nextSrc;
-        requestAnimationFrame(() => {
-          img1.style.opacity = '1';
-          img2.style.opacity = '0';
-          activeImg = 1;
-        });
-      };
-      tempImg.src = nextSrc;
+      img1.src = nextSrc;
+      setTimeout(() => {
+        img1.style.opacity = '1';
+        img2.style.opacity = '0';
+        activeImg = 1;
+      }, 50);
     }
-  }, 6000);
+  }, 5500);
 }
 
 // Structure / Nature Section Random Slider & Lightbox Handler
