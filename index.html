@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Morada Quintal da Serra | Chalé Boutique & Day Use em Rancho Queimado - SC</title>
+  <meta name="description" content="Viva momentos inesquecíveis no Morada Quintal da Serra em Rancho Queimado, SC. Chalé boutique de alto padrão com Jacuzzi, Lareira, Vista Panorâmica e Pacotes Românticos." />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Morada Quintal da Serra | Hospedagem Boutique & Day Use" />
+  <meta property="og:description" content="Sofisticação acolhedora e natureza em Rancho Queimado - SC. Reserve direto com as melhores tarifas e pacotes de experiência." />
+  <meta property="og:image" content="assets/images/DJI_20260505153651_0104_D.jpeg" />
+  <meta property="og:type" content="website" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom CSS Design System -->
+  <link rel="stylesheet" href="src/css/main.css" />
+</head>
+<body class="bg-[var(--color-creme)] text-[var(--color-texto)] font-sans antialiased selection:bg-[var(--color-araucaria)] selection:text-white">
+
+  <!-- ==================== HEADER FIXO GLASSMORPHISM ==================== -->
+  <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 glass-header header-transparent py-3.5 px-4 md:px-8 xl:px-12">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="flex items-center gap-3 group shrink-0">
+        <img src="assets/logo-round.png" alt="Morada Quintal da Serra" class="w-[48px] h-[48px] md:w-[52px] md:h-[52px] xl:w-[55px] xl:h-[55px] rounded-full object-cover shadow-sm border border-[var(--color-champagne)]/40 transition-transform duration-300 group-hover:scale-105" />
+        <div class="hidden sm:flex flex-col border-l border-champagne-subtle header-brand-divider pl-3">
+          <span class="font-serif font-bold text-sm tracking-wider text-[var(--color-araucaria)] header-brand-title uppercase whitespace-nowrap">Morada</span>
+          <span class="text-[9px] tracking-widest text-[var(--color-texto-suave)] header-brand-sub uppercase font-semibold whitespace-nowrap">Quintal da Serra</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-10 2xl:gap-12 font-sans text-xs xl:text-sm font-semibold uppercase tracking-wider text-[var(--color-texto)] whitespace-nowrap">
+        <a href="#banner-bem-estar" class="hover:text-[var(--color-araucaria)] transition-colors py-1 whitespace-nowrap">O Chalé</a>
+        <a href="#banner-romance" class="hover:text-[var(--color-araucaria)] transition-colors py-1 whitespace-nowrap">Pacotes Românticos</a>
+        <a href="#banner-gastronomia" class="hover:text-[var(--color-araucaria)] transition-colors py-1 whitespace-nowrap">Adicionais</a>
+        <a href="#guia-hospede" class="hover:text-[var(--color-araucaria)] transition-colors py-1 whitespace-nowrap">Guia do Hóspede</a>
+      </nav>
+
+      <!-- Right Action Controls (Cart & Direct Booking & Mobile Hamburger) -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <!-- Cart Button -->
+        <button onclick="openCartModal()" class="relative p-2.5 rounded-full bg-[var(--color-branco-quente)] border border-champagne-subtle hover:border-[var(--color-champagne)] transition-all text-[var(--color-araucaria)] header-cart-btn shrink-0">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+          <span id="cart-badge" class="absolute -top-1 -right-1 bg-[var(--color-araucaria)] text-[var(--color-champagne)] font-mono text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border border-[var(--color-champagne)]" style="display: none;">0</span>
+        </button>
+
+        <!-- Primary CTA -->
+        <button onclick="openCartModal()" class="hidden sm:inline-flex btn-araucaria text-[11px] xl:text-xs !py-2.5 !px-4 xl:!px-5 uppercase tracking-wider whitespace-nowrap shrink-0">
+          Simular Reserva
+        </button>
+
+        <!-- Mobile Hamburger Menu Button -->
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-full bg-[var(--color-branco-quente)] border border-champagne-subtle text-[var(--color-araucaria)] focus:outline-none flex items-center justify-center shrink-0" aria-label="Menu Mobile">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center pt-32 pb-24 px-6 md:px-12 overflow-hidden">
+    <!-- Hero Background Image Slider & Gradient Overlay -->
+    <div id="hero-slider-container" class="absolute inset-0 z-0 overflow-hidden">
+      <img id="hero-bg-img-1" src="assets/images/Escolhas/Home/DJI_20260505153651_0104_D.jpeg" alt="Serra de Rancho Queimado" class="absolute inset-0 w-full h-full object-cover scale-105 transition-opacity duration-1000 ease-in-out opacity-100" />
+      <img id="hero-bg-img-2" src="" alt="Serra de Rancho Queimado" class="absolute inset-0 w-full h-full object-cover scale-105 transition-opacity duration-1000 ease-in-out opacity-0" />
+      <div class="absolute inset-0 z-1 bg-gradient-to-t from-[var(--color-araucaria-dark)] via-[rgba(14,38,30,0.55)] to-[rgba(14,38,30,0.35)] pointer-events-none"></div>
+      
+      <!-- Camada Vitrificada (Blur Glass) no topo alinhada com o Menu -->
+      <div id="hero-glass-strip" class="hero-header-glass-strip"></div>
+    </div>
+
+    <!-- Hero Content Card -->
+    <div class="relative z-10 max-w-4xl mx-auto text-center text-[var(--color-branco-quente)] space-y-6">
+      
+      <div class="inline-flex items-center gap-2 bg-[rgba(250,248,242,0.15)] backdrop-blur-md border border-[var(--color-champagne)] px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase text-[var(--color-champagne)] hero-anim-3">
+        <span class="w-2 h-2 rounded-full bg-[var(--color-champagne)] animate-pulse"></span>
+        Hospedagem Boutique & Day Use em Rancho Queimado - SC
+      </div>
+
+      <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-tight text-white hero-anim-1">
+        Uma experiência plural<br/>
+        <span class="italic font-normal text-[var(--color-champagne)]">em um lugar singular.</span>
+      </h1>
+
+      <p class="font-sans text-base md:text-lg text-[var(--color-champagne-light)] max-w-2xl mx-auto font-light leading-relaxed hero-anim-2">
+        Refúgio privativo cercado pela natureza intocada da serra catarinense. Jacuzzi aquecida, lareira acolhedora e pacotes de experiências românticas inesquecíveis.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="pt-4 flex flex-wrap justify-center gap-4 hero-anim-3">
+        <a href="#banner-bem-estar" class="btn-champagne text-xs uppercase tracking-wider font-bold !py-3.5 !px-8 shadow-lg inline-flex items-center justify-center">
+          Reserve Direto Sem Taxas
+        </a>
+        <a href="#o-chale" class="btn-outline-champagne text-xs uppercase tracking-wider font-bold !py-3.5 !px-8 !text-[var(--color-branco-quente)] hover:!text-[var(--color-araucaria-dark)]">
+          Conheça o Chalé
+        </a>
+      </div>
+
+      <!-- Quick Trust Indicators -->
+      <div class="pt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 text-center border-t border-[rgba(203,185,139,0.3)] max-w-4xl mx-auto hero-anim-3">
+        <div>
+          <span class="font-serif font-bold text-2xl text-[var(--color-champagne)] block">R$ 754,00</span>
+          <span class="text-[10px] sm:text-[11px] uppercase tracking-wider text-[var(--color-champagne-light)] font-medium whitespace-nowrap block">Diária p/ casal (2+ noites)</span>
+        </div>
+        <div>
+          <span class="font-serif font-bold text-2xl text-[var(--color-champagne)] block">Jacuzzi</span>
+          <span class="text-[10px] sm:text-[11px] uppercase tracking-wider text-[var(--color-champagne-light)] font-medium whitespace-nowrap block">Hidro Aquecida Privativa</span>
+        </div>
+        <div>
+          <span class="font-serif font-bold text-2xl text-[var(--color-champagne)] block">Starlink</span>
+          <span class="text-[10px] sm:text-[11px] uppercase tracking-wider text-[var(--color-champagne-light)] font-medium whitespace-nowrap block">Wi-Fi de Alta Velocidade</span>
+        </div>
+        <div>
+          <span class="font-serif font-bold text-2xl text-[var(--color-champagne)] block">Pet Friendly</span>
+          <span class="text-[10px] sm:text-[11px] uppercase tracking-wider text-[var(--color-champagne-light)] font-medium whitespace-nowrap block">Seu Pet é bem-vindo</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO 2: GALERIA DE FOTOS DA HOSPEDAGEM (FUNDO BRANCO 100VH, CANTO RETO 0° & CARREGAR MAIS) ==================== -->
+  <section id="galeria-reveal-container" class="relative z-10 bg-white w-full h-[400vh] -mt-[100vh]">
+    <div id="galeria-sticky-wrapper" class="sticky top-0 w-full h-screen overflow-hidden">
+      <section id="galeria" class="bg-white text-[var(--color-araucaria)] w-full h-full relative gallery-collapsed overflow-hidden">
+        
+        <!-- Full Bleed Photo Grid (4 Columns, Square 0deg Corners, White BG, 100vw Edge) -->
+        <div class="gallery-grid-edge pt-0 transition-transform duration-75 origin-center">
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/C110E2FB-EAE4-47FE-A391-8D42EAD1D710.jpeg', 'Experiência Inesquecível na Serra')">
+            <img src="assets/images/Escolhas/C110E2FB-EAE4-47FE-A391-8D42EAD1D710.jpeg" alt="Experiência Inesquecível na Serra" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Experiência Inesquecível na Serra</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/DJI_20260505153651_0104_D.jpeg', 'Vista Aérea da Serra Catarinense')">
+            <img src="assets/images/Escolhas/DJI_20260505153651_0104_D.jpeg" alt="Vista Aérea da Serra Catarinense" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Vista Aérea da Serra Catarinense</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/IMG_1983.jpeg', 'Momentos Especiais no Chalé')">
+            <img src="assets/images/Escolhas/IMG_1983.jpeg" alt="Momentos Especiais no Chalé" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Momentos Especiais no Chalé</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/IMG_3526.jpeg', 'Interior Elegante e Acolhedor do Chalé')">
+            <img src="assets/images/Escolhas/IMG_3526.jpeg" alt="Interior Elegante e Acolhedor do Chalé" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Interior Elegante e Acolhedor do Chalé</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/IMG_3553.jpeg', 'Espaço Externo Privativo')">
+            <img src="assets/images/Escolhas/IMG_3553.jpeg" alt="Espaço Externo Privativo" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Espaço Externo Privativo</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/IMG_3557.jpeg', 'Iluminação Cênica Noturna')">
+            <img src="assets/images/Escolhas/IMG_3557.jpeg" alt="Iluminação Cênica Noturna" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Iluminação Cênica Noturna</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/IMG_3566.jpeg', 'Deck de Madeira com Vista Panorâmica')">
+            <img src="assets/images/Escolhas/IMG_3566.jpeg" alt="Deck de Madeira com Vista Panorâmica" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Deck de Madeira com Vista Panorâmica</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/IMG_3568.jpeg', 'Refúgio de Paz nas Montanhas')">
+            <img src="assets/images/Escolhas/IMG_3568.jpeg" alt="Refúgio de Paz nas Montanhas" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Refúgio de Paz nas Montanhas</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/IMG_3570.jpeg', 'Cozinha Gourmet Integrada')">
+            <img src="assets/images/Escolhas/IMG_3570.jpeg" alt="Cozinha Gourmet Integrada" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Cozinha Gourmet Integrada</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/IMG_3596.jpeg', 'Conforto e Detalhes Nobres do Chalé')">
+            <img src="assets/images/Escolhas/IMG_3596.jpeg" alt="Conforto e Detalhes Nobres do Chalé" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Conforto e Detalhes Nobres do Chalé</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/IMG_4043.jpeg', 'Aconchego Interno com Lareira')">
+            <img src="assets/images/Escolhas/IMG_4043.jpeg" alt="Aconchego Interno com Lareira" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Aconchego Interno com Lareira</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1029068.jpeg', 'Atmosfera de Tranquilidade em Rancho Queimado')">
+            <img src="assets/images/Escolhas/P1029068.jpeg" alt="Atmosfera de Tranquilidade em Rancho Queimado" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Atmosfera de Tranquilidade em Rancho Queimado</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1029110.jpeg', 'Paisagem Natural e Araucárias')">
+            <img src="assets/images/Escolhas/P1029110.jpeg" alt="Paisagem Natural e Araucárias" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Paisagem Natural e Araucárias</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1029115.jpeg', 'Jardim Privativo da Morada')">
+            <img src="assets/images/Escolhas/P1029115.jpeg" alt="Jardim Privativo da Morada" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Jardim Privativo da Morada</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1029120.jpeg', 'Pôr do Sol Mágico na Serra')">
+            <img src="assets/images/Escolhas/P1029120.jpeg" alt="Pôr do Sol Mágico na Serra" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Pôr do Sol Mágico na Serra</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1029251.jpeg', 'Experiência Day Use e Pernoite')">
+            <img src="assets/images/Escolhas/P1029251.jpeg" alt="Experiência Day Use e Pernoite" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Experiência Day Use e Pernoite</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1029301.jpeg', 'Entorno Preservado e Ar Puro')">
+            <img src="assets/images/Escolhas/P1029301.jpeg" alt="Entorno Preservado e Ar Puro" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Entorno Preservado e Ar Puro</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1029305.jpeg', 'Estadia Inesquecível a Dois')">
+            <img src="assets/images/Escolhas/P1029305.jpeg" alt="Estadia Inesquecível a Dois" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Estadia Inesquecível a Dois</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071283.jpeg', 'Decoração Romântica de Surpresa')">
+            <img src="assets/images/Escolhas/P1071283.jpeg" alt="Decoração Romântica de Surpresa" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Decoração Romântica de Surpresa</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071289.jpeg', 'Velas e Iluminação Intimista')">
+            <img src="assets/images/Escolhas/P1071289.jpeg" alt="Velas e Iluminação Intimista" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Velas e Iluminação Intimista</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071293.jpeg', 'Detalhes da Produção Romântica')">
+            <img src="assets/images/Escolhas/P1071293.jpeg" alt="Detalhes da Produção Romântica" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Detalhes da Produção Romântica</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071294.jpeg', 'Ambiente Preparado com Carinho')">
+            <img src="assets/images/Escolhas/P1071294.jpeg" alt="Ambiente Preparado com Carinho" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Ambiente Preparado com Carinho</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071299.jpeg', 'Caminho de Pétalas e Romance')">
+            <img src="assets/images/Escolhas/P1071299.jpeg" alt="Caminho de Pétalas e Romance" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Caminho de Pétalas e Romance</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071300.jpeg', 'Lareira Aquecida e Acolhedora')">
+            <img src="assets/images/Escolhas/P1071300.jpeg" alt="Lareira Aquecida e Acolhedora" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Lareira Aquecida e Acolhedora</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071305.jpeg', 'Vinhos e Gastronomia da Serra')">
+            <img src="assets/images/Escolhas/P1071305.jpeg" alt="Vinhos e Gastronomia da Serra" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Vinhos e Gastronomia da Serra</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071316.jpeg', 'Celebrações de Namoro e Casamento')">
+            <img src="assets/images/Escolhas/P1071316.jpeg" alt="Celebrações de Namoro e Casamento" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Celebrações de Namoro e Casamento</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071317.jpeg', 'Produção Especial de Boas-Vindas')">
+            <img src="assets/images/Escolhas/P1071317.jpeg" alt="Produção Especial de Boas-Vindas" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Produção Especial de Boas-Vindas</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071321.jpeg', 'Espumante Premium e Tábua de Frios')">
+            <img src="assets/images/Escolhas/P1071321.jpeg" alt="Espumante Premium e Tábua de Frios" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Espumante Premium e Tábua de Frios</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071325.jpeg', 'Brinde Inesquecível a Dois')">
+            <img src="assets/images/Escolhas/P1071325.jpeg" alt="Brinde Inesquecível a Dois" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Brinde Inesquecível a Dois</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071337.jpeg', 'Vista do Pôr do Sol entre as Araucárias')">
+            <img src="assets/images/Escolhas/P1071337.jpeg" alt="Vista do Pôr do Sol entre as Araucárias" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Vista do Pôr do Sol entre as Araucárias</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071341.jpeg', 'Cenário Perfeito para Pedidos Especiais')">
+            <img src="assets/images/Escolhas/P1071341.jpeg" alt="Cenário Perfeito para Pedidos Especiais" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Cenário Perfeito para Pedidos Especiais</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071343(1).jpeg', 'Experiência VIP Romântica')">
+            <img src="assets/images/Escolhas/P1071343(1).jpeg" alt="Experiência VIP Romântica" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Experiência VIP Romântica</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071349.jpeg', 'Espaço Exclusivo e Reservado')">
+            <img src="assets/images/Escolhas/P1071349.jpeg" alt="Espaço Exclusivo e Reservado" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Espaço Exclusivo e Reservado</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071351.jpeg', 'Recordações Únicas da Estadia')">
+            <img src="assets/images/Escolhas/P1071351.jpeg" alt="Recordações Únicas da Estadia" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Recordações Únicas da Estadia</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071381.jpeg', 'Ambiente Noturno Iluminado')">
+            <img src="assets/images/Escolhas/P1071381.jpeg" alt="Ambiente Noturno Iluminado" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Ambiente Noturno Iluminado</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071449.jpeg', 'Experiência Day Use em Rancho Queimado')">
+            <img src="assets/images/Escolhas/P1071449.jpeg" alt="Experiência Day Use em Rancho Queimado" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Experiência Day Use em Rancho Queimado</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071514.jpeg', 'Pacote Casa Comigo - Decoração Intimista')">
+            <img src="assets/images/Escolhas/P1071514.jpeg" alt="Pacote Casa Comigo - Decoração Intimista" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Pacote Casa Comigo - Decoração Intimista</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071561.jpeg', 'Arranjo com Flores Naturais Nobres')">
+            <img src="assets/images/Escolhas/P1071561.jpeg" alt="Arranjo com Flores Naturais Nobres" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Arranjo com Flores Naturais Nobres</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071579.jpeg', 'Cenário Especial de Pedido de Casamento')">
+            <img src="assets/images/Escolhas/P1071579.jpeg" alt="Cenário Especial de Pedido de Casamento" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Cenário Especial de Pedido de Casamento</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/P1071586.jpeg', 'Momentos Únicos na Serra Catarinense')">
+            <img src="assets/images/Escolhas/P1071586.jpeg" alt="Momentos Únicos na Serra Catarinense" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Momentos Únicos na Serra Catarinense</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/pkg_namora_p3_img2.jpg', 'Produção Especial para Casais')">
+            <img src="assets/images/Escolhas/pkg_namora_p3_img2.jpg" alt="Produção Especial para Casais" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Produção Especial para Casais</span>
+            </div>
+          </div>
+          <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/pkg_namora_p3_img3.jpg', 'Mimos e Detalhes Especiais')">
+            <img src="assets/images/Escolhas/pkg_namora_p3_img3.jpg" alt="Mimos e Detalhes Especiais" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">
+              <span class="text-xs text-white font-medium">Mimos e Detalhes Especiais</span>
+            </div>
+          </div>
+        </div>
+
+      <!-- Gradient Fade + "Carregar Mais" Button Overlay (visible when collapsed) -->
+      <div id="gallery-load-more-bar" class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/95 to-transparent flex items-end justify-center pb-8 z-20 transition-opacity duration-300">
+        <button id="btn-load-more-gallery" onclick="expandGallerySection()" class="btn-araucaria text-xs uppercase tracking-widest font-bold !py-3.5 !px-10 shadow-2xl border border-[var(--color-araucaria)] hover:bg-[var(--color-araucaria-dark)] transition-all">
+          + Carregar Mais Fotos
+        </button>
+      </div>
+      
+      <!-- "Carregar Menos" Button (visible when expanded) -->
+      <div id="gallery-load-less-bar" class="w-full flex justify-center py-12 hidden opacity-0 transition-opacity duration-500">
+        <button onclick="collapseGallerySection()" class="btn-outline-champagne text-xs uppercase tracking-widest font-bold !py-3.5 !px-10 border border-[var(--color-champagne-dark)] text-[var(--color-araucaria)] hover:bg-[var(--color-champagne-light)] transition-all">
+          - Carregar Menos
+        </button>
+      </div>
+
+    </section>
+    </div>
+  </section>
+
+  <!-- ==================== BANNER PARALLAX: BEM-ESTAR & DAY USE ==================== -->
+  <section id="banner-bem-estar" class="section-banner-canyons !pb-36 md:!pb-44" style="background-image: url('assets/images/IMG_3530.jpeg');">
+    <div class="section-banner-content max-w-3xl space-y-4 reveal">
+      <span class="text-xs uppercase tracking-widest font-bold text-[var(--color-champagne)] block">
+        Relaxamento & Natureza
+      </span>
+      <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl font-normal text-white uppercase tracking-wider leading-tight">
+        BEM-ESTAR & DAY USE
+      </h2>
+      <p class="font-sans text-sm md:text-base text-[rgba(255,255,255,0.9)] font-light max-w-2xl mx-auto leading-relaxed">
+        Experiências pensadas para desacelerar e sentir. Aproveite nossa Jacuzzi aquecida privativa no formato pernoite ou na modalidade exclusiva Day Use (09h às 18h).
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO 3: WIDGET FLUTUANTE DE SIMULAÇÃO DE RESERVAS (OVERLAP 50%) ==================== -->
+  <section id="simulador-reserva" class="relative z-30 -mt-24 md:-mt-32 max-w-6xl mx-auto px-6 mb-12">
+    <div class="floating-booking-bar p-6 md:p-8 shadow-2xl">
+      
+      <!-- Top Switcher: Pernoite vs Day Use -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-6 mb-6 border-b border-[rgba(203,185,139,0.3)] gap-4">
+        <div>
+          <span class="badge-boutique text-[10px] text-[var(--color-champagne)] border-[var(--color-champagne)] mb-1">Simulador Online</span>
+          <h2 class="font-serif text-xl font-bold text-white">Calcule sua Estadia em Tempo Real</h2>
+        </div>
+
+        <!-- Mode Buttons -->
+        <div class="flex items-center gap-2 bg-[var(--color-araucaria-dark)] p-1.5 rounded-full border border-champagne-subtle">
+          <button id="btn-type-pernoite" onclick="setServiceType('pernoite')" class="btn-araucaria text-xs !py-2.5 !px-5">
+            🌙 Hospedagem (Pernoite)
+          </button>
+          <button id="btn-type-dayuse" onclick="setServiceType('dayuse')" class="btn-outline-champagne text-xs !py-2.5 !px-5 !text-white">
+            ☀️ Day Use (09h às 18h)
+          </button>
+        </div>
+      </div>
+
+      <!-- Controls Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 items-center">
+        
+        <!-- Check-in Date -->
+        <div class="lg:col-span-3">
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-[var(--color-champagne)] mb-1.5">Check-in (Entrada)</label>
+          <input type="date" id="input-checkin" class="w-full px-4 py-3 rounded-xl bg-[var(--color-araucaria-dark)] border border-champagne-subtle text-xs text-white focus:outline-none focus:border-[var(--color-champagne)]" />
+        </div>
+
+        <!-- Check-out Date -->
+        <div id="field-checkout-container" class="lg:col-span-3">
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-[var(--color-champagne)] mb-1.5">Check-out (Saída)</label>
+          <input type="date" id="input-checkout" class="w-full px-4 py-3 rounded-xl bg-[var(--color-araucaria-dark)] border border-champagne-subtle text-xs text-white focus:outline-none focus:border-[var(--color-champagne)]" />
+        </div>
+
+        <!-- Nights Slider / Display -->
+        <div id="nights-selector-container" class="lg:col-span-3">
+          <div class="flex justify-between text-[11px] font-bold uppercase tracking-wider text-[var(--color-champagne)] mb-1.5">
+            <span>Duração</span>
+            <span id="label-nights-display" class="text-white">2 noites</span>
+          </div>
+          <input type="range" id="slider-nights" min="1" max="7" value="2" oninput="setNights(this.value)" class="w-full accent-[var(--color-champagne)] cursor-pointer" />
+          <div class="flex justify-between text-[10px] text-[var(--color-champagne-light)] mt-1">
+            <span>1 noite (R$1.100)</span>
+            <span>2+ noites (R$754/n)</span>
+          </div>
+        </div>
+
+        <!-- Result & Checkout Button -->
+        <div class="lg:col-span-3 flex flex-col justify-center text-right sm:text-left lg:text-right space-y-2">
+          <div>
+            <span id="calc-rate-note" class="text-[10px] uppercase font-bold text-[var(--color-champagne-light)] block">2 Noites x R$ 754,00 / noite</span>
+            <span id="calc-subtotal-display" class="font-serif font-bold text-3xl text-[var(--color-champagne)]">R$ 1.508,00</span>
+          </div>
+
+          <button onclick="openCartModal()" class="btn-champagne text-[11px] sm:text-xs uppercase tracking-wider font-bold !py-3 w-full shadow-md whitespace-nowrap">
+            Prosseguir com Reserva ➔
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO O CHALÉ ==================== -->
+  <section id="o-chale" class="py-24 px-6 md:px-12">
+    <div class="max-w-6xl mx-auto space-y-16">
+      
+      <!-- Section Header -->
+      <div class="border-b border-champagne-subtle pb-8 space-y-3 reveal">
+        <span class="badge-boutique mb-1 inline-block">Conceito & Hospedagem</span>
+        <h2 class="font-serif text-3xl md:text-5xl font-bold text-[var(--color-araucaria)] leading-tight">
+          Sofisticação Acolhedora na Serra
+        </h2>
+        <p class="text-xs md:text-sm text-[var(--color-texto-suave)] max-w-2xl font-light leading-relaxed pt-1">
+          Projetado para oferecer o máximo conforto em um ambiente privativo, o Morada Quintal da Serra une a atmosfera aconchegante do chalé ao padrão de excelência de hospedagem boutique.
+        </p>
+      </div>
+
+      <!-- Feature Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Card 1 -->
+        <div class="card-boutique p-8 flex flex-col justify-between reveal">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-[rgba(203,185,139,0.15)] text-[var(--color-araucaria)] flex items-center justify-center font-bold text-xl mb-6">
+              🛁
+            </div>
+            <h3 class="font-serif text-xl font-bold text-[var(--color-araucaria)] mb-2">Jacuzzi Hidromassagem</h3>
+            <p class="text-xs text-[var(--color-texto-suave)] leading-relaxed font-light">
+              Hidromassagem aquecida privativa com vista panorâmica para as montanhas de Rancho Queimado. Relaxamento total em qualquer estação do ano.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-champagne-subtle flex items-center justify-between text-[11px] font-semibold text-[var(--color-araucaria)]">
+            <span>Conforto Térmico</span>
+            <span>Incluído</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card-boutique p-8 flex flex-col justify-between reveal">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-[rgba(203,185,139,0.15)] text-[var(--color-araucaria)] flex items-center justify-center font-bold text-xl mb-6">
+              🔥
+            </div>
+            <h3 class="font-serif text-xl font-bold text-[var(--color-araucaria)] mb-2">Lareira Acolhedora</h3>
+            <p class="text-xs text-[var(--color-texto-suave)] leading-relaxed font-light">
+              Lareira interna no chalé com lenha selecionada. Perfeita para harmonizar com vinhos finos nas noites frias da serra catarinense.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-champagne-subtle flex items-center justify-between text-[11px] font-semibold text-[var(--color-araucaria)]">
+            <span>Ambiente Romântico</span>
+            <span>Incluído</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card-boutique p-8 flex flex-col justify-between reveal">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-[rgba(203,185,139,0.15)] text-[var(--color-araucaria)] flex items-center justify-center font-bold text-xl mb-6">
+              📡
+            </div>
+            <h3 class="font-serif text-xl font-bold text-[var(--color-araucaria)] mb-2">Wi-Fi Starlink & Lazer</h3>
+            <p class="text-xs text-[var(--color-texto-suave)] leading-relaxed font-light">
+              Internet ultrarrápida via satélite Starlink. Trabalhe via remoto com estabilidade ou aproveite streamings de alta resolução.
+            </p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-champagne-subtle flex items-center justify-between text-[11px] font-semibold text-[var(--color-araucaria)]">
+            <span>Conectividade Total</span>
+            <span>Incluído</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Chalet Main Highlights Showcase -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-8">
+        
+        <div class="lg:col-span-7 h-96 shadow-lg rounded-3xl overflow-hidden relative cursor-pointer group" id="estrutura-slider-container" onclick="handleStructureClick()">
+          <img id="estrutura-bg-img-1" src="assets/images/Escolhas/Estrutura/IMG_3530.jpeg" alt="Estrutura Morada Quintal da Serra" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100 group-hover:scale-105 transition-transform duration-700" />
+          <img id="estrutura-bg-img-2" src="" alt="Estrutura Morada Quintal da Serra" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0 group-hover:scale-105 transition-transform duration-700" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.4)] via-transparent to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-3 left-4 text-white text-[11px] font-medium z-10 pointer-events-none flex items-center gap-1.5 bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/20">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Clique para ampliar a foto</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 space-y-6">
+          <span class="badge-boutique">Privacidade & Natureza</span>
+          <h3 class="font-serif text-3xl font-bold text-[var(--color-araucaria)]">
+            Estrutura Completa Pensada em Cada Detalhe
+          </h3>
+          <p class="text-xs md:text-sm text-[var(--color-texto-suave)] font-light leading-relaxed">
+            Cozinha totalmente equipada, cama queen com enxoval nobre, ar-condicionado quente/frio, deck de madeira privativo e amplo gramado cercado pelas araucárias.
+          </p>
+
+          <ul class="space-y-3 text-xs text-[var(--color-texto)] font-medium">
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs">✓</span>
+              Cozinha Gourmet (Cooktop, Frigobar, Utensílios e Taças)
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs">✓</span>
+              Estudo e iluminação cênica para fotos e ensaios
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs">✓</span>
+              Estacione seu veículo em área privativa dentro da propriedade
+            </li>
+          </ul>
+
+          <div class="pt-2">
+            <button onclick="openCartModal()" class="btn-araucaria text-xs uppercase tracking-wider">
+              Verificar Disponibilidade de Datas
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== BANNER PARALLAX: ROMANCE ==================== -->
+  <section id="banner-romance" class="section-banner-canyons" style="background-image: url('assets/images/P1071283.jpeg');">
+    <div class="section-banner-content max-w-3xl space-y-4 reveal">
+      <span class="text-xs uppercase tracking-widest font-bold text-[var(--color-champagne)] block">
+        Momentos Inesquecíveis
+      </span>
+      <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl font-normal text-white uppercase tracking-wider leading-tight">
+        ROMANCE
+      </h2>
+      <p class="font-sans text-sm md:text-base text-[rgba(255,255,255,0.9)] font-light max-w-2xl mx-auto leading-relaxed">
+        Experiências criadas para casais que desejam aproveitar a serra com mais privacidade, conforto, decoração especial e atmosfera romântica inesquecível.
+      </p>
+      <div class="pt-4">
+        <a href="#pacotes-romanticos" class="btn-champagne text-xs uppercase tracking-wider font-bold !py-3.5 !px-8 shadow-lg inline-flex items-center justify-center">
+          Ver Pacotes Românticos
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MÓDULO DE PACOTES ROMÂNTICOS ==================== -->
+  <section id="pacotes-romanticos" class="py-24 px-6 md:px-12 bg-[var(--color-branco-quente)] border-y border-champagne-subtle">
+    <div class="max-w-6xl mx-auto space-y-12">
+      
+      <div class="text-center max-w-3xl mx-auto space-y-4 reveal">
+        <span class="badge-boutique">Experiências Especiais & Pedidos</span>
+        <h2 class="font-serif text-3xl md:text-5xl font-bold text-[var(--color-araucaria)]">
+          Pacotes de Surpresas Românticas
+        </h2>
+        <p class="text-xs md:text-sm text-[var(--color-texto-suave)] font-light leading-relaxed">
+          Preparamos cada detalhe com carinho para que o seu pedido de namoro ou casamento seja único, inesquecível e cheio de significado. Onde histórias de amor ganham novos capítulos.
+        </p>
+
+        <!-- Category Tab Switcher -->
+        <div class="pt-4 flex justify-center gap-4">
+          <button id="tab-pkg-namora" onclick="switchPackageCategory('namorar')" class="btn-araucaria text-xs !py-2.5 !px-6">
+            💍 "Namora comigo?"
+          </button>
+          <button id="tab-pkg-casa" onclick="switchPackageCategory('casar')" class="btn-outline-champagne text-xs !py-2.5 !px-6">
+            💎 "Casa comigo?" (Pedidos de Casamento)
+          </button>
+        </div>
+      </div>
+
+      <!-- Dynamic Package Cards Container -->
+      <div id="packages-cards-container" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Rendered via JavaScript -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== BANNER PARALLAX: GASTRONOMIA & CONFORTO ==================== -->
+  <section id="banner-gastronomia" class="section-banner-canyons" style="background-image: url('assets/images/P1071300.jpeg');">
+    <div class="section-banner-content max-w-3xl space-y-4 reveal">
+      <span class="text-xs uppercase tracking-widest font-bold text-[var(--color-champagne)] block">
+        Sabores da Serra Catarinense
+      </span>
+      <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl font-normal text-white uppercase tracking-wider leading-tight">
+        GASTRONOMIA & CONFORTO
+      </h2>
+      <p class="font-sans text-sm md:text-base text-[rgba(255,255,255,0.9)] font-light max-w-2xl mx-auto leading-relaxed">
+        Sabores que acompanham o ritmo da experiência. Cestas de café da manhã artesanal de Rancho Queimado, vinhos finos e lenha aquecida para a lareira.
+      </p>
+      <div class="pt-4">
+        <a href="#adicionais-gastronomia" class="btn-champagne text-xs uppercase tracking-wider font-bold !py-3.5 !px-8 shadow-lg inline-flex items-center justify-center">
+          Ver Cestas & Adicionais
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ADICIONAIS DE EXPERIÊNCIA ==================== -->
+  <section id="adicionais-gastronomia" class="py-20 px-6 md:px-12">
+    <div class="max-w-6xl mx-auto space-y-12">
+      
+      <!-- Section Header -->
+      <div class="border-b border-champagne-subtle pb-6 space-y-3 reveal">
+        <span class="badge-boutique mb-1 inline-block">Upsell & Comodidade</span>
+        <h2 class="font-serif text-2xl md:text-4xl font-bold text-[var(--color-araucaria)] leading-tight">
+          Adicionais para Enriquecer sua Estadia
+        </h2>
+        <p class="text-xs text-[var(--color-texto-suave)] max-w-2xl font-light leading-relaxed pt-1">
+          Selecione itens extras diretamente no ato da reserva para personalizar ainda mais sua experiência.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Addon 1 -->
+        <div class="card-boutique p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-3">
+              <span class="text-2xl">🧺</span>
+              <span class="font-serif font-bold text-lg text-[var(--color-araucaria)]">R$ 140,00</span>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-[var(--color-araucaria)] mb-1">Cesta de Café da Manhã</h3>
+            <p class="text-xs text-[var(--color-texto-suave)] font-light leading-relaxed">
+              Pães artesanais, queijos coloniais de Rancho Queimado, geleias e frutas da estação entregues no chalé.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-champagne-subtle">
+            <button onclick="toggleAddon('add-cafe')" class="btn-outline-champagne text-xs w-full !py-2">
+              + Incluir Cesta
+            </button>
+          </div>
+        </div>
+
+        <!-- Addon 2 -->
+        <div class="card-boutique p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-3">
+              <span class="text-2xl">🍷</span>
+              <span class="font-serif font-bold text-lg text-[var(--color-araucaria)]">R$ 190,00</span>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-[var(--color-araucaria)] mb-1">Kit Lareira & Vinho Fino</h3>
+            <p class="text-xs text-[var(--color-texto-suave)] font-light leading-relaxed">
+              Lenha ecológica selecionada, acendedores e 1 garrafa de vinho tinto reservado para a lareira.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-champagne-subtle">
+            <button onclick="toggleAddon('add-lareira')" class="btn-outline-champagne text-xs w-full !py-2">
+              + Incluir Kit Vinho
+            </button>
+          </div>
+        </div>
+
+        <!-- Addon 3 -->
+        <div class="card-boutique p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-start mb-3">
+              <span class="text-2xl">🐾</span>
+              <span class="font-serif font-bold text-lg text-[var(--color-araucaria)]">R$ 95,00</span>
+            </div>
+            <h3 class="font-serif text-lg font-bold text-[var(--color-araucaria)] mb-1">Taxa Pet Amigo</h3>
+            <p class="text-xs text-[var(--color-texto-suave)] font-light leading-relaxed">
+              Comedouros, saquinhos higiênicos, mimos para o seu pet e higienização especial pós-check-out.
+            </p>
+          </div>
+          <div class="mt-6 pt-3 border-t border-champagne-subtle">
+            <button onclick="toggleAddon('add-pet')" class="btn-outline-champagne text-xs w-full !py-2">
+              + Incluir Taxa Pet
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- ==================== GUIA DIGITAL DO HÓSPEDE ==================== -->
+  <section id="guia-hospede" class="py-24 px-6 md:px-12">
+    <div class="max-w-5xl mx-auto card-boutique p-8 md:p-12 glass-card relative overflow-hidden reveal">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-8 space-y-4">
+          <span class="badge-boutique">Tecnologia & Manual Web</span>
+          <h2 class="font-serif text-3xl font-bold text-[var(--color-araucaria)]">
+            Guia Digital do Hóspede Morada
+          </h2>
+          <p class="text-xs md:text-sm text-[var(--color-texto-suave)] font-light leading-relaxed">
+            Acesse as orientações da casa a qualquer momento pelo seu smartphone: senha do Wi-Fi Starlink, como utilizar a jacuzzi aquecida e a lareira, regras da propriedade e dicas de restaurantes selecionados em Rancho Queimado.
+          </p>
+          <div class="pt-2">
+            <button onclick="openGuestGuideModal()" class="btn-araucaria text-xs uppercase tracking-wider">
+              📖 Abrir Guia Digital do Hóspede
+            </button>
+          </div>
+        </div>
+
+        <div class="md:col-span-4 flex justify-center">
+          <div class="w-40 h-40 rounded-2xl bg-[var(--color-araucaria)] p-4 text-center text-[var(--color-champagne)] flex flex-col items-center justify-center space-y-2 border border-[var(--color-champagne)] shadow-md">
+            <span class="text-4xl">📱</span>
+            <span class="font-mono text-[10px] font-bold uppercase tracking-wider">Acesso via QR Code no Chalé</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== LOCALIZAÇÃO & RANCHO QUEIMADO ==================== -->
+  <section id="localizacao" class="py-24 px-6 md:px-12 bg-[var(--color-branco-quente)] border-t border-champagne-subtle">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+      
+      <div class="lg:col-span-5 space-y-6 reveal">
+        <div>
+          <span class="badge-boutique mb-3 inline-block">Serra Catarinense</span>
+          <h2 class="font-serif text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--color-araucaria)] leading-tight whitespace-nowrap">
+            Rancho Queimado - SC
+          </h2>
+        </div>
+        <p class="text-xs md:text-sm text-[var(--color-texto-suave)] font-light leading-relaxed">
+          Localizada a apenas 65 km da capital Florianópolis, Rancho Queimado é conhecida como a capital catarinense do morango e por seu clima serrano europeu. A altitude proporciona temperaturas amenas, ar puro e uma paisagem exuberante de araucárias.
+        </p>
+
+        <div class="space-y-3 text-xs text-[var(--color-texto)] font-medium pt-2">
+          <div class="flex items-center gap-3">
+            <span class="text-lg">📍</span>
+            <span>A apenas 1h15m de Florianópolis via BR-282</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-lg">🍷</span>
+            <span>Circuito gastronômico e vinícolas da região da serra</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-lg">🌲</span>
+            <span>Tranquilidade, clima ameno e privacidade total</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 card-boutique p-6 md:p-8 bg-white space-y-4 shadow-md">
+        <h3 class="font-serif text-xl font-bold text-[var(--color-araucaria)] border-b border-champagne-subtle pb-3">
+          Dúvidas Frequentes (FAQ)
+        </h3>
+
+        <details class="group py-2 border-b border-champagne-subtle">
+          <summary class="flex justify-between items-center font-semibold text-xs text-[var(--color-araucaria)] cursor-pointer">
+            <span>Qual o horário de check-in e check-out?</span>
+            <span class="transition group-open:rotate-180">▼</span>
+          </summary>
+          <p class="text-[11px] text-[var(--color-texto-suave)] mt-2 font-light">
+            O check-in de hospedagem é a partir das 14h e o check-out até às 11h. Para a modalidade Day Use, o horário é das 09h às 18h.
+          </p>
+        </details>
+
+        <details class="group py-2 border-b border-champagne-subtle">
+          <summary class="flex justify-between items-center font-semibold text-xs text-[var(--color-araucaria)] cursor-pointer">
+            <span>Como funcionam os valores das diárias?</span>
+            <span class="transition group-open:rotate-180">▼</span>
+          </summary>
+          <p class="text-[11px] text-[var(--color-texto-suave)] mt-2 font-light">
+            Para 2 ou mais diárias, o valor é de R$ 754,00 / noite para o casal. Para apenas 1 diária (ex: sábado a domingo), o valor é de R$ 1.100,00.
+          </p>
+        </details>
+
+        <details class="group py-2 border-b border-champagne-subtle">
+          <summary class="flex justify-between items-center font-semibold text-xs text-[var(--color-araucaria)] cursor-pointer">
+            <span>Qual a política para animais de estimação (Pets)?</span>
+            <span class="transition group-open:rotate-180">▼</span>
+          </summary>
+          <p class="text-[11px] text-[var(--color-texto-suave)] mt-2 font-light">
+            Aceitamos pets mediante contratação da Taxa Pet Amigo (R$ 95,00 por estadia), garantindo higienização especial do chalé.
+          </p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-[var(--color-araucaria-dark)] text-[var(--color-branco-quente)] py-16 px-6 md:px-12 border-t border-[var(--color-champagne)]">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-[rgba(203,185,139,0.3)]">
+      
+      <div class="space-y-4">
+        <img src="assets/logo-round.png" alt="Morada Quintal da Serra" class="w-[55px] h-[55px] rounded-full object-cover shadow-sm border border-[var(--color-champagne)]/40" />
+        <p class="text-xs text-[var(--color-champagne-light)] font-light">
+          Morada Quintal da Serra — Refúgio boutique & Day Use na serra catarinense.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-serif font-bold text-sm text-[var(--color-champagne)] mb-3 uppercase tracking-wider">Navegação</h4>
+        <ul class="space-y-2 text-xs text-[var(--color-champagne-light)]">
+          <li><a href="#banner-bem-estar" class="hover:text-white transition-colors">O Chalé</a></li>
+          <li><a href="#banner-romance" class="hover:text-white transition-colors">Pacotes Românticos</a></li>
+          <li><a href="#banner-gastronomia" class="hover:text-white transition-colors">Adicionais</a></li>
+          <li><a href="#guia-hospede" class="hover:text-white transition-colors">Guia do Hóspede</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-serif font-bold text-sm text-[var(--color-champagne)] mb-3 uppercase tracking-wider">Contato & Atendimento</h4>
+        <ul class="space-y-2 text-xs text-[var(--color-champagne-light)] font-mono">
+          <li>📱 (48) 99188-2991</li>
+          <li>📸 @moradaquintaldaserra</li>
+          <li>📍 Rancho Queimado - SC</li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-serif font-bold text-sm text-[var(--color-champagne)] mb-3 uppercase tracking-wider">Reserva Direta</h4>
+        <p class="text-xs text-[var(--color-champagne-light)] font-light mb-4">
+          Reserve diretamente com os proprietários e garanta os melhores adicionais para sua hospedagem.
+        </p>
+        <button onclick="openCartModal()" class="btn-champagne text-xs uppercase tracking-wider font-bold !py-2.5 w-full">
+          Simular Reserva Agora
+        </button>
+      </div>
+
+    </div>
+
+    <div class="max-w-6xl mx-auto pt-8 text-center text-[11px] text-[var(--color-champagne-light)] font-light">
+      <p>© 2026 Morada Quintal da Serra. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL 1: SHOPPING CART & TRANSPARENT CHECKOUT ==================== -->
+  <div id="checkout-modal" class="modal-backdrop">
+    <div class="modal-content">
+      <div id="cart-modal-body">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 2: PACKAGE DETAILS & SPECIFIC GALLERY ==================== -->
+  <div id="package-details-modal" class="modal-backdrop">
+    <div class="modal-content max-w-4xl">
+      <div id="package-details-body">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 3: LIGHTBOX GALLERY (WITH PREV/NEXT ARROWS) ==================== -->
+  <div id="gallery-modal" class="modal-backdrop bg-black/95 backdrop-blur-md" onclick="closeLightbox()">
+    <!-- Close Button -->
+    <button onclick="closeLightbox()" class="fixed top-6 right-6 w-12 h-12 rounded-full bg-black/75 hover:bg-black text-white flex items-center justify-center font-bold text-xl z-[120] border border-white/20 transition-all cursor-pointer shadow-lg" title="Fechar (Esc)">
+      ✕
+    </button>
+
+    <!-- Previous Arrow (‹) -->
+    <button onclick="prevLightboxImage(event)" class="fixed left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/75 hover:bg-black text-white flex items-center justify-center font-bold text-2xl z-[120] border border-white/20 transition-all cursor-pointer shadow-lg hover:scale-110" title="Anterior (Seta Esquerda)">
+      ‹
+    </button>
+
+    <!-- Next Arrow (›) -->
+    <button onclick="nextLightboxImage(event)" class="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full bg-black/75 hover:bg-black text-white flex items-center justify-center font-bold text-2xl z-[120] border border-white/20 transition-all cursor-pointer shadow-lg hover:scale-110" title="Próxima (Seta Direita)">
+      ›
+    </button>
+
+    <!-- Main Image Container -->
+    <div class="relative flex items-center justify-center w-full h-full p-4 md:p-12" onclick="event.stopPropagation()">
+      <img id="lightbox-img" src="" alt="Ampliação" class="max-w-[90vw] max-h-[88vh] w-auto h-auto object-contain drop-shadow-2xl select-none transition-opacity duration-200" />
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 3: GUIA DIGITAL DO HÓSPEDE ==================== -->
+  <div id="guest-guide-modal" class="modal-backdrop" onclick="closeGuestGuideModal()">
+    <div class="modal-content p-6 md:p-8" onclick="event.stopPropagation()">
+      <div class="flex justify-between items-center pb-4 border-b border-champagne-subtle mb-6">
+        <div>
+          <span class="badge-boutique mb-1">Manual da Casa</span>
+          <h2 class="font-serif text-2xl font-bold text-[var(--color-araucaria)]">Guia Digital do Hóspede</h2>
+        </div>
+        <button onclick="closeGuestGuideModal()" class="w-9 h-9 rounded-full bg-[var(--color-creme)] text-[var(--color-araucaria)] flex items-center justify-center font-bold">
+          ✕
+        </button>
+      </div>
+
+      <div class="space-y-6 text-xs text-[var(--color-texto)]">
+        <div class="card-boutique p-4 space-y-2">
+          <h3 class="font-bold text-sm text-[var(--color-araucaria)]">📡 Wi-Fi Starlink de Alta Velocidade</h3>
+          <p><strong>Rede:</strong> Morada Quintal da Serra</p>
+          <p><strong>Senha:</strong> morada2026</p>
+        </div>
+
+        <div class="card-boutique p-4 space-y-2">
+          <h3 class="font-bold text-sm text-[var(--color-araucaria)]">🛁 Jacuzzi Hidromassagem Aquecida</h3>
+          <p>Ligue a hidromassagem utilizando o painel lateral. O aquecimento automático mantém a água a 38°C. Utilize os sais de banho disponibilizados no banheiro.</p>
+        </div>
+
+        <div class="card-boutique p-4 space-y-2">
+          <h3 class="font-bold text-sm text-[var(--color-araucaria)]">🔥 Lareira Interna</h3>
+          <p>Utilize os acendedores ecológicos e a lenha seca disposta ao lado da lareira. Abra a chaminé antes do acendimento.</p>
+        </div>
+
+        <div class="card-boutique p-4 space-y-2">
+          <h3 class="font-bold text-sm text-[var(--color-araucaria)]">🍷 Dicas de Gastronomia em Rancho Queimado</h3>
+          <p>Restaurantes recomendados: Bistrô da Serra, Casa do Morango, Café Colonial Rancho Queimado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MOBILE MENU DRAWER ==================== -->
+  <div id="mobile-nav-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] opacity-0 pointer-events-none transition-opacity duration-300" onclick="closeMobileMenu()"></div>
+
+  <div id="mobile-nav-drawer" class="fixed top-0 right-0 w-[82vw] max-w-[320px] h-full bg-[var(--color-araucaria-dark)] text-white z-[95] transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col shadow-2xl">
+    <div class="flex items-center justify-between p-5 border-b border-[rgba(203,185,139,0.3)] shrink-0">
+      <div class="flex items-center gap-3">
+        <img src="assets/logo-round.png" alt="Morada Logo" class="w-9 h-9 rounded-full border border-[var(--color-champagne)]/40 object-cover" />
+        <span class="font-serif font-bold text-sm tracking-wider text-white">Menu Morada</span>
+      </div>
+      <button onclick="closeMobileMenu()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition-colors">✕</button>
+    </div>
+
+    <nav class="flex-1 overflow-y-auto p-6 space-y-4">
+      <a href="#banner-bem-estar" onclick="closeMobileMenu()" class="flex items-center gap-3 py-3 border-b border-white/10 text-xs font-semibold uppercase tracking-wider text-[var(--color-champagne)] hover:text-white transition-colors">
+        <span>🌿</span> O Chalé
+      </a>
+      <a href="#banner-romance" onclick="closeMobileMenu()" class="flex items-center gap-3 py-3 border-b border-white/10 text-xs font-semibold uppercase tracking-wider text-[var(--color-champagne)] hover:text-white transition-colors">
+        <span>💍</span> Pacotes Românticos
+      </a>
+      <a href="#banner-gastronomia" onclick="closeMobileMenu()" class="flex items-center gap-3 py-3 border-b border-white/10 text-xs font-semibold uppercase tracking-wider text-[var(--color-champagne)] hover:text-white transition-colors">
+        <span>🧺</span> Adicionais
+      </a>
+      <a href="#guia-hospede" onclick="closeMobileMenu()" class="flex items-center gap-3 py-3 border-b border-white/10 text-xs font-semibold uppercase tracking-wider text-[var(--color-champagne)] hover:text-white transition-colors">
+        <span>📖</span> Guia do Hóspede
+      </a>
+    </nav>
+
+    <div class="p-6 border-t border-[rgba(203,185,139,0.3)] space-y-3 bg-[var(--color-araucaria)]/40 shrink-0">
+      <button onclick="closeMobileMenu(); openCartModal();" class="w-full btn-champagne text-xs uppercase tracking-wider font-bold py-3.5 flex items-center justify-center gap-2">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+        Simular Reserva
+      </button>
+      <a href="https://wa.me/5548991882991" target="_blank" class="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-[var(--color-champagne)]/40 text-xs font-semibold uppercase tracking-wider text-white hover:bg-white/10 transition-colors text-center">
+        <span>💬</span> Falar no WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- JavaScript Main Application -->
+  <script src="src/js/app.js"></script>
+</body>
+</html>

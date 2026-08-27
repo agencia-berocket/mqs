@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Morada Quintal da Serra | Referência Boutique Serra SC (Variação B)</title>
+  <meta name="description" content="Uma experiência plural em um lugar singular em Rancho Queimado - SC. Chalés boutique, Jacuzzi, Lareira e Pacotes Românticos." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Base Main CSS & Variation B Styling -->
+  <link rel="stylesheet" href="src/css/main.css" />
+  <link rel="stylesheet" href="src/css/variacao-b.css" />
+</head>
+<body class="bg-[#F4EFE3] text-[#1F2723] font-canyons-body antialiased">
+
+  <!-- ==================== HEADER ESTILO MORADA DOS CANYONS ==================== -->
+  <header class="header-canyons">
+    <!-- Logo -->
+    <a href="#hero-canyons" class="flex items-center gap-3 shrink-0">
+      <img src="assets/logo-round.png" alt="Morada Quintal da Serra" class="w-[48px] h-[48px] md:w-[52px] md:h-[52px] xl:w-[55px] xl:h-[55px] rounded-full object-cover shadow-sm border border-[var(--color-champagne)]/40 transition-transform duration-300 group-hover:scale-105 brightness-105" />
+      <span class="font-canyons-title text-xs xl:text-sm tracking-widest text-white font-semibold border-l border-[rgba(203,185,139,0.3)] pl-3 hidden sm:inline whitespace-nowrap">
+        MORADA QUINTAL DA SERRA
+      </span>
+    </a>
+
+    <!-- Center Menu -->
+    <nav class="hidden lg:flex items-center gap-6 xl:gap-10 2xl:gap-12 font-canyons-body text-xs xl:text-sm font-medium uppercase tracking-widest text-white whitespace-nowrap">
+      <a href="#a-morada" class="hover:text-[var(--canyons-accent)] transition-colors whitespace-nowrap">O Chalé</a>
+      <a href="#romance-section" class="hover:text-[var(--canyons-accent)] transition-colors whitespace-nowrap">Pacotes Românticos</a>
+      <a href="#experiencias-tabs" class="hover:text-[var(--canyons-accent)] transition-colors whitespace-nowrap">Galeria de Fotos</a>
+      <a href="#bem-estar-section" class="hover:text-[var(--canyons-accent)] transition-colors whitespace-nowrap">Guia do Hóspede</a>
+    </nav>
+
+    <!-- Action Button -->
+    <div class="flex items-center gap-4 shrink-0">
+      <button onclick="openCartModal()" class="btn-canyons-outline whitespace-nowrap shrink-0">
+        Faça sua Reserva
+      </button>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION PARALLAX (ESTILO REFERÊNCIA) ==================== -->
+  <section id="hero-canyons" class="hero-parallax-canyons" style="background-image: url('assets/images/DJI_20260505153651_0104_D.jpeg');">
+    <div class="hero-overlay-canyons"></div>
+    
+    <div class="relative z-10 text-center text-white px-6 max-w-4xl space-y-6 pt-20">
+      <span class="text-xs uppercase tracking-widest font-semibold text-[var(--canyons-accent)] block mb-2">
+        Rancho Queimado — Santa Catarina
+      </span>
+
+      <h1 class="font-canyons-title text-4xl sm:text-6xl md:text-7xl font-normal leading-tight text-white">
+        Uma experiência plural<br/>
+        <span class="italic text-[var(--canyons-accent)]">em um lugar singular.</span>
+      </h1>
+
+      <p class="font-canyons-body text-sm sm:text-base text-[rgba(255,255,255,0.85)] max-w-2xl mx-auto font-light leading-relaxed">
+        O luxo de viver a natureza de Rancho Queimado com exclusividade, aconchego boutique e o silêncio restaurador da serra.
+      </p>
+
+      <div class="pt-6 flex justify-center gap-4">
+        <button onclick="openCartModal()" class="btn-canyons-filled">
+          Faça sua Reserva
+        </button>
+        <a href="#a-morada" class="btn-canyons-outline">
+          Conheça o Chalé
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO A MORADA (EDITORIAL INTRO) ==================== -->
+  <section id="a-morada" class="py-28 px-6 md:px-16 bg-[#F4EFE3]">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+      
+      <div class="md:col-span-6 space-y-6">
+        <span class="text-xs uppercase font-bold tracking-widest text-[var(--canyons-accent)] block">01. O Conceito</span>
+        <h2 class="font-canyons-title text-3xl md:text-5xl font-normal text-[var(--canyons-green)] leading-tight">
+          Privilegiada por um entorno incrivelmente belo
+        </h2>
+        <p class="font-canyons-body text-sm text-[var(--canyons-text-muted)] font-light leading-relaxed">
+          Nascido com a missão de estar à altura de sua localização única em Rancho Queimado, o Morada Quintal da Serra oferece cada experiência de forma autêntica e surpreendente, garantindo que seus dias na serra sejam inesquecíveis e renovadores.
+        </p>
+        <div class="pt-2 flex gap-4">
+          <button onclick="openCartModal()" class="btn-canyons-filled">
+            Simular Valores
+          </button>
+          <a href="https://wa.me/5548991882991?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Morada%20Quintal%20da%20Serra" target="_blank" class="btn-canyons-outline !text-[var(--canyons-green)] !border-[var(--canyons-green)] hover:!bg-[var(--canyons-green)] hover:!text-white">
+            Entre em Contato
+          </a>
+        </div>
+      </div>
+
+      <div class="md:col-span-6">
+        <div class="relative overflow-hidden shadow-2xl">
+          <img src="assets/images/IMG_3526.jpeg" alt="A Morada Chalé" class="w-full h-[450px] object-cover hover:scale-105 transition-transform duration-700" onclick="openLightbox('assets/images/IMG_3526.jpeg', 'Ambiente Acolhedor do Chalé')" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== BANNER PARALLAX 1: ROMANCE ==================== -->
+  <section id="romance-section" class="section-banner-canyons" style="background-image: url('assets/images/P1071283.jpeg');">
+    <div class="section-banner-content max-w-2xl">
+      <h2 class="font-canyons-title text-4xl sm:text-6xl font-normal text-white uppercase tracking-wider mb-4">
+        ROMANCE
+      </h2>
+      <p class="font-canyons-body text-sm md:text-base text-[rgba(255,255,255,0.9)] font-light mb-8 leading-relaxed">
+        Experiências criadas para casais que desejam aproveitar a serra com mais privacidade, conforto, decoração especial e atmosfera romântica inesquecível.
+      </p>
+      <button onclick="openCartModal()" class="btn-canyons-filled">
+        Conheça os Pacotes Românticos
+      </button>
+    </div>
+  </section>
+
+  <!-- ==================== BANNER PARALLAX 2: BEM-ESTAR & DAY USE ==================== -->
+  <section id="bem-estar-section" class="section-banner-canyons" style="background-image: url('assets/images/IMG_3530.jpeg');">
+    <div class="section-banner-content max-w-2xl">
+      <h2 class="font-canyons-title text-4xl sm:text-6xl font-normal text-white uppercase tracking-wider mb-4">
+        BEM-ESTAR & DAY USE
+      </h2>
+      <p class="font-canyons-body text-sm md:text-base text-[rgba(255,255,255,0.9)] font-light mb-8 leading-relaxed">
+        Experiências pensadas para desacelerar e sentir. Aproveite nossa Jacuzzi aquecida privativa no formato pernoite ou na modalidade exclusiva Day Use (09h às 18h).
+      </p>
+      <button onclick="openCartModal()" class="btn-canyons-filled">
+        Simular Day Use
+      </button>
+    </div>
+  </section>
+
+  <!-- ==================== BANNER PARALLAX 3: GASTRONOMIA ==================== -->
+  <section id="gastronomia-section" class="section-banner-canyons" style="background-image: url('assets/images/P1071300.jpeg');">
+    <div class="section-banner-content max-w-2xl">
+      <h2 class="font-canyons-title text-4xl sm:text-6xl font-normal text-white uppercase tracking-wider mb-4">
+        GASTRONOMIA & CONFORTO
+      </h2>
+      <p class="font-canyons-body text-sm md:text-base text-[rgba(255,255,255,0.9)] font-light mb-8 leading-relaxed">
+        Sabores que acompanham o ritmo da experiência. Cestas de café da manhã artesanal de Rancho Queimado, vinhos finos e lenha aquecida para a lareira.
+      </p>
+      <button onclick="openCartModal()" class="btn-canyons-filled">
+        Ver Adicionais
+      </button>
+    </div>
+  </section>
+
+  <!-- ==================== ABAS INTERATIVAS DE PACOTES & TARIFAS (ESTILO REFERÊNCIA) ==================== -->
+  <section id="experiencias-tabs" class="py-28 px-6 md:px-16 bg-[#FAF8F2]">
+    <div class="max-w-6xl mx-auto space-y-12">
+      
+      <div class="text-center max-w-2xl mx-auto space-y-4">
+        <span class="text-xs uppercase font-bold tracking-widest text-[var(--canyons-accent)] block">Seleção de Experiências</span>
+        <h2 class="font-canyons-title text-3xl md:text-5xl font-normal text-[var(--canyons-green)]">
+          Tarifas & Pacotes do Chalé
+        </h2>
+        <p class="text-xs text-[var(--canyons-text-muted)] font-light">
+          Escolha uma das abas abaixo para consultar valores e adicionar ao seu pedido:
+        </p>
+      </div>
+
+      <!-- Navigation Tabs matching Morada dos Canyons UI -->
+      <div class="tabs-canyons-container">
+        <button id="tab-canyons-hospedagem" onclick="switchCanyonsTab('hospedagem')" class="tab-canyons-btn active">
+          Hospedagem & Diárias
+        </button>
+        <button id="tab-canyons-namora" onclick="switchCanyonsTab('namora')" class="tab-canyons-btn">
+          Pacote "Namora comigo?"
+        </button>
+        <button id="tab-canyons-casa" onclick="switchCanyonsTab('casa')" class="tab-canyons-btn">
+          Pacote "Casa comigo?"
+        </button>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div id="canyons-tab-content" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Dynamically rendered via JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== LOCALIZAÇÃO & RODAPÉ REFERÊNCIA ==================== -->
+  <section id="localizacao" class="py-24 px-6 md:px-16 bg-[#F4EFE3] border-t border-[rgba(203,185,139,0.3)]">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+      <div class="md:col-span-6 space-y-4">
+        <span class="text-xs uppercase font-bold tracking-widest text-[var(--canyons-accent)] block">Serra Catarinense</span>
+        <h2 class="font-canyons-title text-3xl md:text-4xl font-normal text-[var(--canyons-green)]">
+          Rancho Queimado — SC
+        </h2>
+        <p class="text-xs text-[var(--canyons-text-muted)] font-light leading-relaxed">
+          Localizado a apenas 65 km de Florianópolis. Um destino romântico com clima de serra, ar puro e natureza exuberante.
+        </p>
+      </div>
+
+      <div class="md:col-span-6 text-right">
+        <button onclick="openCartModal()" class="btn-canyons-filled">
+          Faça sua Reserva Online
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Style Matching Morada dos Canyons -->
+  <footer class="bg-[#163A2F] text-white py-16 px-6 md:px-16 border-t border-[var(--canyons-accent)]">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 pb-12 border-b border-[rgba(203,185,139,0.2)]">
+      <div class="flex items-center gap-4">
+        <img src="assets/logo-round.png" alt="Morada Quintal da Serra" class="w-[50px] h-[50px] rounded-full object-cover shadow-sm border border-[var(--color-champagne)]/40" />
+        <span class="font-canyons-title text-sm tracking-widest text-[var(--canyons-accent)] uppercase">Morada Quintal da Serra</span>
+      </div>
+
+      <div class="text-xs font-mono text-[rgba(255,255,255,0.7)] space-x-6">
+        <span>📍 Rancho Queimado - SC</span>
+        <span>📱 (48) 99188-2991</span>
+        <span>📸 @moradaquintaldaserra</span>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto pt-8 text-center text-xs text-[rgba(255,255,255,0.5)] font-light">
+      © 2026 Morada Quintal da Serra. Variação B — Teste AB inspirado no Morada dos Canyons.
+    </div>
+  </footer>
+
+  <!-- Modals -->
+  <div id="checkout-modal" class="modal-backdrop">
+    <div class="modal-content">
+      <div id="cart-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Package Details Modal with Exclusive Photo Gallery -->
+  <div id="package-details-modal" class="modal-backdrop">
+    <div class="modal-content max-w-4xl">
+      <div id="package-details-body"></div>
+    </div>
+  </div>
+
+  <div id="gallery-modal" class="modal-backdrop" onclick="closeLightbox()">
+    <div class="relative max-w-4xl w-full p-4" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-[#163A2F] text-white flex items-center justify-center font-bold">✕</button>
+      <img id="lightbox-img" src="" alt="Ampliação" class="w-full h-auto max-h-[80vh] object-contain shadow-2xl" />
+      <p id="lightbox-title" class="text-center font-canyons-title text-sm text-[var(--canyons-accent)] mt-3"></p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="src/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      switchCanyonsTab('hospedagem');
+    });
+
+    function switchCanyonsTab(tabKey) {
+      const btns = document.querySelectorAll('.tab-canyons-btn');
+      btns.forEach(b => b.classList.remove('active'));
+      
+      if (tabKey === 'hospedagem') document.getElementById('tab-canyons-hospedagem').classList.add('active');
+      if (tabKey === 'namora') document.getElementById('tab-canyons-namora').classList.add('active');
+      if (tabKey === 'casa') document.getElementById('tab-canyons-casa').classList.add('active');
+
+      const container = document.getElementById('canyons-tab-content');
+      if (!container) return;
+
+      if (tabKey === 'hospedagem') {
+        container.innerHTML = `
+          <div class="card-canyons flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-[var(--canyons-accent)] block mb-1">A partir de 2 diárias</span>
+              <h3 class="font-canyons-title text-2xl text-[var(--canyons-green)] font-semibold mb-2">Hospedagem Casal</h3>
+              <p class="text-xs text-[var(--canyons-text-muted)] font-light leading-relaxed mb-4">
+                Estadias de 2 ou mais noites com valor promocional de R$ 754,00 por noite para o casal.
+              </p>
+              <span class="font-canyons-title font-bold text-2xl text-[var(--canyons-green)] block mb-4">R$ 754,00 / noite</span>
+            </div>
+            <button onclick="openCartModal()" class="btn-canyons-filled text-xs w-full text-center">Simular Datas</button>
+          </div>
+
+          <div class="card-canyons flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-[var(--canyons-accent)] block mb-1">Fim de Semana Único</span>
+              <h3 class="font-canyons-title text-2xl text-[var(--canyons-green)] font-semibold mb-2">Diária Única (1 Noite)</h3>
+              <p class="text-xs text-[var(--canyons-text-muted)] font-light leading-relaxed mb-4">
+                Reserva para apenas uma diária (ex: sábado para domingo) para casal.
+              </p>
+              <span class="font-canyons-title font-bold text-2xl text-[var(--canyons-green)] block mb-4">R$ 1.100,00</span>
+            </div>
+            <button onclick="openCartModal()" class="btn-canyons-filled text-xs w-full text-center">Simular 1 Diária</button>
+          </div>
+
+          <div class="card-canyons flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-[var(--canyons-accent)] block mb-1">Passar o Dia</span>
+              <h3 class="font-canyons-title text-2xl text-[var(--canyons-green)] font-semibold mb-2">Experiência Day Use</h3>
+              <p class="text-xs text-[var(--canyons-text-muted)] font-light leading-relaxed mb-4">
+                Das 09h às 18h com acesso privativo ao chalé, jacuzzi e áreas externas para ensaios ou lazer.
+              </p>
+              <span class="font-canyons-title font-bold text-2xl text-[var(--canyons-green)] block mb-4">R$ 650,00</span>
+            </div>
+            <button onclick="openCartModal()" class="btn-canyons-filled text-xs w-full text-center">Simular Day Use</button>
+          </div>
+        `;
+      } else if (tabKey === 'namora') {
+        const pkgs = ROMANTIC_PACKAGES.namorar;
+        container.innerHTML = pkgs.map(p => `
+          <div class="card-canyons flex flex-col justify-between">
+            <div>
+              <div class="h-40 rounded-none overflow-hidden mb-4 relative">
+                <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" />
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-[var(--canyons-accent)] block mb-1">${p.tag}</span>
+              <h3 class="font-canyons-title text-2xl text-[var(--canyons-green)] font-semibold mb-1">${p.name}</h3>
+              <p class="text-xs italic text-[var(--canyons-accent)] mb-2">${p.slogan}</p>
+              <p class="text-xs text-[var(--canyons-text-muted)] font-light mb-4 leading-relaxed">${p.description}</p>
+              
+              <ul class="space-y-1.5 mb-6 text-xs text-[var(--canyons-text-dark)] font-medium">
+                ${p.items.map(it => `
+                  <li class="flex items-center gap-1.5">
+                    <span class="text-emerald-800 font-bold">✓</span> ${it}
+                  </li>
+                `).join('')}
+              </ul>
+
+              <span class="font-canyons-title font-bold text-2xl text-[var(--canyons-green)] block mb-4">${formatBRL(p.price)}</span>
+            </div>
+            <div class="space-y-2">
+              <button onclick="togglePackage('${p.id}'); openCartModal();" class="btn-canyons-filled text-xs w-full text-center">+ Incluir no Pedido</button>
+              <a href="${p.pdf}" target="_blank" class="block text-center text-[10px] font-bold text-[var(--canyons-green)] hover:underline">📄 Baixar PDF Oficial</a>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        const pkgs = ROMANTIC_PACKAGES.casar;
+        container.innerHTML = pkgs.map(p => `
+          <div class="card-canyons flex flex-col justify-between">
+            <div>
+              <div class="h-40 rounded-none overflow-hidden mb-4 relative">
+                <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover" />
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-[var(--canyons-accent)] block mb-1">${p.tag}</span>
+              <h3 class="font-canyons-title text-2xl text-[var(--canyons-green)] font-semibold mb-1">${p.name}</h3>
+              <p class="text-xs italic text-[var(--canyons-accent)] mb-2">${p.slogan}</p>
+              <p class="text-xs text-[var(--canyons-text-muted)] font-light mb-4 leading-relaxed">${p.description}</p>
+              
+              <ul class="space-y-1.5 mb-4 text-xs text-[var(--canyons-text-dark)] font-medium">
+                ${p.items.map(it => `
+                  <li class="flex items-center gap-1.5">
+                    <span class="text-emerald-800 font-bold">✓</span> ${it}
+                  </li>
+                `).join('')}
+              </ul>
+
+              ${p.note ? `<p class="text-[10px] italic text-[var(--canyons-text-muted)] mb-4">${p.note}</p>` : ''}
+              <span class="font-canyons-title font-bold text-2xl text-[var(--canyons-green)] block mb-4">${formatBRL(p.price)}</span>
+            </div>
+            <div class="space-y-2">
+              <button onclick="togglePackage('${p.id}'); openCartModal();" class="btn-canyons-filled text-xs w-full text-center">+ Incluir no Pedido</button>
+              <a href="${p.pdf}" target="_blank" class="block text-center text-[10px] font-bold text-[var(--canyons-green)] hover:underline">📄 Baixar PDF Oficial</a>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+  </script>
+</body>
+</html>
