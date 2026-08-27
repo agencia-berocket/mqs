@@ -153,11 +153,18 @@ html {
 }
 
 /* Efeito Cortina Parallax & Zoom para a Galeria de Fotos (Seção 2) */
-#hero {
+#hero,
+#hero-slider-container {
   position: relative;
   z-index: 20;
   min-height: 100vh;
+  background-color: var(--color-araucaria-dark) !important;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+#hero-bg-img-1,
+#hero-bg-img-2 {
+  background-color: var(--color-araucaria-dark);
 }
 
 #galeria-reveal-container {
@@ -168,7 +175,7 @@ html {
   transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Galeria com Fundo Branco, Canto Reto 0°, 100vw Bleed e Altura Inicial 100vh */
+/* Galeria com Fundo Branco */
 #galeria {
   background-color: #FFFFFF !important;
   color: #1E2923;
@@ -176,39 +183,59 @@ html {
   transition: max-height 1.5s ease-in-out, height 1.5s ease-in-out;
 }
 
-#galeria.gallery-collapsed {
-  height: 100vh;
-  max-height: 100vh;
-  overflow: hidden;
-}
+/* Regras Mobile (<1024px): Galeria em fluxo relativo normal sem parallax sticky travas */
+@media (max-width: 1023px) {
+  #galeria-reveal-container {
+    height: auto !important;
+    margin-top: 0 !important;
+    padding: 2.5rem 0.75rem !important;
+  }
 
-#galeria.gallery-expanded {
-  height: auto;
-  max-height: 9999px;
-  overflow: visible;
-}
+  #galeria-sticky-wrapper {
+    position: relative !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
 
-.gallery-grid-edge {
-  column-count: 2;
-  column-gap: 12px;
-  width: 120vw;
-  max-width: 120vw;
-  margin-left: -10vw;
-  padding: 0;
-  background-color: #FFFFFF;
-}
+  #galeria,
+  #galeria.gallery-collapsed {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
 
-@media (min-width: 640px) {
   .gallery-grid-edge {
-    column-count: 3;
-    column-gap: 16px;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    column-count: 2 !important;
+    column-gap: 8px !important;
+    padding: 0 !important;
   }
 }
 
+/* Regras Desktop (>=1024px): Cortina Sticky 400vh com Zoom Out */
 @media (min-width: 1024px) {
+  #galeria.gallery-collapsed {
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
+  #galeria.gallery-expanded {
+    height: auto;
+    max-height: 9999px;
+    overflow: visible;
+  }
+
   .gallery-grid-edge {
     column-count: 4;
     column-gap: 20px;
+    width: 120vw;
+    max-width: 120vw;
+    margin-left: -10vw;
+    padding: 0;
+    background-color: #FFFFFF;
   }
 }
 

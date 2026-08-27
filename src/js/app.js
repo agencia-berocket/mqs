@@ -246,16 +246,19 @@ function initCurtainGalleryParallax() {
   if (!hero || !galleryContainer || !gallery) return;
 
   const updateParallax = () => {
-    // A galeria já fica fixa atrás da Hero Section via CSS (margin-top: -100vh e sticky top-0)
-    // Precisamos apenas aplicar o Zoom na galeria durante a rolagem sticky.
-    const containerRect = galleryContainer.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
     const galleryGrid = document.querySelector('.gallery-grid-edge');
-
     if (!galleryGrid) return;
 
+    if (window.innerWidth < 1024) {
+      galleryGrid.style.transform = 'none';
+      return;
+    }
+
+    const containerRect = galleryContainer.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+
     // Se a galeria está expandida, não aplicamos zoom
-    if (!galleryContainer.classList.contains('h-[400vh]')) {
+    if (!galleryContainer.classList.contains('h-[400vh]') && !galleryContainer.classList.contains('lg:h-[400vh]')) {
       galleryGrid.style.transform = 'scale(1)';
       return;
     }
@@ -1409,26 +1412,19 @@ function initHeroRandomSlider() {
 
   if (!img1 || !img2) return;
 
-  // Shuffle images array randomly so the sequence is fresh on every visit
-  let shuffled = [...HERO_HOME_IMAGES].sort(() => 0.5 - Math.random());
   let index = 0;
   let activeImg = 1;
 
-  // Set initial random image
-  img1.src = shuffled[index];
-  img1.style.opacity = '1';
-  img2.style.opacity = '0';
-
-  // Preload all images in memory for instant smooth crossfades
-  shuffled.forEach(src => {
+  // Preload all hero slider images in memory
+  HERO_HOME_IMAGES.forEach(src => {
     const pre = new Image();
     pre.src = src;
   });
 
-  // Change image every 3.5 seconds (3500 ms)
+  // Change hero image every 7.5 seconds (7500 ms) smoothly
   setInterval(() => {
-    index = (index + 1) % shuffled.length;
-    const nextSrc = shuffled[index];
+    index = (index + 1) % HERO_HOME_IMAGES.length;
+    const nextSrc = HERO_HOME_IMAGES[index];
 
     if (activeImg === 1) {
       img2.src = nextSrc;
@@ -1441,7 +1437,7 @@ function initHeroRandomSlider() {
       img2.style.opacity = '0';
       activeImg = 1;
     }
-  }, 3000);
+  }, 7500);
 }
 
 // Structure / Nature Section Random Slider & Lightbox Handler

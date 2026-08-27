@@ -17,6 +17,14 @@
   
   <!-- Custom CSS Design System -->
   <link rel="stylesheet" href="src/css/main.css" />
+
+  <!-- Preload Initial Hero Background Image -->
+  <link rel="preload" as="image" href="assets/images/Escolhas/Home/DJI_20260505153651_0104_D.jpeg" />
+  <style>
+    #hero, #hero-slider-container {
+      background-color: #0D261E !important;
+    }
+  </style>
 </head>
 <body class="bg-[var(--color-creme)] text-[var(--color-texto)] font-sans antialiased selection:bg-[var(--color-araucaria)] selection:text-white">
 
@@ -130,8 +138,8 @@
   </section>
 
   <!-- ==================== SEÇÃO 2: GALERIA DE FOTOS DA HOSPEDAGEM (FUNDO BRANCO 100VH, CANTO RETO 0° & CARREGAR MAIS) ==================== -->
-  <section id="galeria-reveal-container" class="relative z-10 bg-white w-full h-[400vh] -mt-[100vh]">
-    <div id="galeria-sticky-wrapper" class="sticky top-0 w-full h-screen overflow-hidden">
+  <section id="galeria-reveal-container" class="relative z-10 bg-white w-full lg:h-[400vh] lg:-mt-[100vh]">
+    <div id="galeria-sticky-wrapper" class="lg:sticky lg:top-0 w-full lg:h-screen overflow-hidden">
       <section id="galeria" class="bg-white text-[var(--color-araucaria)] w-full h-full relative gallery-collapsed overflow-hidden">
         
         <!-- Full Bleed Photo Grid (4 Columns, Square 0deg Corners, White BG, 100vw Edge) -->
