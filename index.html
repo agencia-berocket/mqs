@@ -142,8 +142,112 @@
     <div id="galeria-sticky-wrapper" class="lg:sticky lg:top-0 w-full lg:h-screen overflow-hidden">
       <section id="galeria" class="bg-white text-[var(--color-araucaria)] w-full h-full relative gallery-collapsed overflow-hidden">
         
-        <!-- Full Bleed Photo Grid (4 Columns, Square 0deg Corners, White BG, 100vw Edge) -->
-        <div class="gallery-grid-edge pt-0 transition-transform duration-75 origin-center">
+        <!-- Mobile Gallery Snap Carousel Showcase (Exclusiva para Telas < 1024px) -->
+        <div class="block lg:hidden px-4 py-8 bg-white">
+          <div class="text-center mb-6">
+            <span class="text-[10px] uppercase tracking-widest font-bold text-[var(--color-araucaria)] block mb-1">
+              Galeria de Experiências
+            </span>
+            <h2 class="font-serif text-2xl font-bold text-[var(--color-araucaria-dark)]">
+              Conheça Nossos Espaços
+            </h2>
+            <p class="text-xs text-[var(--color-texto-suave)] font-light mt-1">
+              Deslize para explorar fotos do chalé, jacuzzi e natureza.
+            </p>
+          </div>
+
+          <!-- Horizontal Touch Snap Carousel -->
+          <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 pt-1 no-scrollbar -mx-4 px-4" style="-ms-overflow-style:none; scrollbar-width:none;">
+            
+            <div class="snap-center shrink-0 w-[84vw] max-w-[320px] rounded-2xl overflow-hidden shadow-lg border border-[var(--color-champagne)]/40 bg-[var(--color-creme)] relative group cursor-pointer" onclick="openLightbox('assets/images/Escolhas/C110E2FB-EAE4-47FE-A391-8D42EAD1D710.jpeg', 'Experiência Inesquecível na Serra')">
+              <div class="h-[280px] w-full overflow-hidden relative">
+                <img src="assets/images/Escolhas/C110E2FB-EAE4-47FE-A391-8D42EAD1D710.jpeg" alt="Chalé na Serra" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent"></div>
+                <span class="absolute top-3 right-3 bg-[var(--color-araucaria-dark)]/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full border border-[var(--color-champagne)]/40">🔍 Ampliar</span>
+                <div class="absolute bottom-3 left-4 right-4 text-white">
+                  <span class="text-[9px] uppercase tracking-wider text-[var(--color-champagne)] font-bold block">Refúgio & Natureza</span>
+                  <span class="font-serif font-bold text-sm text-white">Experiência Inesquecível na Serra</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="snap-center shrink-0 w-[84vw] max-w-[320px] rounded-2xl overflow-hidden shadow-lg border border-[var(--color-champagne)]/40 bg-[var(--color-creme)] relative group cursor-pointer" onclick="openLightbox('assets/images/Escolhas/DJI_20260505153651_0104_D.jpeg', 'Vista Aérea da Serra Catarinense')">
+              <div class="h-[280px] w-full overflow-hidden relative">
+                <img src="assets/images/Escolhas/DJI_20260505153651_0104_D.jpeg" alt="Vista Aérea" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent"></div>
+                <span class="absolute top-3 right-3 bg-[var(--color-araucaria-dark)]/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full border border-[var(--color-champagne)]/40">🔍 Ampliar</span>
+                <div class="absolute bottom-3 left-4 right-4 text-white">
+                  <span class="text-[9px] uppercase tracking-wider text-[var(--color-champagne)] font-bold block">Rancho Queimado</span>
+                  <span class="font-serif font-bold text-sm text-white">Vista Aérea da Serra</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="snap-center shrink-0 w-[84vw] max-w-[320px] rounded-2xl overflow-hidden shadow-lg border border-[var(--color-champagne)]/40 bg-[var(--color-creme)] relative group cursor-pointer" onclick="openLightbox('assets/images/Escolhas/IMG_1983.jpeg', 'Momentos Especiais no Chalé')">
+              <div class="h-[280px] w-full overflow-hidden relative">
+                <img src="assets/images/Escolhas/IMG_1983.jpeg" alt="Momentos no Chalé" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent"></div>
+                <span class="absolute top-3 right-3 bg-[var(--color-araucaria-dark)]/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full border border-[var(--color-champagne)]/40">🔍 Ampliar</span>
+                <div class="absolute bottom-3 left-4 right-4 text-white">
+                  <span class="text-[9px] uppercase tracking-wider text-[var(--color-champagne)] font-bold block">Aconchego</span>
+                  <span class="font-serif font-bold text-sm text-white">Momentos Especiais no Chalé</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="snap-center shrink-0 w-[84vw] max-w-[320px] rounded-2xl overflow-hidden shadow-lg border border-[var(--color-champagne)]/40 bg-[var(--color-creme)] relative group cursor-pointer" onclick="openLightbox('assets/images/Escolhas/IMG_3526.jpeg', 'Interior Elegante e Acolhedor')">
+              <div class="h-[280px] w-full overflow-hidden relative">
+                <img src="assets/images/Escolhas/IMG_3526.jpeg" alt="Interior Chalé" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent"></div>
+                <span class="absolute top-3 right-3 bg-[var(--color-araucaria-dark)]/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full border border-[var(--color-champagne)]/40">🔍 Ampliar</span>
+                <div class="absolute bottom-3 left-4 right-4 text-white">
+                  <span class="text-[9px] uppercase tracking-wider text-[var(--color-champagne)] font-bold block">Interiores</span>
+                  <span class="font-serif font-bold text-sm text-white">Interior Elegante & Acolhedor</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="snap-center shrink-0 w-[84vw] max-w-[320px] rounded-2xl overflow-hidden shadow-lg border border-[var(--color-champagne)]/40 bg-[var(--color-creme)] relative group cursor-pointer" onclick="openLightbox('assets/images/Escolhas/IMG_3566.jpeg', 'Deck com Vista Panorâmica')">
+              <div class="h-[280px] w-full overflow-hidden relative">
+                <img src="assets/images/Escolhas/IMG_3566.jpeg" alt="Deck Panorâmico" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent"></div>
+                <span class="absolute top-3 right-3 bg-[var(--color-araucaria-dark)]/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full border border-[var(--color-champagne)]/40">🔍 Ampliar</span>
+                <div class="absolute bottom-3 left-4 right-4 text-white">
+                  <span class="text-[9px] uppercase tracking-wider text-[var(--color-champagne)] font-bold block">Área Externa</span>
+                  <span class="font-serif font-bold text-sm text-white">Deck com Vista Panorâmica</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="snap-center shrink-0 w-[84vw] max-w-[320px] rounded-2xl overflow-hidden shadow-lg border border-[var(--color-champagne)]/40 bg-[var(--color-creme)] relative group cursor-pointer" onclick="openLightbox('assets/images/Escolhas/P1071337.jpeg', 'Jacuzzi Aquecida Privativa')">
+              <div class="h-[280px] w-full overflow-hidden relative">
+                <img src="assets/images/Escolhas/P1071337.jpeg" alt="Jacuzzi Privativa" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent"></div>
+                <span class="absolute top-3 right-3 bg-[var(--color-araucaria-dark)]/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full border border-[var(--color-champagne)]/40">🔍 Ampliar</span>
+                <div class="absolute bottom-3 left-4 right-4 text-white">
+                  <span class="text-[9px] uppercase tracking-wider text-[var(--color-champagne)] font-bold block">Bem-Estar</span>
+                  <span class="font-serif font-bold text-sm text-white">Jacuzzi Aquecida Privativa</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Carousel Controls Footer -->
+          <div class="mt-4 flex flex-col items-center gap-3 text-center">
+            <div class="flex items-center gap-1.5 text-[11px] text-[var(--color-texto-suave)] font-medium">
+              <span>👈 Deslize para explorar mais fotos 👉</span>
+            </div>
+
+            <button onclick="openLightbox('assets/images/Escolhas/C110E2FB-EAE4-47FE-A391-8D42EAD1D710.jpeg', 'Experiência Inesquecível na Serra')" class="btn-araucaria text-[11px] uppercase tracking-wider font-bold !py-3 !px-6 rounded-full shadow-md flex items-center gap-2">
+              <span>🖼️</span> Ver Galeria Completa (18 fotos)
+            </button>
+          </div>
+        </div>
+
+        <!-- Desktop Full Bleed Photo Grid (4 Columns, Square 0deg Corners, White BG, 100vw Edge) -->
+        <div class="hidden lg:block">
+          <div class="gallery-grid-edge pt-0 transition-transform duration-75 origin-center">
           <div class="gallery-item-square" onclick="openLightbox('assets/images/Escolhas/C110E2FB-EAE4-47FE-A391-8D42EAD1D710.jpeg', 'Experiência Inesquecível na Serra')">
             <img src="assets/images/Escolhas/C110E2FB-EAE4-47FE-A391-8D42EAD1D710.jpeg" alt="Experiência Inesquecível na Serra" loading="lazy" />
             <div class="absolute inset-0 bg-gradient-to-t from-[rgba(14,38,30,0.85)] via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-3 pointer-events-none">

@@ -1397,8 +1397,8 @@ function toggleFullGallery() {
 // Randomized Auto-Rotating Background Slider for Hero (Changes every 3.5s)
 function initHeroRandomSlider() {
   const HERO_HOME_IMAGES = [
-    'assets/images/Escolhas/Home/C110E2FB-EAE4-47FE-A391-8D42EAD1D710.jpeg',
     'assets/images/Escolhas/Home/DJI_20260505153651_0104_D.jpeg',
+    'assets/images/Escolhas/Home/C110E2FB-EAE4-47FE-A391-8D42EAD1D710.jpeg',
     'assets/images/Escolhas/Home/IMG_3526.jpeg',
     'assets/images/Escolhas/Home/IMG_6442.jpeg',
     'assets/images/Escolhas/Home/P1071337.jpeg',
@@ -1412,32 +1412,44 @@ function initHeroRandomSlider() {
 
   if (!img1 || !img2) return;
 
-  let index = 0;
-  let activeImg = 1;
-
   // Preload all hero slider images in memory
   HERO_HOME_IMAGES.forEach(src => {
     const pre = new Image();
     pre.src = src;
   });
 
-  // Change hero image every 7.5 seconds (7500 ms) smoothly
+  let index = 0;
+  let activeImg = 1;
+
+  // Change hero image every 6 seconds smoothly after image is verified decoded
   setInterval(() => {
     index = (index + 1) % HERO_HOME_IMAGES.length;
     const nextSrc = HERO_HOME_IMAGES[index];
 
     if (activeImg === 1) {
-      img2.src = nextSrc;
-      img2.style.opacity = '1';
-      img1.style.opacity = '0';
-      activeImg = 2;
+      const tempImg = new Image();
+      tempImg.onload = () => {
+        img2.src = nextSrc;
+        requestAnimationFrame(() => {
+          img2.style.opacity = '1';
+          img1.style.opacity = '0';
+          activeImg = 2;
+        });
+      };
+      tempImg.src = nextSrc;
     } else {
-      img1.src = nextSrc;
-      img1.style.opacity = '1';
-      img2.style.opacity = '0';
-      activeImg = 1;
+      const tempImg = new Image();
+      tempImg.onload = () => {
+        img1.src = nextSrc;
+        requestAnimationFrame(() => {
+          img1.style.opacity = '1';
+          img2.style.opacity = '0';
+          activeImg = 1;
+        });
+      };
+      tempImg.src = nextSrc;
     }
-  }, 7500);
+  }, 6000);
 }
 
 // Structure / Nature Section Random Slider & Lightbox Handler
