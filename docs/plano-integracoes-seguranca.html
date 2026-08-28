@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Morada Quintal da Serra — Plano de Integrações & Cibersegurança</title>
+  <title>Morada Quintal da Serra — Plano de Integrações, Segurança & Guia do Cliente</title>
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -175,12 +175,12 @@
     }
 
     .tab-btn {
-      padding: 10px 20px;
+      padding: 10px 18px;
       border-radius: 10px;
       border: none;
       background: transparent;
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
@@ -203,7 +203,7 @@
 
     /* Hero Banner */
     .hero {
-      padding: 3rem 0 2rem 0;
+      padding: 2.5rem 0 1.5rem 0;
       position: relative;
     }
 
@@ -211,7 +211,7 @@
       background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(88, 28, 135, 0.3));
       border: 1px solid var(--border-hover);
       border-radius: 20px;
-      padding: 2.5rem;
+      padding: 2.25rem;
       position: relative;
       overflow: hidden;
       backdrop-filter: blur(10px);
@@ -234,28 +234,28 @@
     }
 
     .hero-title {
-      font-size: 2.25rem;
+      font-size: 2.1rem;
       font-weight: 800;
       color: #ffffff;
       line-height: 1.25;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     .hero-desc {
-      font-size: 1.05rem;
-      color: rgba(255, 255, 255, 0.8);
-      max-width: 800px;
-      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 850px;
+      margin-bottom: 1.25rem;
     }
 
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
-      font-size: 0.875rem;
-      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.75);
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 1.25rem;
+      padding-top: 1rem;
     }
 
     .hero-meta-item {
@@ -267,7 +267,7 @@
     /* Main Content Sections */
     .section-content {
       display: none;
-      padding: 2rem 0 4rem 0;
+      padding: 1.5rem 0 4rem 0;
       animation: fadeIn 0.4s ease-in-out forwards;
     }
 
@@ -365,6 +365,127 @@
     .badge-alta { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
     .badge-media { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
     .badge-opcional { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+    /* Didactic Step-by-Step Card Styles */
+    .tutorial-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .tutorial-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .tutorial-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .tutorial-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-heading);
+    }
+
+    .tutorial-subtitle {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .step-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .step-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .step-badge-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--accent-blue);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.85rem;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .step-title {
+      display: inline-block;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-body {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      margin-left: 38px;
+    }
+
+    .step-body ol, .step-body ul {
+      padding-left: 1.25rem;
+      margin: 0.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .step-body li {
+      line-height: 1.5;
+    }
+
+    .highlight-box {
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px dashed rgba(59, 130, 246, 0.4);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--accent-blue-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .copy-box {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.825rem;
+      color: #58a6ff;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
 
     /* Flow Diagrams */
     .flow-steps {
@@ -649,13 +770,13 @@
         display: block !important;
         page-break-after: always;
       }
-      .card, .hero-card, .arch-layer, .accordion, table {
+      .card, .hero-card, .arch-layer, .accordion, table, .tutorial-section, .step-card {
         border: 1px solid #ccc !important;
         box-shadow: none !important;
         background: #fff !important;
         color: #000 !important;
       }
-      .hero-title, .card-title, th, td {
+      .hero-title, .card-title, th, td, .tutorial-title, .step-title {
         color: #000 !important;
       }
       .accordion-content {
@@ -686,7 +807,7 @@
           </div>
           <div class="logo-text">
             <h1>Morada Quintal da Serra</h1>
-            <p>Berocket Agency — Plano de Implantação</p>
+            <p>Berocket Agency — Plano & Guia do Cliente</p>
           </div>
         </a>
 
@@ -709,19 +830,22 @@
     <div class="container">
       <div class="tabs-wrapper">
         <button class="tab-btn active" onclick="switchTab('visao-geral')">
-          <i class="fa-solid fa-compass"></i> Visão Geral & Resumo
+          <i class="fa-solid fa-compass"></i> Visão Geral
+        </button>
+        <button class="tab-btn" onclick="switchTab('guia-cliente')">
+          <i class="fa-solid fa-book-open-reader"></i> 📖 Passo a Passo (Guia do Cliente)
         </button>
         <button class="tab-btn" onclick="switchTab('integracoes')">
           <i class="fa-solid fa-plug"></i> Plano de Integrações
         </button>
         <button class="tab-btn" onclick="switchTab('seguranca')">
-          <i class="fa-solid fa-shield-halved"></i> Plano de Cibersegurança
+          <i class="fa-solid fa-shield-halved"></i> Cibersegurança
         </button>
         <button class="tab-btn" onclick="switchTab('entregaveis')">
-          <i class="fa-solid fa-list-check"></i> Checklist do Cliente
+          <i class="fa-solid fa-list-check"></i> Checklist
         </button>
         <button class="tab-btn" onclick="switchTab('cronograma')">
-          <i class="fa-solid fa-clock-rotate-left"></i> Cronograma & Prazos
+          <i class="fa-solid fa-clock-rotate-left"></i> Cronograma
         </button>
       </div>
     </div>
@@ -733,24 +857,21 @@
     <div class="hero">
       <div class="hero-card">
         <div class="hero-badge">
-          <i class="fa-solid fa-circle-check"></i> Proposta Técnica & Didática para o Cliente
+          <i class="fa-solid fa-circle-check"></i> Documento Didático & Proposta de Implantação
         </div>
-        <h2 class="hero-title">Planejamento de Integrações e Segurança Digital</h2>
+        <h2 class="hero-title">Manual de Integrações, Segurança & Guia do Cliente</h2>
         <p class="hero-desc">
-          Este documento apresenta o mapeamento completo das integrações de pagamento, agendamento e autenticação para a <strong>Morada Quintal da Serra</strong>, acompanhado do protocolo de cibersegurança em 5 camadas para proteção de dados financeiros e pessoais (LGPD).
+          Este manual foi desenvolvido com linguagem extremamente simples e didática para orientar o cliente, passo a passo (clique por clique), sobre como criar suas contas e pegar as chaves de acesso necessárias para o site da <strong>Morada Quintal da Serra</strong>.
         </p>
         <div class="hero-meta">
           <div class="hero-meta-item">
             <i class="fa-solid fa-building"></i> Cliente: Morada Quintal da Serra
           </div>
           <div class="hero-meta-item">
-            <i class="fa-solid fa-rocket"></i> Desenvolvido por: Berocket Agency
+            <i class="fa-solid fa-rocket"></i> Agência: Berocket Agency
           </div>
           <div class="hero-meta-item">
-            <i class="fa-solid fa-calendar"></i> Versão: Agosto 2026
-          </div>
-          <div class="hero-meta-item">
-            <i class="fa-solid fa-lock"></i> Padrão: OWASP Top 10 + PCI-DSS + LGPD
+            <i class="fa-solid fa-graduation-cap"></i> Formato: Guia Didático Passo a Passo
           </div>
         </div>
       </div>
@@ -876,7 +997,210 @@
       </div>
     </section>
 
-    <!-- TAB 2: PLANO DE INTEGRAÇÕES -->
+    <!-- TAB 2: GUIA PASSO A PASSO (NOVO & SUPER DIDÁTICO) -->
+    <section id="guia-cliente" class="section-content">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="hero-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border-color: rgba(16, 185, 129, 0.3);">
+          <i class="fa-solid fa-heart"></i> Guia Especial para o Cliente
+        </span>
+        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--text-heading); margin-top: 0.5rem;">
+          Guia Passo a Passo: Como Pegar Suas Chaves e Criar as Contas
+        </h2>
+        <p style="color: var(--text-muted); max-width: 750px; margin: 0 auto;">
+          Não se preocupe com termos técnicos! Siga as instruções simplificadas abaixo, clique nos links informados e copie os códigos gerados para nos enviar.
+        </p>
+      </div>
+
+      <!-- TUTORIAL 1: MERCADO PAGO -->
+      <div class="tutorial-section">
+        <div class="tutorial-header">
+          <div class="tutorial-icon icon-blue">
+            <i class="fa-solid fa-credit-card"></i>
+          </div>
+          <div>
+            <h3 class="tutorial-title">Passo 1: Mercado Pago (Para Receber Pagamentos no Site)</h3>
+            <p class="tutorial-subtitle">Aqui você vai pegar as duas "chaves secretas" que permitem que o dinheiro dos clientes vá direto para a sua conta.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge-num">1</span>
+          <span class="step-title">Acesse o Mercado Pago com sua conta do negócio</span>
+          <div class="step-body">
+            <ul>
+              <li>Entre no site: <a href="https://www.mercadopago.com.br" target="_blank" style="color: var(--accent-blue-light); font-weight: 700;">www.mercadopago.com.br</a></li>
+              <li>Faça login com a conta da sua empresa (preferencialmente conta de CNPJ para emitir comprovantes).</li>
+              <li>Se ainda não tem conta empresarial, faça a verificação enviando os documentos solicitados na tela do Mercado Pago.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge-num">2</span>
+          <span class="step-title">Acesse o Portal de Desenvolvedores</span>
+          <div class="step-body">
+            <ul>
+              <li>Com a conta logada, acesse o link: <a href="https://developers.mercadopago.com.br" target="_blank" style="color: var(--accent-blue-light); font-weight: 700;">developers.mercadopago.com.br</a></li>
+              <li>No menu do topo, clique em <strong>"Suas integrações"</strong> (ou "Painel de Desenvolvedor").</li>
+              <li>Clique no botão azul <strong>"+ Criar aplicação"</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge-num">3</span>
+          <span class="step-title">Preencha o formulário de criação da aplicação</span>
+          <div class="step-body">
+            <ul>
+              <li><strong>Nome da aplicação:</strong> Digite <code>Morada Quintal da Serra</code></li>
+              <li><strong>Tipo de integração:</strong> Selecione <em>"Pagamentos no e-commerce"</em></li>
+              <li><strong>Está usando uma plataforma de e-commerce?</strong> Marque <em>"Não"</em></li>
+              <li><strong>Modelo de integração:</strong> Selecione <em>"Checkout Pro"</em></li>
+              <li>Marque a caixinha aceitando os termos e clique em <strong>"Criar aplicação"</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge-num">4</span>
+          <span class="step-title">Copie as duas chaves e nos envie</span>
+          <div class="step-body">
+            <ul>
+              <li>Dentro da sua aplicação recém-criada, no menu esquerdo, clique em <strong>"Credenciais de produção"</strong>.</li>
+              <li>Você verá duas informações importantes:
+                <br>1️⃣ <strong>Public Key</strong> (Chave Pública): Começa com <code>APP_USR-...</code>
+                <br>2️⃣ <strong>Access Token</strong> (Token de Acesso): Também começa com <code>APP_USR-...</code> (Clique no ícone de "olho" para revelar e copiar).
+              </li>
+            </ul>
+            <div class="highlight-box">
+              <i class="fa-solid fa-circle-info"></i>
+              <span><strong>O que nos enviar:</strong> Copie e cole essas duas chaves (Public Key e Access Token) e envie pelo WhatsApp da agência.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TUTORIAL 2: GOOGLE CALENDAR -->
+      <div class="tutorial-section">
+        <div class="tutorial-header">
+          <div class="tutorial-icon icon-amber">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+          <div>
+            <h3 class="tutorial-title">Passo 2: Google Calendar (Para Atualizar suas Datas Automaticamente)</h3>
+            <p class="tutorial-subtitle">Permite que o site veja seu calendário de reservas e crie novos eventos sozinhos quando alguém reservar.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge-num">1</span>
+          <span class="step-title">Pegar o ID do seu Google Calendar</span>
+          <div class="step-body">
+            <ul>
+              <li>Abra o seu Google Agenda no computador: <a href="https://calendar.google.com" target="_blank" style="color: var(--accent-blue-light); font-weight: 700;">calendar.google.com</a></li>
+              <li>No lado esquerdo, em <em>"Minhas agendas"</em>, passe o mouse por cima da agenda da Pousada e clique nos <strong>3 pontinhos</strong> → <strong>"Configurações e compart."</strong>.</li>
+              <li>Role a página até a seção <strong>"Integrar agenda"</strong>.</li>
+              <li>Procure por <strong>"ID da agenda"</strong>. Ele se parece com isso: <code>c_abc12345678@group.calendar.google.com</code> ou <code>seuemail@gmail.com</code>.</li>
+              <li>Copie esse ID!</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge-num">2</span>
+          <span class="step-title">Compartilhar a agenda com a agência (Robô de Reservas)</span>
+          <div class="step-body">
+            <ul>
+              <li>Na mesma tela de configurações da agenda, procure a seção <strong>"Compartilhar com pessoas específicas"</strong>.</li>
+              <li>Clique em <strong>"+ Adicionar pessoas"</strong>.</li>
+              <li>Cole o e-mail da nossa conta de serviço que nós te passaremos (ex: <code>mqs-bot@mqs-reservas.iam.gserviceaccount.com</code>).</li>
+              <li>Na permissão, mude para: <strong>"Fazer alterações nos eventos"</strong>.</li>
+              <li>Clique em <strong>"Enviar"</strong>. Pronto! Agora o sistema já tem permissão para colocar as reservas no seu calendário.</li>
+            </ul>
+            <div class="highlight-box">
+              <i class="fa-solid fa-circle-info"></i>
+              <span><strong>O que nos enviar:</strong> O <strong>ID da agenda</strong> que você copiou no item 1.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TUTORIAL 3: GMAIL DE DISPARO -->
+      <div class="tutorial-section">
+        <div class="tutorial-header">
+          <div class="tutorial-icon icon-green">
+            <i class="fa-solid fa-envelope-open-text"></i>
+          </div>
+          <div>
+            <h3 class="tutorial-title">Passo 3: Gmail Automático (Para Enviar Comprovantes ao Hóspede)</h3>
+            <p class="tutorial-subtitle">Como criar uma "Senha de App" para o site enviar e-mails em seu nome com total segurança.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge-num">1</span>
+          <span class="step-title">Ativar a Verificação em Duas Etapas no Google</span>
+          <div class="step-body">
+            <ul>
+              <li>Acesse a segurança da sua conta Google: <a href="https://myaccount.google.com/security" target="_blank" style="color: var(--accent-blue-light); font-weight: 700;">myaccount.google.com/security</a></li>
+              <li>Procure pela opção <strong>"Verificação em duas etapas"</strong>.</li>
+              <li>Se estiver desativada, clique nela e siga os passos para ativar usando seu celular.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge-num">2</span>
+          <span class="step-title">Gerar a "Senha de App"</span>
+          <div class="step-body">
+            <ul>
+              <li>Com a verificação em duas etapas ativa, digite na barra de pesquisa da Conta Google lá no topo: <code>Senhas de app</code> (ou acesse <a href="https://myaccount.google.com/apppasswords" target="_blank" style="color: var(--accent-blue-light); font-weight: 700;">myaccount.google.com/apppasswords</a>).</li>
+              <li>Em <strong>"Nome do app"</strong>, digite: <code>Site MQS</code></li>
+              <li>Clique em <strong>"Criar"</strong>.</li>
+              <li>O Google vai mostrar um código de <strong>16 letras amarelas/brancas</strong> em uma caixinha (ex: <code>abcd efgh ijkl mnop</code>).</li>
+            </ul>
+            <div class="highlight-box">
+              <i class="fa-solid fa-circle-info"></i>
+              <span><strong>O que nos enviar:</strong> O seu e-mail do Gmail + essa <strong>Senha de App de 16 caracteres</strong>. Essa senha serve apenas para o site enviar e-mails e não dá acesso à sua senha pessoal do Google!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TUTORIAL 4: GOOGLE ANALYTICS 4 -->
+      <div class="tutorial-section">
+        <div class="tutorial-header">
+          <div class="tutorial-icon icon-purple">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <div>
+            <h3 class="tutorial-title">Passo 4: Google Analytics 4 (Para Saber Quantas Pessoas Acessam o Site)</h3>
+            <p class="tutorial-subtitle">Como pegar o código de métricas do seu site.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge-num">1</span>
+          <span class="step-title">Criar a conta no Google Analytics</span>
+          <div class="step-body">
+            <ul>
+              <li>Acesse: <a href="https://analytics.google.com" target="_blank" style="color: var(--accent-blue-light); font-weight: 700;">analytics.google.com</a></li>
+              <li>Clique no botão de engrenagem <strong>"Administrador"</strong> no canto inferior esquerdo.</li>
+              <li>Clique em <strong>"+ Criar Propriedade"</strong> e coloque o nome: <code>Morada Quintal da Serra</code>.</li>
+              <li>Selecione fuso horário <em>Brasil (São Paulo)</em> e moeda <em>Real brasileiro (BRL)</em>.</li>
+              <li>Em <strong>Plataforma</strong>, escolha <strong>"Web"</strong> e digite o endereço do seu site: <code>mqs.berocket.com.br</code>.</li>
+              <li>Após criar, você verá o <strong>"ID DE MEDIÇÃO"</strong> (Começa com <code>G-</code>, por exemplo: <code>G-ABC123XYZ</code>).</li>
+            </ul>
+            <div class="highlight-box">
+              <i class="fa-solid fa-circle-info"></i>
+              <span><strong>O que nos enviar:</strong> O seu <strong>ID de Medição (G-XXXXXXXXXX)</strong>.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: PLANO DE INTEGRAÇÕES -->
     <section id="integracoes" class="section-content">
       <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--text-heading);">
         🔌 Detalhamento das Integrações Técnica e Operacional
@@ -910,18 +1234,6 @@
           <div class="flow-step"><span class="flow-step-num">5</span> O Mercado Pago envia uma notificação automática Webhook (HMAC verificado).</div>
           <div class="flow-step"><span class="flow-step-num">6</span> A reserva é confirmada, o calendário é atualizado e o comprovante é enviado.</div>
         </div>
-
-        <div class="action-box">
-          <div class="action-box-title">
-            <i class="fa-solid fa-user-gear"></i> Ações Obrigatórias do Cliente para o Mercado Pago:
-          </div>
-          <ul class="action-list">
-            <li><i class="fa-solid fa-check"></i> Criar ou acessar a conta Mercado Pago Jurídica (CNPJ).</li>
-            <li><i class="fa-solid fa-check"></i> Acessar o Portal de Desenvolvedores Mercado Pago e criar a aplicação "MQS Reservas".</li>
-            <li><i class="fa-solid fa-check"></i> Fornecer as credenciais de Produção: <code>PUBLIC_KEY</code> e <code>ACCESS_TOKEN</code>.</li>
-            <li><i class="fa-solid fa-check"></i> Autorizar o endereço de Webhook que configuraremos no servidor Coolify.</li>
-          </ul>
-        </div>
       </div>
 
       <!-- 2. Google Calendar -->
@@ -940,19 +1252,6 @@
         <p style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 1rem;">
           Toda reserva confirmada insere automaticamente um evento no Google Calendar oficial do proprietário. O site consulta o calendário antes de permitir qualquer nova reserva, evitando <em>overbooking</em>.
         </p>
-
-        <div class="action-box">
-          <div class="action-box-title">
-            <i class="fa-solid fa-user-gear"></i> Ações Obrigatórias do Cliente para o Google Calendar:
-          </div>
-          <ul class="action-list">
-            <li><i class="fa-solid fa-check"></i> Definir a conta Google oficial (ex: <code>reservas@moradaquintaldasserra.com.br</code>).</li>
-            <li><i class="fa-solid fa-check"></i> Criar o projeto na Google Cloud Console com o nome <code>MQS-Reservas</code>.</li>
-            <li><i class="fa-solid fa-check"></i> Ativar a Google Calendar API e criar uma Conta de Serviço (Service Account).</li>
-            <li><i class="fa-solid fa-check"></i> Compartilhar o Google Calendar principal com a Conta de Serviço (permissão de alteração).</li>
-            <li><i class="fa-solid fa-check"></i> Nos entregar o arquivo de chave privada <code>.json</code> e o ID do calendário.</li>
-          </ul>
-        </div>
       </div>
 
       <!-- 3. Gmail Automático -->
@@ -971,21 +1270,6 @@
         <p style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 1rem;">
           Disparo automático de e-mails customizados assim que o pagamento é aprovado.
         </p>
-
-        <div class="grid-2">
-          <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-color);">
-            <h5 style="font-weight: 700; color: var(--accent-blue-light); margin-bottom: 0.5rem;"><i class="fa-solid fa-user"></i> Para o Hóspede:</h5>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">
-              E-mail estilizado com layout responsivo contendo código da reserva, datas de check-in/out, regras da casa e comprovante de pagamento em anexo.
-            </p>
-          </div>
-          <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-color);">
-            <h5 style="font-weight: 700; color: var(--accent-amber); margin-bottom: 0.5rem;"><i class="fa-solid fa-crown"></i> Para o Anfitrião:</h5>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">
-              Notificação imediata no e-mail com dados completos do hóspede, telefone de contato e valor bruto retido.
-            </p>
-          </div>
-        </div>
       </div>
 
       <!-- 4. Painel Firebase Auth -->
@@ -1007,7 +1291,7 @@
       </div>
     </section>
 
-    <!-- TAB 3: PLANO DE CIBERSEGURANÇA -->
+    <!-- TAB 4: PLANO DE CIBERSEGURANÇA -->
     <section id="seguranca" class="section-content">
       <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-heading);">
         🛡️ Arquitetura de Cibersegurança em 5 Camadas
@@ -1121,24 +1405,9 @@ function verificarWebhookMP(req, res, next) {
 }</code></pre>
         </div>
       </div>
-
-      <div class="accordion">
-        <div class="accordion-header" onclick="toggleAccordion(this)">
-          <span><i class="fa-solid fa-scale-balanced" style="color: var(--accent-green); margin-right: 8px;"></i> 3. Conformidade LGPD (Proteção de Dados do Hóspede)</span>
-          <i class="fa-solid fa-chevron-down"></i>
-        </div>
-        <div class="accordion-content" style="color: var(--text-main); font-size: 0.875rem;">
-          <ul style="padding-left: 1.25rem; display: flex; flex-direction: column; gap: 8px;">
-            <li><strong>Política de Privacidade:</strong> Página obrigatória detalhando o tratamento de dados pessoais.</li>
-            <li><strong>Consentimento Explícito:</strong> Checkbox obrigatório no checkout de reserva.</li>
-            <li><strong>Direito de Remoção/Acesso:</strong> Canal direto via e-mail <code>lgpd@moradaquintaldasserra.com.br</code>.</li>
-            <li><strong>Zero Retenção de Cartão:</strong> Cartões de crédito trafegam exclusivamente nos servidores do Mercado Pago.</li>
-          </ul>
-        </div>
-      </div>
     </section>
 
-    <!-- TAB 4: ENTREGÁVEIS DO CLIENTE -->
+    <!-- TAB 5: ENTREGÁVEIS DO CLIENTE -->
     <section id="entregaveis" class="section-content">
       <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-heading);">
         📋 Checklist Interativo de Entregáveis do Cliente
@@ -1173,7 +1442,7 @@ function verificarWebhookMP(req, res, next) {
       </div>
     </section>
 
-    <!-- TAB 5: CRONOGRAMA -->
+    <!-- TAB 6: CRONOGRAMA -->
     <section id="cronograma" class="section-content">
       <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-heading);">
         ⏱️ Cronograma Estimado de Implantação
@@ -1231,7 +1500,7 @@ function verificarWebhookMP(req, res, next) {
 
   <footer>
     <div class="container">
-      <p style="margin-bottom: 0.5rem; font-weight: 600;">Morada Quintal da Serra — Documentação Técnica de Projeto</p>
+      <p style="margin-bottom: 0.5rem; font-weight: 600;">Morada Quintal da Serra — Documentação Técnica & Guia do Cliente</p>
       <p style="font-size: 0.8rem; color: var(--text-muted);">
         Elaborado por <strong>Berocket Agency</strong> • Agosto de 2026 • Todos os direitos reservados.
       </p>
