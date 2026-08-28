@@ -144,18 +144,6 @@
       color: var(--accent-blue-light);
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-blue), #2563eb);
-      color: #ffffff;
-      border: none;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: #ffffff;
-    }
-
     /* Subheader Tabs */
     .tabs-bar {
       background: var(--bg-secondary);
@@ -643,30 +631,6 @@
       color: var(--text-muted);
     }
 
-    /* Print Styles */
-    @media print {
-      header, .tabs-bar, .nav-actions, .btn-action, .theme-toggle {
-        display: none !important;
-      }
-      body {
-        background: #fff !important;
-        color: #000 !important;
-      }
-      .section-content {
-        display: block !important;
-        page-break-after: always;
-      }
-      .card, .hero-card, table, .tutorial-section, .step-card {
-        border: 1px solid #ccc !important;
-        box-shadow: none !important;
-        background: #fff !important;
-        color: #000 !important;
-      }
-      .hero-title, .card-title, th, td, .tutorial-title, .step-title {
-        color: #000 !important;
-      }
-    }
-
     @media (max-width: 768px) {
       .hero-title { font-size: 1.6rem; }
       .nav-wrapper { height: 64px; }
@@ -694,10 +658,6 @@
           <button class="btn-action" id="themeToggle" title="Alternar Tema">
             <i class="fa-solid fa-moon"></i>
             <span id="themeText">Escuro</span>
-          </button>
-          <button class="btn-action" onclick="window.print()" title="Imprimir ou Salvar PDF">
-            <i class="fa-solid fa-print"></i>
-            <span>PDF / Imprimir</span>
           </button>
         </div>
       </div>
