@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Morada Quintal da Serra — Plano de Integrações & Cibersegurança</title>
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #111827;
+      --bg-card: rgba(31, 41, 55, 0.7);
+      --bg-glass: rgba(17, 24, 39, 0.75);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --border-hover: rgba(59, 130, 246, 0.4);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-heading: #ffffff;
+      --accent-blue: #3b82f6;
+      --accent-blue-light: #60a5fa;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-red: #ef4444;
+      --accent-purple: #8b5cf6;
+      --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html.light {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --bg-glass: rgba(255, 255, 255, 0.85);
+      --border-color: rgba(0, 0, 0, 0.08);
+      --border-hover: rgba(37, 99, 235, 0.3);
+      --text-main: #334155;
+      --text-muted: #64748b;
+      --text-heading: #0f172a;
+      --accent-blue: #2563eb;
+      --accent-blue-light: #3b82f6;
+      --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .logo-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.25rem;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+    }
+
+    .logo-text h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+    }
+
+    .logo-text p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-action {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .btn-action:hover {
+      border-color: var(--accent-blue);
+      color: var(--accent-blue-light);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), #2563eb);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+    }
+
+    /* Subheader Tabs */
+    .tabs-bar {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .tabs-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tabs-wrapper {
+      display: flex;
+      gap: 8px;
+      padding: 10px 0;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .tab-btn.active {
+      background: var(--accent-blue);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Hero Banner */
+    .hero {
+      padding: 3rem 0 2rem 0;
+      position: relative;
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(88, 28, 135, 0.3));
+      border: 1px solid var(--border-hover);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 30px;
+      color: var(--accent-blue-light);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 800px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.25rem;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Main Content Sections */
+    .section-content {
+      display: none;
+      padding: 2rem 0 4rem 0;
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+
+    .section-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.75rem;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-icon-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+
+    .icon-blue { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue-light); border: 1px solid rgba(59, 130, 246, 0.3); }
+    .icon-green { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .icon-amber { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .icon-red { background: rgba(239, 68, 68, 0.2); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
+    .icon-purple { background: rgba(139, 92, 246, 0.2); color: var(--accent-purple); border: 1px solid rgba(139, 92, 246, 0.3); }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+
+    .badge {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-alta { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-media { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-opcional { background: rgba(16, 185, 129, 0.15); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+    /* Flow Diagrams */
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 1rem 0;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--bg-secondary);
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      font-size: 0.9rem;
+    }
+
+    .flow-step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Action Box */
+    .action-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .action-box-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: var(--accent-amber);
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .action-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .action-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.875rem;
+      color: var(--text-main);
+    }
+
+    .action-list li i {
+      color: var(--accent-amber);
+      margin-top: 4px;
+      font-size: 0.8rem;
+    }
+
+    /* Architecture Visualizer */
+    .arch-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 1.5rem 0;
+    }
+
+    .arch-layer {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-left: 5px solid var(--accent-blue);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: var(--transition);
+    }
+
+    .arch-layer:hover {
+      border-color: var(--border-hover);
+      transform: translateX(4px);
+    }
+
+    .arch-layer-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .arch-layer-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--accent-blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    .arch-layer-title {
+      font-weight: 700;
+      color: var(--text-heading);
+      font-size: 1rem;
+    }
+
+    .arch-layer-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Code Blocks / Accordions */
+    .accordion {
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: var(--bg-secondary);
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .accordion-header {
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-heading);
+    }
+
+    .accordion-header:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .accordion-content {
+      display: none;
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--border-color);
+      background: #0d1117;
+    }
+
+    .accordion-content.open {
+      display: block;
+    }
+
+    pre code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.825rem;
+      color: #e6edf3;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* Tables */
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: var(--bg-secondary);
+      margin: 1rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 14px 18px;
+      font-weight: 700;
+      color: var(--text-heading);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Checklist Section */
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      margin-bottom: 8px;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .checklist-item:hover {
+      border-color: var(--border-hover);
+    }
+
+    .checklist-item.checked {
+      background: rgba(16, 185, 129, 0.08);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .checklist-checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      transition: var(--transition);
+    }
+
+    .checklist-item.checked .checklist-checkbox {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+      color: #fff;
+    }
+
+    .checklist-text {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-heading);
+    }
+
+    .checklist-item.checked .checklist-text {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 2.5rem 0;
+      background: var(--bg-secondary);
+      text-align: center;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* Print Styles */
+    @media print {
+      header, .tabs-bar, .nav-actions, .btn-action, .theme-toggle {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .section-content {
+        display: block !important;
+        page-break-after: always;
+      }
+      .card, .hero-card, .arch-layer, .accordion, table {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .hero-title, .card-title, th, td {
+        color: #000 !important;
+      }
+      .accordion-content {
+        display: block !important;
+        background: #f8f9fa !important;
+      }
+      pre code {
+        color: #000 !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 1.6rem; }
+      .nav-wrapper { height: 64px; }
+      .tab-btn { padding: 8px 14px; font-size: 0.825rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Navbar -->
+  <header>
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="#" class="logo-brand">
+          <div class="logo-icon">
+            <i class="fa-solid fa-house-tree"></i>
+          </div>
+          <div class="logo-text">
+            <h1>Morada Quintal da Serra</h1>
+            <p>Berocket Agency — Plano de Implantação</p>
+          </div>
+        </a>
+
+        <div class="nav-actions">
+          <button class="btn-action" id="themeToggle" title="Alternar Tema">
+            <i class="fa-solid fa-moon"></i>
+            <span id="themeText">Escuro</span>
+          </button>
+          <button class="btn-action" onclick="window.print()" title="Imprimir ou Salvar PDF">
+            <i class="fa-solid fa-print"></i>
+            <span>PDF / Imprimir</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="tabs-bar">
+    <div class="container">
+      <div class="tabs-wrapper">
+        <button class="tab-btn active" onclick="switchTab('visao-geral')">
+          <i class="fa-solid fa-compass"></i> Visão Geral & Resumo
+        </button>
+        <button class="tab-btn" onclick="switchTab('integracoes')">
+          <i class="fa-solid fa-plug"></i> Plano de Integrações
+        </button>
+        <button class="tab-btn" onclick="switchTab('seguranca')">
+          <i class="fa-solid fa-shield-halved"></i> Plano de Cibersegurança
+        </button>
+        <button class="tab-btn" onclick="switchTab('entregaveis')">
+          <i class="fa-solid fa-list-check"></i> Checklist do Cliente
+        </button>
+        <button class="tab-btn" onclick="switchTab('cronograma')">
+          <i class="fa-solid fa-clock-rotate-left"></i> Cronograma & Prazos
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    
+    <!-- Hero Banner -->
+    <div class="hero">
+      <div class="hero-card">
+        <div class="hero-badge">
+          <i class="fa-solid fa-circle-check"></i> Proposta Técnica & Didática para o Cliente
+        </div>
+        <h2 class="hero-title">Planejamento de Integrações e Segurança Digital</h2>
+        <p class="hero-desc">
+          Este documento apresenta o mapeamento completo das integrações de pagamento, agendamento e autenticação para a <strong>Morada Quintal da Serra</strong>, acompanhado do protocolo de cibersegurança em 5 camadas para proteção de dados financeiros e pessoais (LGPD).
+        </p>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <i class="fa-solid fa-building"></i> Cliente: Morada Quintal da Serra
+          </div>
+          <div class="hero-meta-item">
+            <i class="fa-solid fa-rocket"></i> Desenvolvido por: Berocket Agency
+          </div>
+          <div class="hero-meta-item">
+            <i class="fa-solid fa-calendar"></i> Versão: Agosto 2026
+          </div>
+          <div class="hero-meta-item">
+            <i class="fa-solid fa-lock"></i> Padrão: OWASP Top 10 + PCI-DSS + LGPD
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 1: VISÃO GERAL -->
+    <section id="visao-geral" class="section-content active">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-heading);">
+        📊 Resumo Executivo das Integrações
+      </h2>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+        Visão rápida de cada módulo a ser integrado no site, considerando nivel de prioridade, custo estimado e complexidade de desenvolvimento.
+      </p>
+
+      <div class="grid-4">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon icon-red"><i class="fa-solid fa-credit-card"></i></div>
+            <span class="badge badge-alta">Alta Prioridade</span>
+          </div>
+          <h3 class="card-title" style="margin-bottom: 0.5rem;">Mercado Pago</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Checkout transparente para Pix e Cartão de Crédito sem retenção de dados sensíveis.
+          </p>
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-blue-light);">
+            Custo: R$ 0 setup (% por transação)
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon icon-amber"><i class="fa-solid fa-calendar-days"></i></div>
+            <span class="badge badge-media">Média Prioridade</span>
+          </div>
+          <h3 class="card-title" style="margin-bottom: 0.5rem;">Google Calendar</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Criação automática de eventos e bloqueio de datas ocupadas em tempo real.
+          </p>
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-green);">
+            Custo: Gratuito (API Google Cloud)
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon icon-amber"><i class="fa-solid fa-envelope"></i></div>
+            <span class="badge badge-media">Média Prioridade</span>
+          </div>
+          <h3 class="card-title" style="margin-bottom: 0.5rem;">Gmail Automático</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Disparo de vouchers/confirmações em PDF para o hóspede e notificação imediata ao proprietário.
+          </p>
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-green);">
+            Custo: Gratuito (App Password)
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon icon-purple"><i class="fa-solid fa-user-shield"></i></div>
+            <span class="badge badge-opcional">Opcional</span>
+          </div>
+          <h3 class="card-title" style="margin-bottom: 0.5rem;">Painel / Firebase Auth</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Área do hóspede com Login via Google ou E-mail e painel administrativo de reservas.
+          </p>
+          <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-green);">
+            Custo: Gratuito até 50k usuários
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Table -->
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Integração</th>
+              <th>Complexidade</th>
+              <th>Custo Estimado</th>
+              <th>Prioridade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><strong>Mercado Pago (Checkout)</strong></td>
+              <td>Média</td>
+              <td>0 setup + % por transação (0,99% Pix / 2,99% a 4,99% Cartão)</td>
+              <td><span class="badge badge-alta">🔴 Alta</span></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><strong>Google Calendar (Sincronização)</strong></td>
+              <td>Baixa</td>
+              <td>Gratuito (até 1.000.000 requisições/mês)</td>
+              <td><span class="badge badge-media">🟡 Média</span></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><strong>Gmail (E-mails Automáticos)</strong></td>
+              <td>Baixa</td>
+              <td>Gratuito (até 500 e-mails/dia)</td>
+              <td><span class="badge badge-media">🟡 Média</span></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><strong>Painel do Hóspede & Firebase Auth</strong></td>
+              <td>Alta</td>
+              <td>Gratuito (até 50.000 usuários ativos/mês)</td>
+              <td><span class="badge badge-opcional">🟢 Opcional</span></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><strong>APIs Complementares (ViaCEP, GA4, Clarity)</strong></td>
+              <td>Baixa</td>
+              <td>Gratuito</td>
+              <td><span class="badge badge-opcional">🟢 Opcional</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 2: PLANO DE INTEGRAÇÕES -->
+    <section id="integracoes" class="section-content">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--text-heading);">
+        🔌 Detalhamento das Integrações Técnica e Operacional
+      </h2>
+
+      <!-- 1. Mercado Pago -->
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-header">
+          <div class="card-icon-title">
+            <div class="card-icon icon-blue"><i class="fa-solid fa-credit-card"></i></div>
+            <div>
+              <h3 class="card-title">1. Mercado Pago — Checkout de Pagamento Seguro</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Processamento de reservas via Pix e Cartão de Crédito em até 4x sem juros</p>
+            </div>
+          </div>
+          <span class="badge badge-alta">Alta Prioridade</span>
+        </div>
+
+        <p style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 1rem;">
+          O checkout integrado redireciona o hóspede para o ambiente auditado do Mercado Pago (PCI-DSS Compliance). Nenhum cartão de crédito passa pelo nosso servidor.
+        </p>
+
+        <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-heading); margin-bottom: 0.5rem;">
+          <i class="fa-solid fa-route" style="color: var(--accent-blue-light);"></i> Fluxo da Experiência:
+        </h4>
+        <div class="flow-steps">
+          <div class="flow-step"><span class="flow-step-num">1</span> Hóspede seleciona as datas e acomodação no carrinho.</div>
+          <div class="flow-step"><span class="flow-step-num">2</span> Clica em "Confirmar Reserva" e o sistema gera o pedido.</div>
+          <div class="flow-step"><span class="flow-step-num">3</span> A API backend solicita o link seguro do Mercado Pago Checkout Pro.</div>
+          <div class="flow-step"><span class="flow-step-num">4</span> O hóspede é direcionado e conclui o pagamento (Pix ou Cartão).</div>
+          <div class="flow-step"><span class="flow-step-num">5</span> O Mercado Pago envia uma notificação automática Webhook (HMAC verificado).</div>
+          <div class="flow-step"><span class="flow-step-num">6</span> A reserva é confirmada, o calendário é atualizado e o comprovante é enviado.</div>
+        </div>
+
+        <div class="action-box">
+          <div class="action-box-title">
+            <i class="fa-solid fa-user-gear"></i> Ações Obrigatórias do Cliente para o Mercado Pago:
+          </div>
+          <ul class="action-list">
+            <li><i class="fa-solid fa-check"></i> Criar ou acessar a conta Mercado Pago Jurídica (CNPJ).</li>
+            <li><i class="fa-solid fa-check"></i> Acessar o Portal de Desenvolvedores Mercado Pago e criar a aplicação "MQS Reservas".</li>
+            <li><i class="fa-solid fa-check"></i> Fornecer as credenciais de Produção: <code>PUBLIC_KEY</code> e <code>ACCESS_TOKEN</code>.</li>
+            <li><i class="fa-solid fa-check"></i> Autorizar o endereço de Webhook que configuraremos no servidor Coolify.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2. Google Calendar -->
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-header">
+          <div class="card-icon-title">
+            <div class="card-icon icon-amber"><i class="fa-solid fa-calendar-check"></i></div>
+            <div>
+              <h3 class="card-title">2. Google Calendar — Gestão Automática de Disponibilidade</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Sincronização em tempo real entre o site e seu celular</p>
+            </div>
+          </div>
+          <span class="badge badge-media">Média Prioridade</span>
+        </div>
+
+        <p style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 1rem;">
+          Toda reserva confirmada insere automaticamente um evento no Google Calendar oficial do proprietário. O site consulta o calendário antes de permitir qualquer nova reserva, evitando <em>overbooking</em>.
+        </p>
+
+        <div class="action-box">
+          <div class="action-box-title">
+            <i class="fa-solid fa-user-gear"></i> Ações Obrigatórias do Cliente para o Google Calendar:
+          </div>
+          <ul class="action-list">
+            <li><i class="fa-solid fa-check"></i> Definir a conta Google oficial (ex: <code>reservas@moradaquintaldasserra.com.br</code>).</li>
+            <li><i class="fa-solid fa-check"></i> Criar o projeto na Google Cloud Console com o nome <code>MQS-Reservas</code>.</li>
+            <li><i class="fa-solid fa-check"></i> Ativar a Google Calendar API e criar uma Conta de Serviço (Service Account).</li>
+            <li><i class="fa-solid fa-check"></i> Compartilhar o Google Calendar principal com a Conta de Serviço (permissão de alteração).</li>
+            <li><i class="fa-solid fa-check"></i> Nos entregar o arquivo de chave privada <code>.json</code> e o ID do calendário.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 3. Gmail Automático -->
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-header">
+          <div class="card-icon-title">
+            <div class="card-icon icon-green"><i class="fa-solid fa-paper-plane"></i></div>
+            <div>
+              <h3 class="card-title">3. Gmail — Notificações e Confirmações Automáticas</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Comunicação transacional instantânea para hóspede e anfitrião</p>
+            </div>
+          </div>
+          <span class="badge badge-media">Média Prioridade</span>
+        </div>
+
+        <p style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 1rem;">
+          Disparo automático de e-mails customizados assim que o pagamento é aprovado.
+        </p>
+
+        <div class="grid-2">
+          <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-color);">
+            <h5 style="font-weight: 700; color: var(--accent-blue-light); margin-bottom: 0.5rem;"><i class="fa-solid fa-user"></i> Para o Hóspede:</h5>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              E-mail estilizado com layout responsivo contendo código da reserva, datas de check-in/out, regras da casa e comprovante de pagamento em anexo.
+            </p>
+          </div>
+          <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-color);">
+            <h5 style="font-weight: 700; color: var(--accent-amber); margin-bottom: 0.5rem;"><i class="fa-solid fa-crown"></i> Para o Anfitrião:</h5>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Notificação imediata no e-mail com dados completos do hóspede, telefone de contato e valor bruto retido.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Painel Firebase Auth -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon-title">
+            <div class="card-icon icon-purple"><i class="fa-solid fa-users-gear"></i></div>
+            <div>
+              <h3 class="card-title">4. Firebase Authentication — Painel do Hóspede & Admin</h3>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Autenticação segura via E-mail/Senha e Login com Google</p>
+            </div>
+          </div>
+          <span class="badge badge-opcional">Opcional</span>
+        </div>
+
+        <p style="font-size: 0.9rem; color: var(--text-main); margin-bottom: 1rem;">
+          Permite que o cliente navegue em sua área exclusiva para consultar reservas passadas, alterar cadastro e emitir segunda via de confirmação.
+        </p>
+      </div>
+    </section>
+
+    <!-- TAB 3: PLANO DE CIBERSEGURANÇA -->
+    <section id="seguranca" class="section-content">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-heading);">
+        🛡️ Arquitetura de Cibersegurança em 5 Camadas
+      </h2>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+        Como trataremos transações financeiras e dados pessoais elegíveis à LGPD, a estrutura de proteção deve seguir rigorosamente o padrão OWASP Top 10 e PCI-DSS Level 4.
+      </p>
+
+      <!-- Architecture Diagram Visualizer -->
+      <div class="arch-container">
+        <div class="arch-layer" style="border-left-color: var(--accent-blue);">
+          <div class="arch-layer-info">
+            <div class="arch-layer-num">L1</div>
+            <div>
+              <div class="arch-layer-title">Cloudflare WAF & DDoS Protection (Infraestrutura)</div>
+              <div class="arch-layer-desc">Filtro de requisições, mitigação DDoS, TLS 1.3, Rate Limiting (100 req/min por IP) e Bot Fight.</div>
+            </div>
+          </div>
+          <span class="badge badge-alta">Borda / Edge</span>
+        </div>
+
+        <div class="arch-layer" style="border-left-color: var(--accent-green);">
+          <div class="arch-layer-info">
+            <div class="arch-layer-num">L2</div>
+            <div>
+              <div class="arch-layer-title">NGINX Hardened (Servidor Web Coolify)</div>
+              <div class="arch-layer-desc">Headers de Segurança (HSTS 1 ano, CSP Estrita, X-Frame-Options SAMEORIGIN, Permissions-Policy).</div>
+            </div>
+          </div>
+          <span class="badge badge-alta">Servidor</span>
+        </div>
+
+        <div class="arch-layer" style="border-left-color: var(--accent-amber);">
+          <div class="arch-layer-info">
+            <div class="arch-layer-num">L3</div>
+            <div>
+              <div class="arch-layer-title">Back-end API Node.js (Lógica de Negócio Segura)</div>
+              <div class="arch-layer-desc">Validação rigorosa de formulários, Sanitização DOMPurify, Assinatura HMAC-SHA256 para Webhooks MP.</div>
+            </div>
+          </div>
+          <span class="badge badge-alta">Aplicação</span>
+        </div>
+
+        <div class="arch-layer" style="border-left-color: var(--accent-purple);">
+          <div class="arch-layer-info">
+            <div class="arch-layer-num">L4</div>
+            <div>
+              <div class="arch-layer-title">Firebase Auth & Firestore Security Rules</div>
+              <div class="arch-layer-desc">Políticas de acesso granular, tokens JWT expiram em 15min e segredos gerenciados via .env.</div>
+            </div>
+          </div>
+          <span class="badge badge-alta">Dados</span>
+        </div>
+
+        <div class="arch-layer" style="border-left-color: #ec4899;">
+          <div class="arch-layer-info">
+            <div class="arch-layer-num">L5</div>
+            <div>
+              <div class="arch-layer-title">Mercado Pago PCI-DSS Compliance</div>
+              <div class="arch-layer-desc">Zero retenção de dados bancários ou cartões nos nossos bancos de dados. Ambiente externo seguro.</div>
+            </div>
+          </div>
+          <span class="badge badge-alta">Pagamentos</span>
+        </div>
+      </div>
+
+      <!-- Technical Accordions -->
+      <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-heading); margin: 2rem 0 1rem 0;">
+        📜 Configurações Técnicas de Segurança
+      </h3>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span><i class="fa-solid fa-code" style="color: var(--accent-blue-light); margin-right: 8px;"></i> 1. Headers de Segurança NGINX (Coolify)</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <pre><code># nginx-security.conf (Coolify Custom Nginx)
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header X-XSS-Protection "1; mode=block" always;
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(self 'https://www.mercadopago.com.br')" always;
+server_tokens off;</code></pre>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span><i class="fa-solid fa-lock" style="color: var(--accent-amber); margin-right: 8px;"></i> 2. Validação da Assinatura HMAC-SHA256 no Webhook</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content">
+          <pre><code>// Validação do Webhook do Mercado Pago no Node.js
+const crypto = require('crypto');
+
+function verificarWebhookMP(req, res, next) {
+  const assinaturaRecebida = req.headers['x-mp-signature'];
+  const segredo = process.env.MP_WEBHOOK_SECRET;
+  
+  const assinaturaEsperada = crypto
+    .createHmac('sha256', segredo)
+    .update(JSON.stringify(req.body))
+    .digest('hex');
+  
+  if (assinaturaRecebida !== assinaturaEsperada) {
+    return res.status(401).json({ error: 'Assinatura inválida. Requisição rejeitada.' });
+  }
+  next();
+}</code></pre>
+        </div>
+      </div>
+
+      <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <span><i class="fa-solid fa-scale-balanced" style="color: var(--accent-green); margin-right: 8px;"></i> 3. Conformidade LGPD (Proteção de Dados do Hóspede)</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="accordion-content" style="color: var(--text-main); font-size: 0.875rem;">
+          <ul style="padding-left: 1.25rem; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>Política de Privacidade:</strong> Página obrigatória detalhando o tratamento de dados pessoais.</li>
+            <li><strong>Consentimento Explícito:</strong> Checkbox obrigatório no checkout de reserva.</li>
+            <li><strong>Direito de Remoção/Acesso:</strong> Canal direto via e-mail <code>lgpd@moradaquintaldasserra.com.br</code>.</li>
+            <li><strong>Zero Retenção de Cartão:</strong> Cartões de crédito trafegam exclusivamente nos servidores do Mercado Pago.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: ENTREGÁVEIS DO CLIENTE -->
+    <section id="entregaveis" class="section-content">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-heading);">
+        📋 Checklist Interativo de Entregáveis do Cliente
+      </h2>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+        Marque os itens à medida que forem fornecidos à agência para acompanhar o progresso em tempo real:
+      </p>
+
+      <div class="card">
+        <div id="checklistContainer">
+          <div class="checklist-item" onclick="toggleCheck(this, 'mp_keys')">
+            <div class="checklist-checkbox"><i class="fa-solid fa-check"></i></div>
+            <div class="checklist-text"><strong>Mercado Pago:</strong> Chaves de API de Produção (PUBLIC_KEY e ACCESS_TOKEN)</div>
+          </div>
+          <div class="checklist-item" onclick="toggleCheck(this, 'google_account')">
+            <div class="checklist-checkbox"><i class="fa-solid fa-check"></i></div>
+            <div class="checklist-text"><strong>Google Cloud:</strong> Projeto MQS-Reservas criado e Service Account autorizada</div>
+          </div>
+          <div class="checklist-item" onclick="toggleCheck(this, 'calendar_id')">
+            <div class="checklist-checkbox"><i class="fa-solid fa-check"></i></div>
+            <div class="checklist-text"><strong>Google Calendar:</strong> ID do Calendário oficial compartilhado com a Service Account</div>
+          </div>
+          <div class="checklist-item" onclick="toggleCheck(this, 'gmail_pass')">
+            <div class="checklist-checkbox"><i class="fa-solid fa-check"></i></div>
+            <div class="checklist-text"><strong>Gmail:</strong> Endereço oficial e App Password criada para disparo transacional</div>
+          </div>
+          <div class="checklist-item" onclick="toggleCheck(this, 'ga4_id')">
+            <div class="checklist-checkbox"><i class="fa-solid fa-check"></i></div>
+            <div class="checklist-text"><strong>Google Analytics 4:</strong> ID de Medição (ex: G-XXXXXXXXXX)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: CRONOGRAMA -->
+    <section id="cronograma" class="section-content">
+      <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-heading);">
+        ⏱️ Cronograma Estimado de Implantação
+      </h2>
+      <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+        Prazos contados a partir do recebimento das credenciais necessárias do cliente.
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Etapa de Desenvolvimento</th>
+              <th>Escopo Principal</th>
+              <th>Tempo Estimado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Mercado Pago Checkout</strong></td>
+              <td>Criação de rotas da API, integração do SDK, Webhooks e validação de segurança HMAC.</td>
+              <td>3–5 dias úteis</td>
+            </tr>
+            <tr>
+              <td><strong>2. Google Calendar Integration</strong></td>
+              <td>Conexão via Service Account, sincronização bidirecional de reservas e bloqueio automático de datas.</td>
+              <td>1–2 dias úteis</td>
+            </tr>
+            <tr>
+              <td><strong>3. Sistema Transacional de E-mails</strong></td>
+              <td>Templates HTML estilizados para comprovantes de reserva do hóspede e notificação do proprietário.</td>
+              <td>1 dia útil</td>
+            </tr>
+            <tr>
+              <td><strong>4. Firebase Auth & Painel</strong></td>
+              <td>Estruturação de segurança Firestore, autenticação OAuth Google e painel de acompanhamento.</td>
+              <td>5–10 dias úteis</td>
+            </tr>
+            <tr>
+              <td><strong>5. Testes & Endurecimento de Segurança</strong></td>
+              <td>Auditoria OWASP, teste de carga, verificação no SSL Labs e auditoria LGPD.</td>
+              <td>2–3 dias úteis</td>
+            </tr>
+            <tr style="background: rgba(59, 130, 246, 0.1); font-weight: 700;">
+              <td><strong>TOTAL ESTIMADO</strong></td>
+              <td><strong>Implantação completa em ambiente de produção (Coolify + GitHub)</strong></td>
+              <td><strong>~15 dias úteis</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 0.5rem; font-weight: 600;">Morada Quintal da Serra — Documentação Técnica de Projeto</p>
+      <p style="font-size: 0.8rem; color: var(--text-muted);">
+        Elaborado por <strong>Berocket Agency</strong> • Agosto de 2026 • Todos os direitos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('themeToggle');
+    const themeText = document.getElementById('themeText');
+    const htmlEl = document.documentElement;
+
+    themeToggle.addEventListener('click', () => {
+      if (htmlEl.classList.contains('dark')) {
+        htmlEl.classList.remove('dark');
+        htmlEl.classList.add('light');
+        themeText.textContent = 'Claro';
+        themeToggle.querySelector('i').className = 'fa-solid fa-sun';
+      } else {
+        htmlEl.classList.remove('light');
+        htmlEl.classList.add('dark');
+        themeText.textContent = 'Escuro';
+        themeToggle.querySelector('i').className = 'fa-solid fa-moon';
+      }
+    });
+
+    // Tab Switch Logic
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
+
+      event.currentTarget.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Accordion Toggle
+    function toggleAccordion(header) {
+      const content = header.nextElementSibling;
+      content.classList.toggle('open');
+      const icon = header.querySelector('.fa-chevron-down, .fa-chevron-up');
+      if (content.classList.contains('open')) {
+        icon.className = 'fa-solid fa-chevron-up';
+      } else {
+        icon.className = 'fa-solid fa-chevron-down';
+      }
+    }
+
+    // Checklist LocalStorage Logic
+    function toggleCheck(item, key) {
+      item.classList.toggle('checked');
+      const isChecked = item.classList.contains('checked');
+      localStorage.setItem('mqs_checklist_' + key, isChecked);
+    }
+
+    // Load Saved Checklist State
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = [
+        { el: document.querySelector('[onclick*="mp_keys"]'), key: 'mp_keys' },
+        { el: document.querySelector('[onclick*="google_account"]'), key: 'google_account' },
+        { el: document.querySelector('[onclick*="calendar_id"]'), key: 'calendar_id' },
+        { el: document.querySelector('[onclick*="gmail_pass"]'), key: 'gmail_pass' },
+        { el: document.querySelector('[onclick*="ga4_id"]'), key: 'ga4_id' }
+      ];
+
+      items.forEach(item => {
+        if (item.el) {
+          const saved = localStorage.getItem('mqs_checklist_' + item.key);
+          if (saved === 'true') {
+            item.el.classList.add('checked');
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
