@@ -760,3 +760,126 @@ nav a {
   }
 }
 
+/* ==================== CUSTOM FLATPICKR CALENDAR BOUTIQUE STYLING ==================== */
+.flatpickr-calendar {
+  background: var(--color-araucaria-dark) !important;
+  border: 1px solid var(--color-champagne) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45) !important;
+  font-family: var(--font-sans) !important;
+  padding: 12px 10px !important;
+  z-index: 99999 !important;
+  box-sizing: content-box !important;
+}
+
+.flatpickr-calendar.arrowTop:before,
+.flatpickr-calendar.arrowTop:after {
+  border-bottom-color: var(--color-champagne) !important;
+}
+
+.flatpickr-months {
+  background: transparent !important;
+  padding: 4px 0 10px 0 !important;
+  align-items: center !important;
+}
+
+.flatpickr-months .flatpickr-month {
+  color: var(--color-champagne) !important;
+  fill: var(--color-champagne) !important;
+  height: 34px !important;
+}
+
+.flatpickr-current-month {
+  font-family: var(--font-serif) !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  color: var(--color-champagne) !important;
+  padding: 2px 0 0 0 !important;
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+  background: var(--color-araucaria-dark) !important;
+  color: var(--color-champagne) !important;
+  font-weight: 600 !important;
+}
+
+.flatpickr-current-month input.cur-year {
+  color: var(--color-champagne) !important;
+  font-weight: 600 !important;
+}
+
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+  color: var(--color-champagne) !important;
+  fill: var(--color-champagne) !important;
+  padding: 6px 10px !important;
+}
+
+.flatpickr-months .flatpickr-prev-month:hover,
+.flatpickr-months .flatpickr-next-month:hover {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+.flatpickr-weekdays {
+  background: transparent !important;
+  height: 28px !important;
+}
+
+span.flatpickr-weekday {
+  color: var(--color-champagne-light) !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+}
+
+.flatpickr-day {
+  color: #ffffff !important;
+  border-radius: 10px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+  border-color: transparent !important;
+}
+
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+  color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.flatpickr-day:hover,
+.flatpickr-day:focus {
+  background: rgba(203, 185, 139, 0.25) !important;
+  color: var(--color-champagne) !important;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.selected.inRange,
+.flatpickr-day.startRange.inRange,
+.flatpickr-day.endRange.inRange,
+.flatpickr-day.selected:focus,
+.flatpickr-day.startRange:focus,
+.flatpickr-day.endRange:focus,
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange:hover {
+  background: var(--color-champagne) !important;
+  color: var(--color-araucaria-dark) !important;
+  font-weight: 700 !important;
+  border-color: var(--color-champagne) !important;
+  box-shadow: 0 4px 12px rgba(203, 185, 139, 0.3) !important;
+}
+
+.flatpickr-day.inRange {
+  background: rgba(203, 185, 139, 0.2) !important;
+  box-shadow: -5px 0 0 rgba(203, 185, 139, 0.2), 5px 0 0 rgba(203, 185, 139, 0.2) !important;
+  color: #ffffff !important;
+}
+
+.flatpickr-day.today {
+  border-color: var(--color-champagne) !important;
+}
+
+

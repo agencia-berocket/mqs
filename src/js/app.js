@@ -220,7 +220,7 @@ const ROMANTIC_PACKAGES = {
 const EXTRA_ADDONS = [
   { id: 'add-cafe', name: 'Cesta de Café da Manhã Artesanal', price: 140.00, desc: 'Pães frescos, queijos coloniais de Rancho Queimado, geleias e frutas.' },
   { id: 'add-lareira', name: 'Kit Lareira & Vinho Fino da Serra', price: 190.00, desc: 'Lenha ecológica selecionada, acendedores e 1 garrafa de vinho reservado.' },
-  { id: 'add-pet', name: 'Taxa Pet Amigo (Por Estadia)', price: 95.00, desc: 'Comedouros, mimos para seu pet e higienização especial pós-check-out.' }
+  { id: 'add-pet', name: 'Taxa Pet Amigo (Por Estadia)', price: 95.00, desc: 'Pequeno e Médio porte (até 14kg). Comedouros, mimos e higienização especial pós-check-out.' }
 ];
 
 // Initialize DOM Events
@@ -404,6 +404,9 @@ function collapseGallerySection() {
   }, 800); 
 }
 
+let fpCheckIn = null;
+let fpCheckOut = null;
+
 function initDateDefaults() {
   const today = new Date();
   const tomorrow = new Date(today);
@@ -413,38 +416,72 @@ function initDateDefaults() {
 
   const formatInputDate = (d) => d.toISOString().split('T')[0];
   
+  appState.checkIn = formatInputDate(tomorrow);
+  appState.checkOut = formatInputDate(afterTomorrow);
+
   const inInput = document.getElementById('input-checkin');
   const outInput = document.getElementById('input-checkout');
   
-  if (inInput && outInput) {
-    inInput.value = formatInputDate(tomorrow);
-    outInput.value = formatInputDate(afterTomorrow);
-    
-    appState.checkIn = inInput.value;
-    appState.checkOut = outInput.value;
-    
+  if (inInput && outInput && typeof flatpickr !== 'undefined') {
+    fpCheckIn = flatpickr(inInput, {
+      locale: 'pt',
+      dateFormat: 'Y-m-d',
+      altInput: true,
+      altFormat: 'd/m/Y',
+      defaultDate: tomorrow,
+      minDate: 'today',
+      disableMobile: true,
+      onChange: function(selectedDates, dateStr) {
+        if (selectedDates.length > 0) {
+          appState.checkIn = dateStr;
+          if (fpCheckOut) {
+            fpCheckOut.set('minDate', selectedDates[0]);
+            // Se o checkout for anterior ou igual ao checkin, atualiza automaticamente
+            const currentOut = new Date(appState.checkOut);
+            if (currentOut <= selectedDates[0]) {
+              const newOut = new Date(selectedDates[0]);
+              newOut.setDate(newOut.getDate() + (appState.numNights || 2));
+              fpCheckOut.setDate(newOut, true);
+            }
+          }
+          handleDateChange();
+        }
+      }
+    });
+
+    fpCheckOut = flatpickr(outInput, {
+      locale: 'pt',
+      dateFormat: 'Y-m-d',
+      altInput: true,
+      altFormat: 'd/m/Y',
+      defaultDate: afterTomorrow,
+      minDate: tomorrow,
+      disableMobile: true,
+      onChange: function(selectedDates, dateStr) {
+        if (selectedDates.length > 0) {
+          appState.checkOut = dateStr;
+          handleDateChange();
+        }
+      }
+    });
+  } else if (inInput && outInput) {
+    inInput.value = appState.checkIn;
+    outInput.value = appState.checkOut;
     inInput.addEventListener('change', handleDateChange);
     outInput.addEventListener('change', handleDateChange);
   }
 }
 
 function handleDateChange() {
-  const inInput = document.getElementById('input-checkin');
-  const outInput = document.getElementById('input-checkout');
-  
-  if (inInput.value && outInput.value) {
-    const d1 = new Date(inInput.value);
-    const d2 = new Date(outInput.value);
+  if (appState.checkIn && appState.checkOut) {
+    const d1 = new Date(appState.checkIn);
+    const d2 = new Date(appState.checkOut);
     const diffTime = d2 - d1;
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
     if (diffDays > 0) {
       appState.numNights = diffDays;
-      appState.checkIn = inInput.value;
-      appState.checkOut = outInput.value;
     } else {
-      alert('A data de check-out deve ser posterior à data de check-in.');
-      outInput.value = inInput.value;
       appState.numNights = 1;
     }
   }
@@ -458,17 +495,20 @@ function setServiceType(type) {
   const btnDayUse = document.getElementById('btn-type-dayuse');
   const nightContainer = document.getElementById('nights-selector-container');
   const checkoutFieldContainer = document.getElementById('field-checkout-container');
+  const labelCheckIn = document.getElementById('label-checkin-date');
 
   if (type === 'pernoite') {
     if (btnPernoite) btnPernoite.className = 'btn-araucaria text-xs !py-2.5 !px-5';
     if (btnDayUse) btnDayUse.className = 'btn-outline-champagne text-xs !py-2.5 !px-5 !text-white';
     if (nightContainer) nightContainer.style.display = 'block';
     if (checkoutFieldContainer) checkoutFieldContainer.style.display = 'block';
+    if (labelCheckIn) labelCheckIn.innerText = 'Check-in (Entrada)';
   } else {
     if (btnDayUse) btnDayUse.className = 'btn-araucaria text-xs !py-2.5 !px-5';
     if (btnPernoite) btnPernoite.className = 'btn-outline-champagne text-xs !py-2.5 !px-5 !text-white';
     if (nightContainer) nightContainer.style.display = 'none';
     if (checkoutFieldContainer) checkoutFieldContainer.style.display = 'none';
+    if (labelCheckIn) labelCheckIn.innerText = 'Data do Day Use (09h às 18h)';
   }
   
   updateCalculation();
@@ -494,8 +534,11 @@ function updateCalculation() {
       rateNote = `${appState.numNights} Noites x R$ 754,00 / noite (Tarifa Promocional)`;
     }
   } else {
+    // Day Use é exclusivo para área externa (piquenique) -> sem pacotes ou adicionais de chalé
     stayBaseTotal = appState.dayUseRate;
     rateNote = 'Day Use Exclusivo (Das 09h às 18h)';
+    appState.selectedPackages = [];
+    appState.selectedAddons = [];
   }
 
   const packagesTotal = appState.selectedPackages.reduce((acc, p) => acc + p.price, 0);
@@ -965,7 +1008,7 @@ function renderCartModalContent() {
             '</div>' +
             packagesHTML +
             addonsHTML +
-            (packages.length === 0 && addons.length === 0 ?
+            (appState.serviceType === 'pernoite' && packages.length === 0 && addons.length === 0 ?
               '<div style="margin:0;padding:14px 16px;background:linear-gradient(135deg,rgba(22,58,47,0.04) 0%,rgba(203,185,139,0.12) 100%);border-top:1px solid var(--color-champagne)">' +
                 '<div style="display:flex;align-items:center;gap:12px">' +
                   '<div style="width:36px;height:36px;border-radius:50%;background:var(--color-araucaria);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">✨</div>' +
@@ -986,19 +1029,26 @@ function renderCartModalContent() {
 
         // Bloco: Dados do Hóspede
         '<div>' +
-          '<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-araucaria);margin-bottom:10px">Dados do Hóspede Titular</p>' +
+          '<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-araucaria);margin-bottom:10px">Dados dos Hóspedes Titulares</p>' +
           '<div style="display:flex;flex-direction:column;gap:10px">' +
             '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">' +
-              '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">Nome Completo *</label>' +
-              '<input type="text" id="guest-name" placeholder="Maria Silva" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
-              '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">CPF *</label>' +
-              '<input type="text" id="guest-cpf" placeholder="000.000.000-00" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
+              '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">Nome do Titular *</label>' +
+              '<input type="text" id="guest-name" placeholder="Nome Completo do Responsável" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
+              '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">Nome dos Demais Hóspedes *</label>' +
+              '<input type="text" id="guest-all-names" placeholder="Nome completo de todos os acompanhantes" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
             '</div>' +
             '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">' +
+              '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">CPF *</label>' +
+              '<input type="text" id="guest-cpf" placeholder="000.000.000-00" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
               '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">WhatsApp *</label>' +
               '<input type="tel" id="guest-phone" placeholder="(48) 9 0000-0000" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
+            '</div>' +
+            '<div style="display:grid;grid-template-columns:1fr' + (addons.some(function(a){ return a.id === 'add-pet'; }) ? ' 1fr' : '') + ';gap:10px">' +
               '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">E-mail *</label>' +
               '<input type="email" id="guest-email" placeholder="email@exemplo.com" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
+              (addons.some(function(a){ return a.id === 'add-pet'; }) ?
+              '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-araucaria);margin-bottom:4px">🐾 Nome e Raça do Pet (Até 14kg) *</label>' +
+              '<input type="text" id="guest-pet-name" placeholder="Ex: Mel (Spitz, 5kg)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' : '') +
             '</div>' +
             '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">Observações (Opcional)</label>' +
             '<textarea id="guest-obs" rows="2" placeholder="Ex: Aniversário de namoro, pedido de casamento..." style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);resize:none;box-sizing:border-box;outline:none"></textarea></div>' +
@@ -1056,17 +1106,24 @@ function renderCartModalContent() {
 
         '</div>' +
 
-        // Pacotes
-        '<div style="margin-bottom:24px">' +
-          '<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-araucaria);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--color-champagne)">Pacotes Românticos <span style="font-size:9px;font-weight:400;text-transform:none;color:var(--color-texto-suave)">(1 por reserva)</span></p>' +
-          editPkgsHTML +
-        '</div>' +
-
-        // Adicionais
+        // Pacotes e Adicionais (Apenas se for Pernoite)
+        (appState.serviceType === 'pernoite' ?
         '<div>' +
-          '<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-araucaria);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--color-champagne)">Adicionais & Conforto <span style="font-size:9px;font-weight:400;text-transform:none;color:var(--color-texto-suave)">(Combine quantos desejar)</span></p>' +
-          editAddonsHTML +
-        '</div>' +
+          '<div style="margin-bottom:24px">' +
+            '<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-araucaria);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--color-champagne)">Pacotes Românticos <span style="font-size:9px;font-weight:400;text-transform:none;color:var(--color-texto-suave)">(1 por reserva)</span></p>' +
+            editPkgsHTML +
+          '</div>' +
+          '<div>' +
+            '<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-araucaria);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--color-champagne)">Adicionais & Conforto <span style="font-size:9px;font-weight:400;text-transform:none;color:var(--color-texto-suave)">(Combine quantos desejar)</span></p>' +
+            editAddonsHTML +
+          '</div>' +
+        '</div>'
+        :
+        '<div style="padding:16px;background:rgba(203,185,139,0.15);border:1px solid var(--color-champagne);border-radius:12px;margin-bottom:20px;text-align:center">' +
+          '<p style="font-size:12px;font-weight:700;color:var(--color-araucaria);margin:0 0 4px 0">☀️ Day Use Piquenique</p>' +
+          '<p style="font-size:11px;color:var(--color-texto-suave);margin:0 font-light">A experiência Day Use é voltada exclusivamente para o uso do ambiente externo e área verde para piquenique (09h às 18h). Os pacotes e adicionais internos do chalé não se aplicam a esta modalidade.</p>' +
+        '</div>'
+        ) +
 
         // Botão voltar ao resumo
         '<button onclick="setCartTab(\'resumo\')" style="width:100%;margin-top:20px;padding:14px;border-radius:12px;border:2px solid var(--color-araucaria);background:transparent;color:var(--color-araucaria);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;font-family:var(--font-sans)">← Concluir & Ver Resumo</button>' +
@@ -1138,14 +1195,21 @@ function handlePaymentDropdown(value) {
 
 function processCheckout() {
   const name = document.getElementById('guest-name')?.value.trim();
+  const allNames = document.getElementById('guest-all-names')?.value.trim();
   const phone = document.getElementById('guest-phone')?.value.trim();
   const cpf = document.getElementById('guest-cpf')?.value.trim();
   const email = document.getElementById('guest-email')?.value.trim();
+  const petName = document.getElementById('guest-pet-name')?.value.trim();
   const obs = document.getElementById('guest-obs')?.value.trim();
   const payMethod = document.getElementById('payment-dropdown')?.value;
+  const isPetActive = appState.cart.addons.some(function(a){ return a.id === 'add-pet'; });
 
-  if (!name || !phone) {
-    alert('Por favor, preencha o Nome Completo e o WhatsApp para continuar.');
+  if (!name || !allNames || !phone) {
+    alert('Por favor, preencha o Nome do Titular, o Nome dos Demais Hóspedes e o WhatsApp para continuar.');
+    return;
+  }
+  if (isPetActive && !petName) {
+    alert('Por favor, informe o Nome e Raça do Pet (Até 14kg) para prosseguir com a Taxa Pet Amigo.');
     return;
   }
   if (!payMethod) {
@@ -1166,12 +1230,14 @@ function processCheckout() {
   lines.push('*NOVA RESERVA — MORADA QUINTAL DA SERRA*');
   lines.push('');
   lines.push('------------------------------------');
-  lines.push('*DADOS DO HÓSPEDE*');
+  lines.push('*DADOS DOS HÓSPEDES*');
   lines.push('------------------------------------');
-  lines.push('Nome: ' + name);
+  lines.push('Titular Responsável: ' + name);
+  lines.push('Acompanhantes: ' + allNames);
   lines.push('WhatsApp: ' + phone);
   if (cpf) lines.push('CPF: ' + cpf);
   if (email) lines.push('E-mail: ' + email);
+  if (isPetActive && petName) lines.push('🐾 Pet (Até 14kg): ' + petName);
   if (obs) lines.push('Obs: ' + obs);
   lines.push('');
   lines.push('------------------------------------');
