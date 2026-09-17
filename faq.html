@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perguntas Frequentes (FAQ) | Morada Quintal da Serra</title>
+  <meta name="description" content="Tire todas as suas dúvidas sobre hospedagem, horários de check-in, pet friendly, comodidades do chalé e reservas na Morada Quintal da Serra em Rancho Queimado - SC." />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Perguntas Frequentes (FAQ) | Morada Quintal da Serra" />
+  <meta property="og:description" content="Tire todas as suas dúvidas sobre nossa hospedagem boutique em Rancho Queimado - SC." />
+  <meta property="og:image" content="assets/images/vista-aerea-chale-rancho-queimado-serra-catarinense.jpeg" />
+  <meta property="og:type" content="website" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom CSS Design System -->
+  <link rel="stylesheet" href="src/css/main.css" />
+
+  <style>
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-[var(--color-creme)] text-[var(--color-texto)] font-sans antialiased selection:bg-[var(--color-araucaria)] selection:text-white">
+
+  <!-- ==================== HEADER FIXO ==================== -->
+  <header id="header" class="fixed top-0 left-0 w-full z-50 glass-header py-3.5 px-4 md:px-8 xl:px-12 bg-white/90 border-b border-champagne-subtle shadow-sm">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-3 group shrink-0">
+        <img src="assets/logo-round.png" alt="Morada Quintal da Serra" class="w-[48px] h-[48px] md:w-[52px] md:h-[52px] rounded-full object-cover shadow-sm border border-[var(--color-champagne)]/40 transition-transform duration-300 group-hover:scale-105" />
+        <div class="hidden sm:flex flex-col border-l border-champagne-subtle pl-3">
+          <span class="font-serif font-bold text-sm tracking-wider text-[var(--color-araucaria)] uppercase whitespace-nowrap">Morada</span>
+          <span class="text-[9px] tracking-widest text-[var(--color-texto-suave)] uppercase font-semibold whitespace-nowrap">Quintal da Serra</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-8 font-sans text-xs font-semibold uppercase tracking-wider text-[var(--color-texto)] whitespace-nowrap">
+        <a href="index.html#banner-bem-estar" class="hover:text-[var(--color-araucaria)] transition-colors py-1">O Chalé</a>
+        <a href="index.html#banner-romance" class="hover:text-[var(--color-araucaria)] transition-colors py-1">Pacotes Românticos</a>
+        <a href="index.html#banner-gastronomia" class="hover:text-[var(--color-araucaria)] transition-colors py-1">Adicionais</a>
+        <a href="index.html#guia-hospede" class="hover:text-[var(--color-araucaria)] transition-colors py-1">Guia do Hóspede</a>
+        <a href="faq.html" class="text-[var(--color-araucaria)] font-bold py-1 border-b-2 border-[var(--color-araucaria)]">FAQ</a>
+      </nav>
+
+      <!-- Right Action Controls -->
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="index.html#simulador-reserva" class="btn-araucaria text-xs !py-2.5 !px-5 uppercase tracking-wider whitespace-nowrap shrink-0">
+          Faça sua Reserva
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==================== HERO FAQ ==================== -->
+  <section class="pt-32 pb-16 px-6 md:px-12 bg-gradient-to-b from-[var(--color-araucaria-dark)] to-[var(--color-araucaria)] text-white text-center">
+    <div class="max-w-4xl mx-auto space-y-4">
+      <span class="badge-boutique !bg-[var(--color-champagne)] !text-[var(--color-araucaria-dark)] font-bold uppercase tracking-widest text-[10px] px-3 py-1 rounded-full">
+        Central de Ajuda & Dúvidas
+      </span>
+      <h1 class="font-serif text-3xl md:text-5xl font-bold text-[var(--color-champagne-light)]">
+        Perguntas Frequentes
+      </h1>
+      <p class="text-xs md:text-sm text-gray-200 max-w-2xl mx-auto font-light leading-relaxed">
+        Tudo o que você precisa saber para planejar sua hospedagem inesquecível na Morada Quintal da Serra em Rancho Queimado - SC.
+      </p>
+
+      <!-- Campo de Busca no FAQ -->
+      <div class="pt-4 max-w-xl mx-auto">
+        <div class="relative">
+          <input type="text" id="faq-search-input" onkeyup="filterFAQItems()" placeholder="Digite sua dúvida ou palavra-chave (ex: pet, café, check-in)..." class="w-full py-3.5 pl-12 pr-4 rounded-2xl bg-white text-[var(--color-texto)] text-xs placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-champagne)] shadow-lg" />
+          <span class="absolute left-4 top-3.5 text-base text-gray-400">🔍</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTEÚDO PRINCIPAL DO FAQ ==================== -->
+  <main class="py-16 px-6 md:px-12 max-w-5xl mx-auto space-y-12">
+    
+    <!-- CATEGORIA 1: LOCALIZAÇÃO & ESTRUTURA -->
+    <div class="faq-category-block space-y-4">
+      <div class="flex items-center gap-3 border-b border-[var(--color-champagne)] pb-3">
+        <span class="text-xl">📍</span>
+        <h2 class="font-serif text-xl font-bold text-[var(--color-araucaria)]">1. Localização & Estrutura</h2>
+      </div>
+
+      <div class="space-y-3">
+        
+        <!-- Q1 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>1. Onde fica a Morada Quintal da Serra?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3 space-y-2">
+            <p>A Morada Quintal da Serra está localizada em Rancho Queimado - SC (Serra Catarinense), em meio à natureza exuberante, proporcionando uma experiência única de tranquilidade, privacidade e conexão com o campo.</p>
+            <p class="pt-1">
+              <a href="https://maps.google.com/?q=Rancho+Queimado+SC" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-bold text-[var(--color-araucaria)] hover:underline">
+                <span>📍 Clique aqui para ver a localização no Google Maps</span> ↗
+              </a>
+            </p>
+          </div>
+        </details>
+
+        <!-- Q2 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>2. A propriedade possui contato com a natureza?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Sim! A Morada foi pensada justamente para quem deseja desacelerar da rotina e aproveitar o clima puro e sereno da serra, cercado de araucárias e paisagens naturais.
+          </div>
+        </details>
+
+        <!-- Q3 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>3. Existem animais na propriedade?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Sim. Por estarmos localizados em um sítio no campo, alguns animais rurais e silvestres fazem parte do cotidiano da Morada, tornando a experiência na natureza ainda mais acolhedora e autêntica.
+          </div>
+        </details>
+
+        <!-- Q4 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>4. Existem trilhas ou cachoeiras na propriedade?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Atualmente nossa propriedade conta com amplas áreas verdes para caminhadas e contemplação ao ar livre. Em breve contaremos com trilhas internas exclusivas finalizadas para os nossos hóspedes!
+          </div>
+        </details>
+
+        <!-- Q5 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>5. Existem mercados e restaurantes próximos?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3 space-y-2">
+            <p>Sim! Na região há excelentes opções de mercados, padarias tradicionais, cafés coloniais e restaurantes renomados da gastronomia serrana.</p>
+            <p class="text-[11px] text-[var(--color-araucaria)] font-bold">💡 Dica: Disponibilizamos aos nossos hóspedes um guia impresso e digital com as melhores indicações da região!</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+
+    <!-- CATEGORIA 2: O CHALÉ & COMODIDADES -->
+    <div class="faq-category-block space-y-4">
+      <div class="flex items-center gap-3 border-b border-[var(--color-champagne)] pb-3">
+        <span class="text-xl">🏡</span>
+        <h2 class="font-serif text-xl font-bold text-[var(--color-araucaria)]">2. O Chalé & Comodidades</h2>
+      </div>
+
+      <div class="space-y-3">
+        
+        <!-- Q6 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>6. O chalé possui cozinha?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Sim! O chalé conta com cozinha completa e superequipada (fogão, forno, geladeira, taças e utensílios), permitindo que os hóspedes preparem suas próprias refeições com total conforto durante a estadia.
+          </div>
+        </details>
+
+        <!-- Q7 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>7. O chalé possui máquina de café?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Sim. Disponibilizamos uma cafeteira Dolce Gusto, acompanhada de cápsulas de cortesia para dar as boas-vindas à sua chegada.
+          </div>
+        </details>
+
+        <!-- Q8 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>8. Tem churrasqueira?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Sim! O chalé dispõe de churrasqueira privativa, acompanhada de grelha e utensílios para churrasco. Lembramos que o carvão deve ser trazido pelos hóspedes.
+          </div>
+        </details>
+
+        <!-- Q9 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>9. Tem lareira?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Sim! O chalé possui lareira para aquecer as noites frias da serra. Disponibilizamos a lenha inicial e há um compartimento próprio na propriedade caso necessite de reposição durante a estadia.
+          </div>
+        </details>
+
+        <!-- Q10 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>10. Vocês fornecem roupas de cama e banho?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Sim. Disponibilizamos enxoval completo de cama e banho de excelente qualidade para proporcionar o máximo de conforto durante a sua hospedagem.
+          </div>
+        </details>
+
+        <!-- Q11 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>11. O chalé possui Wi-Fi?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Sim! Disponibilizamos Wi-Fi de alta velocidade em toda a acomodação para que você possa se conectar sempre que precisar.
+          </div>
+        </details>
+
+        <!-- Q12 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>12. Preciso levar água e mantimentos?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Sim. Recomendamos que os hóspedes levem água mineral, alimentos e mantimentos que desejarem consumir durante a estadia, pois esses itens não são fornecidos pela Morada. O chalé conta com cozinha equipada para o preparo.
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+
+    <!-- CATEGORIA 3: HOSPEDAGEM, REGRAS & PETS -->
+    <div class="faq-category-block space-y-4">
+      <div class="flex items-center gap-3 border-b border-[var(--color-champagne)] pb-3">
+        <span class="text-xl">🐾</span>
+        <h2 class="font-serif text-xl font-bold text-[var(--color-araucaria)]">3. Hospedagem, Regras & Pets</h2>
+      </div>
+
+      <div class="space-y-3">
+        
+        <!-- Q13 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>13. Qual é o período mínimo de hospedagem?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Trabalhamos com reserva mínima de 1 diária, para que nossos hóspedes possam aproveitar a experiência com mais tranquilidade e flexibilidade.
+          </div>
+        </details>
+
+        <!-- Q14 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>14. Qual é o horário de check-in e check-out?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3 space-y-1">
+            <p>• <strong>Check-in:</strong> a partir das 15h00</p>
+            <p>• <strong>Check-out:</strong> até às 11h00</p>
+          </div>
+        </details>
+
+        <!-- Q15 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>15. A Morada oferece alimentação?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3 space-y-2">
+            <p>Não trabalhamos com serviço de refeições preparadas. Porém, oferecemos café da manhã à parte, mediante solicitação prévia. Os itens são deixados no chalé para que vocês preparem e aproveitem no seu próprio ritmo, com privacidade.</p>
+            <p>Também oferecemos a opção de piquenique no período da tarde, preparado com carinho para aproveitarem os momentos ao ar livre!</p>
+          </div>
+        </details>
+
+        <!-- Q16 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>16. Como funciona o café da manhã?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            O café da manhã é oferecido como um serviço adicional contratado antecedidamente. Os itens do café são deixados previamente na geladeira do chalé na quantidade correspondente às diárias contratadas. Assim, você prepara no horário que desejar.
+          </div>
+        </details>
+
+        <!-- Q17 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>17. A Morada aceita animais de estimação (Pet Friendly)?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3 space-y-2">
+            <p>Sim! A Morada é pet friendly e recebe animais de pequeno e médio porte (até aproximadamente 14 kg).</p>
+            <p>A hospedagem do pet está sujeita à cobrança de uma taxa adicional de higienização especial, informada no momento da reserva. Pedimos que os pets permaneçam sob os cuidados de seus tutores durante a estadia.</p>
+          </div>
+        </details>
+
+        <!-- Q18 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>18. Crianças podem se hospedar?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Sim, crianças são muito bem-vindas à Morada, desde que estejam acompanhadas por pelo menos um dos pais ou responsável legal durante toda a estadia. Por estarmos em meio à natureza com terrenos irregulares, recomendamos supervisão constante.
+          </div>
+        </details>
+
+        <!-- Q19 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>19. Posso receber visitas durante minha hospedagem?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Não. Por questões de segurança, privacidade dos hóspedes e controle de acesso da propriedade, somente as pessoas informadas na reserva podem permanecer no local.
+          </div>
+        </details>
+
+        <!-- Q20 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>20. Posso levar outras pessoas além das informadas na reserva?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Não. Todos os hóspedes devem ser previamente informados e incluídos no registro da reserva antes do check-in.
+          </div>
+        </details>
+
+        <!-- Q21 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>21. É necessário preencher os dados de todos os hóspedes?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Sim. Para segurança e organização da hospedagem, solicitamos previamente os dados das pessoas que permanecerão na propriedade.
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+
+    <!-- CATEGORIA 4: RESERVAS, PAGAMENTOS & CANCELAMENTO -->
+    <div class="faq-category-block space-y-4">
+      <div class="flex items-center gap-3 border-b border-[var(--color-champagne)] pb-3">
+        <span class="text-xl">💳</span>
+        <h2 class="font-serif text-xl font-bold text-[var(--color-araucaria)]">4. Reservas, Pagamentos & Cancelamento</h2>
+      </div>
+
+      <div class="space-y-3">
+        
+        <!-- Q22 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>22. Como faço minha reserva?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            A reserva pode ser realizada de forma prática e segura diretamente pelo nosso site ou através do WhatsApp da Morada. Após a escolha das datas e confirmação de disponibilidade, você receberá o passo a passo para garantir sua estadia.
+          </div>
+        </details>
+
+        <!-- Q23 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>23. Como funciona o pagamento da reserva?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3 space-y-2">
+            <p>Para garantir a reserva, solicitamos o pagamento de 50% do valor total no ato da confirmação. Os 50% restantes deverão ser pagos até um dia antes da data do check-in.</p>
+            <p>Para maior comodidade, também oferecemos a opção de pagamento parcelado em até 4x, através de link de pagamento. A reserva será considerada confirmada somente após a identificação do pagamento inicial.</p>
+          </div>
+        </details>
+
+        <!-- Q24 -->
+        <details class="faq-item group card-boutique p-4 bg-white border border-champagne-subtle shadow-sm rounded-xl">
+          <summary class="flex justify-between items-center font-bold text-xs md:text-sm text-[var(--color-araucaria)] cursor-pointer select-none">
+            <span>24. Qual é a política de cancelamento?</span>
+            <span class="text-xs transition-transform duration-300 group-open:rotate-180 bg-[var(--color-creme)] w-6 h-6 rounded-full flex items-center justify-center">▼</span>
+          </summary>
+          <div class="text-xs text-[var(--color-texto-suave)] mt-3 font-light leading-relaxed border-t border-champagne-subtle/40 pt-3">
+            Nossa política de cancelamento visa garantir transparência e flexibilidade aos hóspedes. Para detalhes sobre prazos de remarcação e condições de reembolso, entre em contato diretamente com nossa equipe via WhatsApp.
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+
+    <!-- CARD DE CONTATO DIRETO SE TIVER DÚVIDAS -->
+    <div class="card-boutique p-8 bg-[var(--color-araucaria)] text-white text-center space-y-4 rounded-2xl shadow-xl">
+      <h3 class="font-serif text-2xl font-bold text-[var(--color-champagne-light)]">
+        Ainda ficou com alguma dúvida?
+      </h3>
+      <p class="text-xs md:text-sm text-gray-200 max-w-xl mx-auto font-light">
+        Nossa equipe terá o maior prazer em ajudar você a organizar uma estadia inesquecível na Morada Quintal da Serra.
+      </p>
+      <div class="pt-2">
+        <a href="https://wa.me/5548991882991?text=Ol%C3%A1%2C%20gostaria%20de%20tirar%20algumas%20d%C3%BAvidas%20sobre%20a%20hospedagem!" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider py-3.5 px-8 rounded-xl transition-all shadow-md">
+          <span>💬</span> Falar com a Morada no WhatsApp
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-[var(--color-araucaria-dark)] text-[var(--color-branco-quente)] py-16 px-6 md:px-12 border-t border-[var(--color-champagne)]">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <img src="assets/logo-round.png" alt="Morada Quintal da Serra" class="w-12 h-12 rounded-full border border-[var(--color-champagne)]/40" />
+        <div>
+          <span class="font-serif font-bold text-sm text-[var(--color-champagne)] block">Morada Quintal da Serra</span>
+          <span class="text-[10px] text-gray-400">Rancho Queimado - Serra Catarinense</span>
+        </div>
+      </div>
+
+      <div class="text-xs text-gray-400 font-light text-center md:text-right">
+        © 2026 Morada Quintal da Serra. Todos os direitos reservados.
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Script Filtro do FAQ -->
+  <script>
+    function filterFAQItems() {
+      const input = document.getElementById('faq-search-input');
+      const filter = input.value.toLowerCase().trim();
+      const items = document.querySelectorAll('.faq-item');
+      const categories = document.querySelectorAll('.faq-category-block');
+
+      items.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        if (text.includes(filter)) {
+          item.style.display = 'block';
+          if (filter.length > 0) {
+            item.setAttribute('open', 'true');
+          }
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Esconder categorias sem itens visíveis
+      categories.forEach(cat => {
+        const visibleItems = cat.querySelectorAll('.faq-item[style="display: block;"]');
+        if (filter.length > 0 && visibleItems.length === 0) {
+          cat.style.display = 'none';
+        } else {
+          cat.style.display = 'block';
+        }
+      });
+    }
+  </script>
+  <!-- Script LGPD & Gestão de Cookies -->
+  <script src="src/js/lgpd.js"></script>
+</body>
+</html>

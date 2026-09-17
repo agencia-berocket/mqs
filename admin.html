@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Gestão | Morada Quintal da Serra</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Design System -->
+  <link rel="stylesheet" href="src/css/main.css" />
+
+  <!-- Flatpickr Datepicker -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+
+  <style>
+    body {
+      background-color: #FAF8F2;
+      color: #2D3748;
+    }
+    .badge-status-pending { background-color: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; white-space: nowrap; display: inline-block; }
+    .badge-status-deposit { background-color: #DBEAFE; color: #1E40AF; border: 1px solid #93C5FD; white-space: nowrap; display: inline-block; }
+    .badge-status-paid { background-color: #D1FAE5; color: #065F46; border: 1px solid #6EE7B7; white-space: nowrap; display: inline-block; }
+    .badge-status-completed { background-color: #E0E7FF; color: #3730A3; border: 1px solid #A5B4FC; white-space: nowrap; display: inline-block; }
+    .badge-status-cancelled { background-color: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5; white-space: nowrap; display: inline-block; }
+  </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- ==================== HEADER DO PAINEL ==================== -->
+  <header class="bg-[var(--color-araucaria-dark)] text-white py-4 px-6 md:px-12 border-b border-[var(--color-champagne)]/30 sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-3">
+        <img src="assets/logo-round.png" alt="Morada Logo" class="w-10 h-10 rounded-full border border-[var(--color-champagne)]/40 object-cover" />
+        <div>
+          <h1 class="font-serif font-bold text-base md:text-lg text-[var(--color-champagne)] leading-none">Morada Quintal da Serra</h1>
+          <span class="text-[10px] text-white/70 uppercase tracking-widest font-mono">Painel de Gestão de Reservas</span>
+        </div>
+      </div>
+
+      <div id="admin-user-bar" class="flex items-center gap-3">
+        <button onclick="handleAdminLogout()" class="px-3 py-1.5 rounded-lg bg-red-900/60 hover:bg-red-800 text-white text-xs font-bold transition-all">
+          Sair
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 md:p-8 space-y-8">
+
+    <!-- SELETOR DE ABAS DO PAINEL -->
+    <div class="flex items-center gap-3 border-b border-champagne-subtle pb-3">
+      <button id="admin-tab-btn-reservations" onclick="switchAdminTab('reservations')" class="btn-araucaria text-xs !py-2.5 !px-5 flex items-center gap-2 font-bold shadow-sm">
+        <span>📋</span> Gestão de Reservas & Hóspedes
+      </button>
+      <button id="admin-tab-btn-calendar" onclick="switchAdminTab('calendar')" class="btn-outline-champagne text-xs !py-2.5 !px-5 flex items-center gap-2 font-bold !text-[var(--color-araucaria)] hover:!bg-[var(--color-creme)]">
+        <span>📅</span> Gestão da Agenda & Bloqueio de Datas
+      </button>
+    </div>
+
+    <!-- ==================== SEÇÃO 1: RESERVAS & HÓSPEDES ==================== -->
+    <div id="admin-section-reservations" class="space-y-8">
+
+      <!-- KPI CARDS (DASHBOARD HIGHLIGHTS) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        
+        <div class="card-boutique p-5 bg-white border border-champagne-subtle shadow-sm space-y-2">
+          <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[var(--color-texto-suave)]">
+            <span>⏳ Pré-Reservas Pendentes</span>
+            <span class="text-xl">📋</span>
+          </div>
+          <div class="flex items-baseline justify-between">
+            <span id="kpi-pending-count" class="font-serif text-3xl font-bold text-amber-700">0</span>
+            <span class="text-[11px] text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full font-semibold">Aguardando PIX</span>
+          </div>
+        </div>
+
+        <div class="card-boutique p-5 bg-white border border-champagne-subtle shadow-sm space-y-2">
+          <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[var(--color-texto-suave)]">
+            <span>💳 Reservas Confirmadas</span>
+            <span class="text-xl">✅</span>
+          </div>
+          <div class="flex items-baseline justify-between">
+            <span id="kpi-confirmed-count" class="font-serif text-3xl font-bold text-[var(--color-araucaria)]">0</span>
+            <span id="kpi-confirmed-total" class="text-xs font-bold text-emerald-700 font-mono">R$ 0,00</span>
+          </div>
+        </div>
+
+        <div class="card-boutique p-5 bg-white border border-champagne-subtle shadow-sm space-y-2">
+          <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[var(--color-texto-suave)]">
+            <span>📥 Check-ins Próximos</span>
+            <span class="text-xl">🔑</span>
+          </div>
+          <div class="flex items-baseline justify-between">
+            <span id="kpi-checkin-count" class="font-serif text-3xl font-bold text-blue-700">0</span>
+            <span class="text-[11px] text-blue-800 bg-blue-100 px-2 py-0.5 rounded-full font-semibold">Entradas</span>
+          </div>
+        </div>
+
+        <div class="card-boutique p-5 bg-white border border-champagne-subtle shadow-sm space-y-2">
+          <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[var(--color-texto-suave)]">
+            <span>📤 Check-outs Próximos</span>
+            <span class="text-xl">🚗</span>
+          </div>
+          <div class="flex items-baseline justify-between">
+            <span id="kpi-checkout-count" class="font-serif text-3xl font-bold text-purple-700">0</span>
+            <span class="text-[11px] text-purple-800 bg-purple-100 px-2 py-0.5 rounded-full font-semibold">Saídas</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CONTROLES DE BUSCA E FILTRO -->
+      <div class="card-boutique p-4 md:p-6 bg-white border border-champagne-subtle shadow-sm space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          
+          <!-- Search Input -->
+          <div class="relative flex-1">
+            <input type="text" id="admin-search-input" onkeyup="filterAdminReservations()" placeholder="Buscar por Hóspede, WhatsApp, E-mail, Código ou CPF..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-champagne-subtle text-xs bg-[var(--color-creme)] text-[var(--color-texto)] focus:outline-none focus:border-[var(--color-araucaria)]" />
+            <span class="absolute left-3.5 top-2.5 text-xs text-[var(--color-texto-suave)]">🔍</span>
+          </div>
+
+          <!-- Filter Dropdown Status -->
+          <div class="flex items-center gap-3">
+            <label class="text-xs font-bold uppercase tracking-wider text-[var(--color-texto-suave)] whitespace-nowrap">Status:</label>
+            <select id="admin-status-filter" onchange="filterAdminReservations()" class="px-3 py-2 rounded-xl border border-champagne-subtle text-xs bg-[var(--color-creme)] text-[var(--color-araucaria)] font-bold focus:outline-none cursor-pointer">
+              <option value="all">Todas as Reservas</option>
+              <option value="pending">⏳ Pré-Reservas Pendentes</option>
+              <option value="deposit_paid">💳 50% PIX Pago</option>
+              <option value="fully_paid">✅ 100% Pago</option>
+              <option value="completed">🏠 Estadia Concluída</option>
+              <option value="cancelled">❌ Canceladas</option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TABELA PRINCIPAL DE RESERVAS -->
+      <div class="card-boutique bg-white border border-champagne-subtle shadow-sm overflow-hidden">
+        <div class="p-4 sm:p-6 border-b border-champagne-subtle flex items-center justify-between">
+          <div>
+            <h2 class="font-serif text-lg font-bold text-[var(--color-araucaria)]">Solicitações & Reservas</h2>
+            <p class="text-xs text-[var(--color-texto-suave)] font-light">Gerencie hóspedes, confirme recebimentos de PIX/Cartão e envie contratos.</p>
+          </div>
+          <button onclick="reloadAdminData()" class="px-3 py-1.5 rounded-lg bg-[var(--color-araucaria)] text-white text-xs font-bold hover:bg-[var(--color-araucaria-dark)] transition-all flex items-center gap-1">
+            🔄 Atualizar
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-[var(--color-texto)]">
+            <thead class="bg-[var(--color-creme)] text-[var(--color-araucaria)] uppercase font-bold text-[10px] tracking-wider border-b border-champagne-subtle">
+              <tr>
+                <th class="p-4">Código / Data</th>
+                <th class="p-4">Hóspede Titular</th>
+                <th class="p-4">Modalidade & Datas</th>
+                <th class="p-4">Hóspedes / Acompanhantes</th>
+                <th class="p-4">Total (R$)</th>
+                <th class="p-4">Status</th>
+                <th class="p-4 text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="admin-reservations-tbody" class="divide-y divide-champagne-subtle">
+              <!-- Renderizado dinamicamente via JS -->
+              <tr>
+                <td colspan="7" class="p-8 text-center text-xs text-[var(--color-texto-suave)]">
+                  Carregando reservas...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== SEÇÃO 2: GESTÃO DA AGENDA & BLOQUEIO DE DATAS ==================== -->
+    <div id="admin-section-calendar" class="space-y-8 hidden">
+      
+      <!-- Cabeçalho da Seção -->
+      <div class="card-boutique p-6 bg-white border border-champagne-subtle shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <span class="badge-boutique mb-1">Controle de Disponibilidade</span>
+          <h2 class="font-serif text-2xl font-bold text-[var(--color-araucaria)]">Agenda Visual Interativa</h2>
+          <p class="text-xs text-[var(--color-texto-suave)] mt-1">Clique em qualquer dia para alternar entre 🟢 <strong>Livre</strong> e 🔴 <strong>Bloqueado</strong>, ou use os atalhos por dia da semana abaixo.</p>
+        </div>
+        
+        <div class="flex items-center gap-4 bg-[var(--color-creme)] p-3 rounded-xl border border-champagne-subtle text-xs">
+          <div class="flex items-center gap-1.5"><span class="font-semibold text-emerald-900">🟢 Livre</span></div>
+          <div class="flex items-center gap-1.5"><span class="font-semibold text-blue-900">🔵 Reservado</span></div>
+          <div class="flex items-center gap-1.5"><span class="font-semibold text-red-900">🔴 Bloqueado</span></div>
+        </div>
+      </div>
+
+      <!-- PAINEL DE ATALHOS RÁPIDOS POR DIA DA SEMANA -->
+      <div class="card-boutique p-6 bg-white border border-champagne-subtle shadow-sm space-y-5">
+        <div class="flex items-center justify-between border-b border-champagne-subtle pb-3">
+          <div>
+            <h3 class="font-serif text-base font-bold text-[var(--color-araucaria)]">⚡ Bloqueio Rápido em Lote (Dias da Semana)</h3>
+            <p class="text-xs text-[var(--color-texto-suave)]">Clique para alternar a disponibilidade de dias específicos ou grupos do mês com 1 toque.</p>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Grupo 1: Dias da Semana Individuais (Grade de 5 Colunas) -->
+          <div>
+            <span class="text-[10px] uppercase font-bold tracking-wider text-[var(--color-texto-suave)] block mb-2">Bloquear / Liberar por Dia da Semana:</span>
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+              <button onclick="toggleDayOfWeekBlock(1)" class="w-full py-2.5 px-3 rounded-xl bg-red-50 hover:bg-red-100 text-red-950 border border-red-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                🔴 Segundas
+              </button>
+              <button onclick="toggleDayOfWeekBlock(2)" class="w-full py-2.5 px-3 rounded-xl bg-red-50 hover:bg-red-100 text-red-950 border border-red-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                🔴 Terças
+              </button>
+              <button onclick="toggleDayOfWeekBlock(3)" class="w-full py-2.5 px-3 rounded-xl bg-red-50 hover:bg-red-100 text-red-950 border border-red-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                🔴 Quartas
+              </button>
+              <button onclick="toggleDayOfWeekBlock(4)" class="w-full py-2.5 px-3 rounded-xl bg-red-50 hover:bg-red-100 text-red-950 border border-red-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                🔴 Quintas
+              </button>
+              <button onclick="toggleDayOfWeekBlock(5)" class="w-full py-2.5 px-3 rounded-xl bg-red-50 hover:bg-red-100 text-red-950 border border-red-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                🔴 Sextas
+              </button>
+            </div>
+          </div>
+
+          <!-- Grupo 2: Ações de Período & Globais (Grade de 3 Colunas) -->
+          <div class="pt-3 border-t border-champagne-subtle/50">
+            <span class="text-[10px] uppercase font-bold tracking-wider text-[var(--color-texto-suave)] block mb-2">Bloqueio em Lote por Período & Ações Globais:</span>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <button onclick="toggleWeekendsBlock()" class="w-full py-2.5 px-4 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-950 border border-amber-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                🏖️ Finais de Semana (Sáb / Dom)
+              </button>
+              <button onclick="toggleWeekdaysBlock()" class="w-full py-2.5 px-4 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-950 border border-purple-200 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                💼 Dias Úteis (Seg a Qui)
+              </button>
+              <button onclick="clearAllBlocksInMonth()" class="w-full py-2.5 px-4 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-950 border border-emerald-300 text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                🟢 Liberar Todo o Mês
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- GRID DO CALENDÁRIO MENSAL INTERATIVO -->
+      <div class="card-boutique p-6 bg-white border border-champagne-subtle shadow-sm space-y-6">
+        
+        <!-- Navegação do Mês -->
+        <div class="flex items-center justify-between border-b border-champagne-subtle pb-4">
+          <button onclick="changeAdminCalendarMonth(-1)" class="px-4 py-2 rounded-xl bg-[var(--color-creme)] hover:bg-[var(--color-champagne-light)] text-[var(--color-araucaria)] font-bold text-xs transition-all flex items-center gap-1.5">
+            ❮ Mês Anterior
+          </button>
+
+          <div class="text-center">
+            <h3 id="admin-calendar-month-title" class="font-serif text-2xl font-bold text-[var(--color-araucaria)] capitalize">Outubro 2026</h3>
+            <span class="text-[11px] text-[var(--color-texto-suave)] font-light">Clique diretamente no dia para alternar de Livre (Verde) para Bloqueado (Vermelho)</span>
+          </div>
+
+          <button onclick="changeAdminCalendarMonth(1)" class="px-4 py-2 rounded-xl bg-[var(--color-creme)] hover:bg-[var(--color-champagne-light)] text-[var(--color-araucaria)] font-bold text-xs transition-all flex items-center gap-1.5">
+            Próximo Mês ❯
+          </button>
+        </div>
+
+        <!-- Grid dos Dias do Mês -->
+        <div id="admin-calendar-grid-wrapper" class="space-y-2">
+          <!-- Cabeçalho dos Dias da Semana -->
+          <div class="grid grid-cols-7 gap-2 text-center text-xs font-bold text-[var(--color-araucaria)] uppercase tracking-wider pb-2 border-b border-champagne-subtle/50">
+            <div class="p-2 cursor-pointer hover:bg-red-50 rounded-lg transition-colors" onclick="toggleDayOfWeekBlock(0)" title="Clique para alterar todos os Domingos">Dom</div>
+            <div class="p-2 cursor-pointer hover:bg-red-50 rounded-lg transition-colors" onclick="toggleDayOfWeekBlock(1)" title="Clique para alterar todas as Segundas">Seg</div>
+            <div class="p-2 cursor-pointer hover:bg-red-50 rounded-lg transition-colors" onclick="toggleDayOfWeekBlock(2)" title="Clique para alterar todas as Terças">Ter</div>
+            <div class="p-2 cursor-pointer hover:bg-red-50 rounded-lg transition-colors" onclick="toggleDayOfWeekBlock(3)" title="Clique para alterar todas as Quartas">Qua</div>
+            <div class="p-2 cursor-pointer hover:bg-red-50 rounded-lg transition-colors" onclick="toggleDayOfWeekBlock(4)" title="Clique para alterar todas as Quintas">Qui</div>
+            <div class="p-2 cursor-pointer hover:bg-red-50 rounded-lg transition-colors" onclick="toggleDayOfWeekBlock(5)" title="Clique para alterar todas as Sextas">Sex</div>
+            <div class="p-2 cursor-pointer hover:bg-red-50 rounded-lg transition-colors" onclick="toggleDayOfWeekBlock(6)" title="Clique para alterar todos os Sábados">Sáb</div>
+          </div>
+
+          <!-- Grade de Quadrados dos Dias (Renderizado via JS) -->
+          <div id="admin-calendar-days-grid" class="grid grid-cols-7 gap-2">
+            <!-- Renderizado dinamicamente -->
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+  </main>
+
+  <!-- ==================== MODAL DE LOGIN ADMIN ==================== -->
+  <div id="admin-login-modal" class="modal-backdrop active">
+    <div class="modal-content p-8 max-w-md w-full text-center space-y-6">
+      
+      <img src="assets/logo-round.png" alt="Morada Logo" class="w-16 h-16 rounded-full border border-[var(--color-champagne)] shadow-md mx-auto" />
+      
+      <div>
+        <span class="badge-boutique mb-2 inline-block">Área Restrita</span>
+        <h2 class="font-serif text-2xl font-bold text-[var(--color-araucaria)]">Acesso Administrativo</h2>
+        <p class="text-xs text-[var(--color-texto-suave)] font-light mt-1">Digite suas credenciais de gestor da Morada Quintal da Serra.</p>
+      </div>
+
+      <form onsubmit="handleAdminLoginSubmit(event)" class="space-y-4 text-left">
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-[var(--color-texto-suave)] mb-1">E-mail do Gestor</label>
+          <input type="email" id="admin-login-email" required value="Reservasmoradaquintaldaserra@gmail.com" class="w-full px-4 py-3 rounded-xl bg-[var(--color-creme)] border border-champagne-subtle text-xs focus:outline-none focus:border-[var(--color-araucaria)]" />
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold uppercase tracking-wider text-[var(--color-texto-suave)] mb-1">Senha de Acesso</label>
+          <input type="password" id="admin-login-password" required value="morada2026" class="w-full px-4 py-3 rounded-xl bg-[var(--color-creme)] border border-champagne-subtle text-xs focus:outline-none focus:border-[var(--color-araucaria)]" />
+        </div>
+
+        <button type="submit" class="w-full btn-araucaria py-3.5 text-xs font-bold uppercase tracking-wider">
+          Entrar no Painel de Gestão
+        </button>
+      </form>
+
+      <div class="pt-2 border-t border-champagne-subtle">
+        <button onclick="enableDemoAdminMode()" class="text-xs text-[var(--color-araucaria)] font-bold hover:underline">
+          🔑 Entrar no Modo de Demonstração Local
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== MODAL DE DETALHES DA RESERVA ==================== -->
+  <div id="admin-details-modal" class="modal-backdrop">
+    <div class="modal-content p-6 sm:p-8 max-w-2xl w-full" onclick="event.stopPropagation()">
+      <div id="admin-details-content">
+        <!-- Preenchido via JS -->
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Firebase Compat CDN scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="src/js/firebase-config.js"></script>
+
+  <!-- Admin Application Logic -->
+  <script src="src/js/admin.js"></script>
+
+</body>
+</html>

@@ -16,10 +16,18 @@ const appState = {
   selectedPackages: [],
   selectedAddons: [],
   activePackageId: 'namora-romance',
+  extraGuest: {
+    active: false,
+    name: '',
+    age: '',
+    surcharge: 0,
+    label: ''
+  },
   cart: {
     stayItem: null,
     packages: [],
     addons: [],
+    extraGuest: null,
     subtotal: 0,
     discount: 0,
     total: 0
@@ -36,14 +44,14 @@ const ROMANTIC_PACKAGES = {
       price: 321.00,
       slogan: 'Para uma surpresa delicada e apaixonante.',
       description: 'Decoração romântica acolhedora no chalé, pensada nos mínimos detalhes para surpreender quem você ama.',
-      cover: 'assets/images/P1071283.jpeg',
+      cover: 'assets/images/decoracao-romantica-surpresa-chale.jpeg',
       pdf: 'Base/Pacotes/Pacote Namora comigo .pdf',
       gallery: [
-        'assets/images/P1071283.jpeg',
-        'assets/images/P1071287.jpeg',
-        'assets/images/P1071293.jpeg',
-        'assets/images/P1071294.jpeg',
-        'assets/images/P1071309.jpeg'
+        'assets/images/decoracao-romantica-surpresa-chale.jpeg',
+        'assets/images/decoracao-romantica-surpresa-chale.jpeg',
+        'assets/images/detalhes-pacote-romantico-chale.jpeg',
+        'assets/images/ambiente-romantico-boas-vindas-chale.jpeg',
+        'assets/images/mimos-especiais-casal-chale.jpeg'
       ],
       items: [
         'Decoração romântica no chalé',
@@ -63,15 +71,15 @@ const ROMANTIC_PACKAGES = {
       price: 490.00,
       slogan: 'Para transformar o pedido em uma experiência ainda mais especial.',
       description: 'Produção romântica completa com caminho de pétalas, espumante premium, buquê de flores e tábua especial de frios.',
-      cover: 'assets/images/P1071316.jpeg',
+      cover: 'assets/images/celebracao-aniversario-de-namoro-chale.jpeg',
       pdf: 'Base/Pacotes/Pacote Namora comigo .pdf',
       gallery: [
-        'assets/images/P1071316.jpeg',
-        'assets/images/P1071317.jpeg',
-        'assets/images/P1071321.jpeg',
-        'assets/images/P1071323.jpeg',
-        'assets/images/P1071325.jpeg',
-        'assets/images/P1071329.jpeg'
+        'assets/images/celebracao-aniversario-de-namoro-chale.jpeg',
+        'assets/images/producao-especial-boas-vindas-casal.jpeg',
+        'assets/images/espumante-premium-tabua-de-frios-chale.jpeg',
+        'assets/images/espumante-premium-tabua-de-frios-chale.jpeg',
+        'assets/images/brinde-inesquecivel-casal-rancho-queimado.jpeg',
+        'assets/images/brinde-inesquecivel-casal-rancho-queimado.jpeg'
       ],
       items: [
         'Decoração romântica completa no chalé',
@@ -94,15 +102,15 @@ const ROMANTIC_PACKAGES = {
       price: 690.00,
       slogan: 'Para quem quer preparar uma surpresa daquelas que ficam para sempre na memória.',
       description: 'Experiência VIP completa com registro em fotos e pequenos vídeos do ambiente preparado antes da chegada.',
-      cover: 'assets/images/P1071337.jpeg',
+      cover: 'assets/images/por-do-sol-entre-araucarias-rancho-queimado.jpeg',
       pdf: 'Base/Pacotes/Pacote Namora comigo .pdf',
       gallery: [
-        'assets/images/P1071337.jpeg',
-        'assets/images/P1071343.jpeg',
-        'assets/images/P1071344.jpeg',
-        'assets/images/P1071346.jpeg',
-        'assets/images/P1071349.jpeg',
-        'assets/images/P1071351.jpeg'
+        'assets/images/por-do-sol-entre-araucarias-rancho-queimado.jpeg',
+        'assets/images/experiencia-vip-romantica-rancho-queimado.jpeg',
+        'assets/images/experiencia-vip-romantica-rancho-queimado.jpeg',
+        'assets/images/experiencia-vip-romantica-rancho-queimado.jpeg',
+        'assets/images/espaco-exclusivo-reservado-casal.jpeg',
+        'assets/images/recordacoes-unicas-estadia-rancho-queimado.jpeg'
       ],
       items: [
         'Decoração romântica premium e exclusiva no chalé',
@@ -128,14 +136,14 @@ const ROMANTIC_PACKAGES = {
       price: 321.00,
       slogan: 'Cenário perfeito para eternizar o tão esperado SIM! 💍',
       description: 'Decoração intimista e romântica para dar início a um novo capítulo na história de amor do casal.',
-      cover: 'assets/images/P1071513.jpeg',
+      cover: 'assets/images/pacote-casa-comigo-decoracao-intimista.jpeg',
       pdf: 'Base/Pacotes/Pacote “Casa comigo”.pdf',
       gallery: [
-        'assets/images/P1071513.jpeg',
-        'assets/images/P1071514.jpeg',
-        'assets/images/P1071515.jpeg',
-        'assets/images/P1071516.jpeg',
-        'assets/images/P1071519.jpeg'
+        'assets/images/pacote-casa-comigo-decoracao-intimista.jpeg',
+        'assets/images/pacote-casa-comigo-decoracao-intimista.jpeg',
+        'assets/images/pacote-casa-comigo-decoracao-intimista.jpeg',
+        'assets/images/pacote-casa-comigo-decoracao-intimista.jpeg',
+        'assets/images/pacote-casa-comigo-decoracao-intimista.jpeg'
       ],
       items: [
         'Decoração romântica no chalé',
@@ -157,14 +165,14 @@ const ROMANTIC_PACKAGES = {
       price: 475.00,
       slogan: 'Onde histórias de amor ganham novos capítulos.',
       description: 'Arranjo de flores naturais, caminho iluminado de pétalas e tábua gourmet especial para o pedido.',
-      cover: 'assets/images/P1071557.jpeg',
+      cover: 'assets/images/flores-naturais-nobres-pacote-romantico.jpeg',
       pdf: 'Base/Pacotes/Pacote “Casa comigo”.pdf',
       gallery: [
-        'assets/images/P1071557.jpeg',
-        'assets/images/P1071561.jpeg',
-        'assets/images/P1071568.jpeg',
-        'assets/images/P1071579.jpeg',
-        'assets/images/P1071586.jpeg'
+        'assets/images/flores-naturais-nobres-pacote-romantico.jpeg',
+        'assets/images/flores-naturais-nobres-pacote-romantico.jpeg',
+        'assets/images/flores-naturais-nobres-pacote-romantico.jpeg',
+        'assets/images/pedido-de-casamento-rancho-queimado.jpeg',
+        'assets/images/momentos-especiais-serra-catarinense.jpeg'
       ],
       items: [
         'Toda a decoração romântica do Pacote Essencial',
@@ -186,15 +194,15 @@ const ROMANTIC_PACKAGES = {
       price: 637.00,
       slogan: 'Uma experiência completa para um dos momentos mais importantes da vida de vocês.',
       description: 'Filmagem no momento do pedido, flores nobres, iluminação cênica e preparação do ambiente para fotos pós-SIM.',
-      cover: 'assets/images/P1071640.jpeg',
+      cover: 'assets/images/experiencia-day-use-chale-rancho-queimado.jpeg',
       pdf: 'Base/Pacotes/Pacote “Casa comigo”.pdf',
       gallery: [
-        'assets/images/P1071640.jpeg',
-        'assets/images/P1071424.jpeg',
-        'assets/images/P1071430.jpeg',
-        'assets/images/P1071443.jpeg',
-        'assets/images/P1071449.jpeg',
-        'assets/images/DJI_20260505153651_0104_D.jpeg'
+        'assets/images/experiencia-day-use-chale-rancho-queimado.jpeg',
+        'assets/images/experiencia-day-use-chale-rancho-queimado.jpeg',
+        'assets/images/experiencia-day-use-chale-rancho-queimado.jpeg',
+        'assets/images/experiencia-day-use-chale-rancho-queimado.jpeg',
+        'assets/images/experiencia-day-use-chale-rancho-queimado.jpeg',
+        'assets/images/vista-aerea-chale-rancho-queimado-serra-catarinense.jpeg'
       ],
       items: [
         'Decoração premium e totalmente personalizada',
@@ -235,6 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initStructureRandomSlider();
   initCustomCursor();
   initBannerCurtainReveals();
+  initMobileBottomBarScroll();
 });
 
 // Parallax Curtain Reveal for Section 2 (Galeria de Fotos da Hospedagem)
@@ -464,6 +473,9 @@ function initDateDefaults() {
         }
       }
     });
+
+    // Sincronizar datas bloqueadas e reservadas com o Flatpickr
+    syncDisabledDatesOnSite();
   } else if (inInput && outInput) {
     inInput.value = appState.checkIn;
     outInput.value = appState.checkOut;
@@ -471,6 +483,80 @@ function initDateDefaults() {
     outInput.addEventListener('change', handleDateChange);
   }
 }
+
+/**
+ * Carrega datas bloqueadas pelo admin e reservas ativas para desabilitar no Flatpickr do site
+ */
+function syncDisabledDatesOnSite() {
+  let disabledDates = new Set();
+
+  // 1. Carregar bloqueios locais
+  try {
+    const localBlocks = JSON.parse(localStorage.getItem('morada_blocked_dates') || '[]');
+    localBlocks.forEach(b => { if (b.date) disabledDates.add(b.date); });
+  } catch (e) {}
+
+  // 2. Carregar reservas confirmadas locais
+  try {
+    const localRes = JSON.parse(localStorage.getItem('morada_reservations') || '[]');
+    localRes.forEach(r => {
+      if ((r.status === 'deposit_paid' || r.status === 'fully_paid') && r.stay?.checkIn && r.stay?.checkOut) {
+        let dt = new Date(r.stay.checkIn + 'T00:00:00');
+        const end = new Date(r.stay.checkOut + 'T00:00:00');
+        while (dt < end) {
+          const year = dt.getFullYear();
+          const month = String(dt.getMonth() + 1).padStart(2, '0');
+          const day = String(dt.getDate()).padStart(2, '0');
+          disabledDates.add(`${year}-${month}-${day}`);
+          dt.setDate(dt.getDate() + 1);
+        }
+      }
+    });
+  } catch (e) {}
+
+  const applyDisableToFlatpickr = (dateSet) => {
+    const disableFunc = function(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const dateStr = `${year}-${month}-${day}`;
+      return dateSet.has(dateStr);
+    };
+
+    if (fpCheckIn) {
+      fpCheckIn.set('disable', [disableFunc]);
+      fpCheckIn.redraw();
+    }
+    if (fpCheckOut) {
+      fpCheckOut.set('disable', [disableFunc]);
+      fpCheckOut.redraw();
+    }
+  };
+
+  applyDisableToFlatpickr(disabledDates);
+
+  // 3. Se Firestore estiver ativo, escutar atualizações em tempo real
+  if (typeof db !== 'undefined' && db) {
+    try {
+      db.collection('blocked_dates').onSnapshot(snapshot => {
+        let liveSet = new Set(disabledDates);
+        snapshot.forEach(doc => {
+          if (doc.data().date) liveSet.add(doc.data().date);
+        });
+        applyDisableToFlatpickr(liveSet);
+      });
+    } catch (err) {
+      console.warn('Erro escutando blocked_dates em tempo real no site:', err);
+    }
+  }
+}
+
+// Escutar alterações entre abas do navegador em tempo real
+window.addEventListener('storage', function(e) {
+  if (e.key === 'morada_blocked_dates' || e.key === 'morada_reservations') {
+    syncDisabledDatesOnSite();
+  }
+});
 
 function handleDateChange() {
   if (appState.checkIn && appState.checkOut) {
@@ -521,6 +607,22 @@ function setNights(val) {
   updateCalculation();
 }
 
+function calcExtraGuestSurcharge(stayBaseTotal) {
+  const age = parseInt(appState.extraGuest.age, 10);
+  if (!appState.extraGuest.active || !appState.extraGuest.age || isNaN(age)) {
+    return { surcharge: 0, label: '' };
+  }
+  if (age <= 5) {
+    return { surcharge: 0, label: 'Criança até 5 anos — Gratuito ✓' };
+  } else if (age <= 10) {
+    const surcharge = stayBaseTotal * 0.20;
+    return { surcharge, label: `Criança ${age} anos — +20% da hospedagem (${formatBRL(surcharge)})` };
+  } else {
+    const surcharge = stayBaseTotal * 0.30;
+    return { surcharge, label: `Hóspede ${age} anos — +30% da hospedagem (${formatBRL(surcharge)})` };
+  }
+}
+
 function updateCalculation() {
   let stayBaseTotal = 0;
   let rateNote = '';
@@ -539,11 +641,18 @@ function updateCalculation() {
     rateNote = 'Day Use Exclusivo (Das 09h às 18h)';
     appState.selectedPackages = [];
     appState.selectedAddons = [];
+    appState.extraGuest.active = false;
   }
 
   const packagesTotal = appState.selectedPackages.reduce((acc, p) => acc + p.price, 0);
   const addonsTotal = appState.selectedAddons.reduce((acc, a) => acc + a.price, 0);
-  const subtotal = stayBaseTotal + packagesTotal + addonsTotal;
+
+  // Extra guest surcharge
+  const extraGuestResult = calcExtraGuestSurcharge(stayBaseTotal);
+  appState.extraGuest.surcharge = extraGuestResult.surcharge;
+  appState.extraGuest.label = extraGuestResult.label;
+
+  const subtotal = stayBaseTotal + packagesTotal + addonsTotal + extraGuestResult.surcharge;
   
   const nightsLabel = document.getElementById('label-nights-display');
   if (nightsLabel) {
@@ -563,6 +672,7 @@ function updateCalculation() {
   };
   appState.cart.packages = [...appState.selectedPackages];
   appState.cart.addons = [...appState.selectedAddons];
+  appState.cart.extraGuest = appState.extraGuest.active ? { ...appState.extraGuest } : null;
   appState.cart.subtotal = subtotal;
   appState.cart.total = subtotal;
 
@@ -622,21 +732,16 @@ function renderPackages(catKey) {
             </div>
           </div>
 
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-serif text-2xl font-bold text-[var(--color-araucaria)]">${pkg.name}</h3>
-            ${pkg.tag && !pkg.highlighted ? `<span class="badge-boutique text-[10px]">${pkg.tag}</span>` : ''}
+          <div class="space-y-1 mb-2">
+            <span class="text-[10px] uppercase font-bold text-[var(--color-champagne)] tracking-widest block">${pkg.category}</span>
+            <h3 class="font-serif font-bold text-xl text-[var(--color-araucaria)]">${pkg.name}</h3>
           </div>
+          <p class="text-xs italic font-semibold text-[var(--color-champagne-hover)] mb-3">${pkg.slogan}</p>
+          <p class="text-xs text-[var(--color-texto-suave)] font-light leading-relaxed mb-4">${pkg.description}</p>
 
-          <p class="text-xs font-semibold italic text-[var(--color-champagne-hover)] mb-2">${pkg.slogan}</p>
-          <p class="text-xs text-[var(--color-texto-suave)] mb-6 leading-relaxed font-light">${pkg.description}</p>
-          
-          <div class="divider-gold mb-6"></div>
-
-          <span class="text-[11px] font-bold uppercase tracking-wider text-[var(--color-araucaria)] block mb-3">Principais Itens Incluídos:</span>
-
-          <ul class="space-y-2 mb-8">
+          <ul class="space-y-2 pt-2 text-xs text-[var(--color-texto)] font-medium">
             ${pkg.items.slice(0, 5).map(item => `
-              <li class="flex items-start gap-2 text-xs text-[var(--color-texto)] font-medium">
+              <li class="flex items-start gap-2">
                 <span class="text-emerald-700 font-bold shrink-0 mt-0.5">✓</span>
                 <span>${item}</span>
               </li>
@@ -645,24 +750,24 @@ function renderPackages(catKey) {
           </ul>
         </div>
 
-        <div class="pt-4 border-t border-champagne-subtle flex flex-col gap-3">
+        <div class="pt-4 border-t border-champagne-subtle flex flex-col gap-3 mt-6">
           <div class="flex items-center justify-between">
             <div>
               <span class="text-[10px] uppercase font-bold tracking-wider text-[var(--color-texto-suave)] block">Investimento</span>
-              <span class="font-serif font-bold text-2xl text-[var(--color-araucaria)]">${formatBRL(pkg.price)}</span>
+              <span class="font-serif font-bold text-lg sm:text-2xl text-[var(--color-araucaria)]">${formatBRL(pkg.price)}</span>
             </div>
 
-            <button onclick="togglePackage('${pkg.id}')" class="${isAdded ? 'btn-champagne' : 'btn-araucaria'} text-xs !py-2.5 !px-4 shadow-sm">
-              ${isAdded ? '✓ Adicionado' : '+ Incluir no Pedido'}
+            <button onclick="togglePackage('${pkg.id}')" class="${isAdded ? 'btn-champagne' : 'btn-araucaria'} text-[11px] !py-2 !px-3.5 shadow-sm font-semibold shrink-0">
+              ${isAdded ? 'Adicionado' : 'Incluir no Pedido'}
             </button>
           </div>
 
           <div class="flex items-center justify-between pt-1 border-t border-champagne-subtle text-[11px]">
-            <button onclick="openPackageDetailsModal('${pkg.id}')" class="font-bold text-[var(--color-araucaria)] hover:underline flex items-center gap-1">
-              📸 Galeria de Fotos Reais (${pkg.gallery.length})
+            <button onclick="openPackageDetailsModal('${pkg.id}')" class="font-bold text-[var(--color-araucaria)] hover:underline">
+              Galeria de Fotos Reais (${pkg.gallery.length})
             </button>
             <a href="${pkg.pdf}" target="_blank" class="font-bold text-[var(--color-texto-suave)] hover:underline">
-              📄 PDF Oficial
+              PDF Oficial
             </a>
           </div>
         </div>
@@ -701,7 +806,7 @@ function openPackageDetailsModal(pkgId) {
       <!-- Specific REAL Photo Gallery for this Package -->
       <div class="space-y-3">
         <span class="text-xs font-bold uppercase tracking-wider text-[var(--color-araucaria)] block">
-          📸 Galeria de Fotos Reais da Morada Quintal da Serra (${pkg.gallery.length} fotos):
+          Galeria de Fotos Reais da Morada Quintal da Serra (${pkg.gallery.length} fotos):
         </span>
         
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
@@ -745,10 +850,10 @@ function openPackageDetailsModal(pkgId) {
 
           <div class="space-y-3 pt-4 border-t border-champagne-subtle">
             <button onclick="togglePackage('${pkg.id}'); closePackageDetailsModal(); openCartModal();" class="w-full btn-araucaria py-3 text-xs uppercase tracking-wider font-bold shadow-md">
-              ${isAdded ? '✓ Pacote Incluído (Ir para Checkout)' : '✨ Incluir no Pedido & Reservar'}
+              ${isAdded ? 'Pacote Incluído (Ir para Checkout)' : 'Incluir no Pedido & Reservar'}
             </button>
             <a href="${pkg.pdf}" target="_blank" class="block text-center text-xs font-bold text-[var(--color-araucaria)] hover:underline py-1">
-              📄 Abrir Catálogo PDF Oficial
+              Abrir Catálogo PDF Oficial
             </a>
           </div>
         </div>
@@ -795,6 +900,32 @@ function toggleAddon(addonId) {
   }
 
   updateCalculation();
+}
+
+function toggleExtraGuest() {
+  appState.extraGuest.active = !appState.extraGuest.active;
+  if (!appState.extraGuest.active) {
+    appState.extraGuest.name = '';
+    appState.extraGuest.age = '';
+  }
+  updateCalculation();
+  renderCartModalContent();
+}
+
+function updateExtraGuestField(field, value) {
+  appState.extraGuest[field] = value;
+  updateCalculation();
+  // Update only the label and total in the cart footer & resumo without full re-render
+  const labelEl = document.getElementById('extra-guest-age-label');
+  if (labelEl && appState.extraGuest.label) {
+    labelEl.textContent = appState.extraGuest.label;
+    labelEl.style.display = 'block';
+  } else if (labelEl) {
+    labelEl.style.display = 'none';
+  }
+  // Update footer total
+  const footerTotal = document.getElementById('cart-footer-total');
+  if (footerTotal) footerTotal.textContent = formatBRL(appState.cart.total);
 }
 
 // Shopping Cart & Lateral Drawer
@@ -925,6 +1056,19 @@ function renderCartModalContent() {
     '</div>';
   }).join('');
 
+  // Extra guest row in resumo tab
+  const extraGuestResumoHTML = (appState.extraGuest.active && appState.extraGuest.name) ?
+    '<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:10px 16px;gap:12px;border-bottom:1px solid var(--color-champagne)">' +
+      '<div style="flex:1">' +
+        '<span style="display:block;font-size:12px;font-weight:700;color:var(--color-araucaria)">👶 Hóspede Extra: ' + appState.extraGuest.name + '</span>' +
+        '<span style="display:block;font-size:11px;color:var(--color-texto-suave);margin-top:2px">' + (appState.extraGuest.label || 'Calculando...') + '</span>' +
+      '</div>' +
+      '<div style="display:flex;align-items:center;gap:8px;flex-shrink:0">' +
+        '<span style="font-family:var(--font-serif);font-weight:700;font-size:13px;color:var(--color-araucaria)">' + (appState.extraGuest.surcharge > 0 ? formatBRL(appState.extraGuest.surcharge) : 'Grátis') + '</span>' +
+        '<button onclick="toggleExtraGuest();" title="Remover" style="width:22px;height:22px;border-radius:50%;border:1px solid #fca5a5;background:#fff5f5;color:#ef4444;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;line-height:1">×</button>' +
+      '</div>' +
+    '</div>' : '';
+
   const allPkgs = [...ROMANTIC_PACKAGES.namorar, ...ROMANTIC_PACKAGES.casar];
   const selectedPkgIds = packages.map(function(p) { return p.id; });
   const selectedAddonIds = addons.map(function(a) { return a.id; });
@@ -939,7 +1083,7 @@ function renderCartModalContent() {
       '<div style="display:flex;align-items:center;gap:8px;flex-shrink:0">' +
         '<span style="font-family:var(--font-serif);font-size:12px;font-weight:700;color:var(--color-araucaria)">' + formatBRL(p.price) + '</span>' +
         '<button onclick="togglePackage(\'' + p.id + '\'); renderCartModalContent();" style="padding:5px 12px;border-radius:20px;font-size:10px;font-weight:700;cursor:pointer;border:1px solid;transition:all 0.2s;background:' + (isSelected ? 'var(--color-araucaria)' : '#fff') + ';color:' + (isSelected ? '#fff' : 'var(--color-araucaria)') + ';border-color:var(--color-araucaria)">' +
-          (isSelected ? '✓ Selecionado' : '+ Selecionar') +
+          (isSelected ? 'Selecionado' : 'Selecionar') +
         '</button>' +
       '</div>' +
     '</div>';
@@ -955,11 +1099,54 @@ function renderCartModalContent() {
       '<div style="display:flex;align-items:center;gap:8px;flex-shrink:0">' +
         '<span style="font-family:var(--font-serif);font-size:12px;font-weight:700;color:var(--color-araucaria)">' + formatBRL(a.price) + '</span>' +
         '<button onclick="toggleAddon(\'' + a.id + '\'); renderCartModalContent();" style="padding:5px 12px;border-radius:20px;font-size:10px;font-weight:700;cursor:pointer;border:1px solid;transition:all 0.2s;background:' + (isSelected ? 'var(--color-araucaria)' : '#fff') + ';color:' + (isSelected ? '#fff' : 'var(--color-araucaria)') + ';border-color:var(--color-araucaria)">' +
-          (isSelected ? '✓ Adicionado' : '+ Adicionar') +
+          (isSelected ? 'Adicionado' : 'Adicionar') +
         '</button>' +
       '</div>' +
     '</div>';
   }).join('');
+
+  // Extra guest addon card for edit tab
+  const isExtraGuestActive = appState.extraGuest.active;
+  const extraGuestAge = appState.extraGuest.age;
+  const extraGuestName = appState.extraGuest.name;
+  const extraGuestAgeLabel = appState.extraGuest.label;
+
+  const editExtraGuestHTML =
+    '<div style="border:1px solid ' + (isExtraGuestActive ? 'var(--color-araucaria)' : 'var(--color-champagne)') + ';border-radius:12px;margin-top:4px;overflow:hidden;transition:border-color 0.2s">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;gap:12px;cursor:pointer;background:' + (isExtraGuestActive ? 'rgba(22,58,47,0.05)' : 'transparent') + '" onclick="toggleExtraGuest()">' +
+        '<div style="flex:1">' +
+          '<div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">' +
+            '<span style="font-size:12px;font-weight:700;color:var(--color-araucaria)">Hóspede Extra / Criança</span>' +
+          '</div>' +
+          '<span style="display:block;font-size:10px;color:var(--color-texto-suave);margin-top:2px">Capacidade máxima: 3 pessoas. Acréscimo calculado sobre o valor da hospedagem.</span>' +
+        '</div>' +
+        '<div style="display:flex;align-items:center;gap:10px;flex-shrink:0">' +
+          '<span style="font-size:10px;font-weight:700;color:var(--color-texto-suave)">Variável</span>' +
+          '<button style="padding:5px 12px;border-radius:20px;font-size:10px;font-weight:700;cursor:pointer;border:1px solid;transition:all 0.2s;background:' + (isExtraGuestActive ? 'var(--color-araucaria)' : '#fff') + ';color:' + (isExtraGuestActive ? '#fff' : 'var(--color-araucaria)') + ';border-color:var(--color-araucaria);pointer-events:none">' +
+            (isExtraGuestActive ? 'Ativado' : 'Adicionar') +
+          '</button>' +
+        '</div>' +
+      '</div>' +
+      (isExtraGuestActive ?
+        '<div style="padding:14px;background:rgba(22,58,47,0.03);border-top:1px dashed var(--color-champagne)">' +
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">' +
+            '<div>' +
+              '<label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">Nome do Hóspede Extra *</label>' +
+              '<input type="text" id="extra-guest-name-input" placeholder="Ex: João, Maria..." value="' + (extraGuestName || '') + '" oninput="updateExtraGuestField(\'name\', this.value)" style="width:100%;padding:9px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" />' +
+            '</div>' +
+            '<div>' +
+              '<label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">Idade *</label>' +
+              '<input type="number" id="extra-guest-age-input" placeholder="Ex: 8" min="0" max="99" value="' + (extraGuestAge || '') + '" oninput="updateExtraGuestField(\'age\', this.value)" style="width:100%;padding:9px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" />' +
+            '</div>' +
+          '</div>' +
+          '<div id="extra-guest-age-label" style="' + (extraGuestAgeLabel ? '' : 'display:none;') + 'padding:8px 12px;border-radius:8px;font-size:11px;font-weight:600;color:' + (appState.extraGuest.surcharge === 0 && extraGuestAge ? '#065f46' : 'var(--color-araucaria)') + ';background:' + (appState.extraGuest.surcharge === 0 && extraGuestAge ? 'rgba(167,243,208,0.3)' : 'rgba(22,58,47,0.07)') + ';border:1px solid ' + (appState.extraGuest.surcharge === 0 && extraGuestAge ? '#a7f3d0' : 'var(--color-champagne)') + '">' +
+            (extraGuestAgeLabel || '') +
+          '</div>' +
+          '<div style="margin-top:10px;padding:8px 10px;background:rgba(203,185,139,0.15);border-radius:8px;border:1px solid var(--color-champagne)">' +
+            '<p style="font-size:10px;color:var(--color-texto-suave);margin:0;line-height:1.5">📌 <strong>Regras de cobrança:</strong> Até 5 anos → gratuito &nbsp;|&nbsp; 6-10 anos → +20% &nbsp;|&nbsp; A partir de 11 anos → +30% do valor da hospedagem.</p>' +
+          '</div>' +
+        '</div>' : '') +
+    '</div>';
 
   const totalItens = packages.length + addons.length;
   const tabResumo = cartActiveTab === 'resumo';
@@ -982,7 +1169,7 @@ function renderCartModalContent() {
     // Abas: Resumo / Editar Reserva
     '<div style="display:flex;border-bottom:1px solid var(--color-champagne);flex-shrink:0;background:#fff">' +
       '<button onclick="setCartTab(\'resumo\')" style="flex:1;padding:12px 8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;border:none;border-bottom:2px solid ' + (tabResumo ? 'var(--color-araucaria)' : 'transparent') + ';background:transparent;color:' + (tabResumo ? 'var(--color-araucaria)' : 'var(--color-texto-suave)') + ';transition:all 0.2s;font-family:var(--font-sans)">Resumo</button>' +
-      '<button onclick="setCartTab(\'editar\')" style="flex:1;padding:12px 8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;border:none;border-bottom:2px solid ' + (!tabResumo ? 'var(--color-araucaria)' : 'transparent') + ';background:transparent;color:' + (!tabResumo ? 'var(--color-araucaria)' : 'var(--color-texto-suave)') + ';transition:all 0.2s;font-family:var(--font-sans)">✏️ Editar Reserva' + (totalItens > 0 ? ' <span style="background:var(--color-araucaria);color:#fff;border-radius:20px;padding:1px 7px;font-size:9px;margin-left:4px">' + totalItens + '</span>' : '') + '</button>' +
+      '<button onclick="setCartTab(\'editar\')" style="flex:1;padding:12px 8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;border:none;border-bottom:2px solid ' + (!tabResumo ? 'var(--color-araucaria)' : 'transparent') + ';background:transparent;color:' + (!tabResumo ? 'var(--color-araucaria)' : 'var(--color-texto-suave)') + ';transition:all 0.2s;font-family:var(--font-sans)">Editar Reserva' + (totalItens > 0 ? ' <span style="background:var(--color-araucaria);color:#fff;border-radius:20px;padding:1px 7px;font-size:9px;margin-left:4px">' + totalItens + '</span>' : '') + '</button>' +
     '</div>' +
 
     // Área de scroll
@@ -996,7 +1183,7 @@ function renderCartModalContent() {
         '<div>' +
           '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">' +
             '<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-araucaria);margin:0">Sua Estadia</p>' +
-            '<button onclick="setCartTab(\'editar\')" style="font-size:10px;font-weight:700;color:var(--color-araucaria);background:none;border:none;cursor:pointer;text-decoration:underline">Editar datas →</button>' +
+            '<button onclick="setCartTab(\'editar\')" style="font-size:10px;font-weight:700;color:var(--color-araucaria);background:none;border:none;cursor:pointer;text-decoration:underline">Editar datas</button>' +
           '</div>' +
           '<div style="border-radius:12px;border:1px solid var(--color-champagne);background:#fff;overflow:hidden">' +
             '<div style="display:flex;justify-content:space-between;align-items:flex-start;padding:12px 16px;gap:12px;border-bottom:1px solid var(--color-champagne)">' +
@@ -1008,6 +1195,7 @@ function renderCartModalContent() {
             '</div>' +
             packagesHTML +
             addonsHTML +
+            extraGuestResumoHTML +
             (appState.serviceType === 'pernoite' && packages.length === 0 && addons.length === 0 ?
               '<div style="margin:0;padding:14px 16px;background:linear-gradient(135deg,rgba(22,58,47,0.04) 0%,rgba(203,185,139,0.12) 100%);border-top:1px solid var(--color-champagne)">' +
                 '<div style="display:flex;align-items:center;gap:12px">' +
@@ -1034,8 +1222,8 @@ function renderCartModalContent() {
             '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">' +
               '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">Nome do Titular *</label>' +
               '<input type="text" id="guest-name" placeholder="Nome Completo do Responsável" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
-              '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">Nome dos Demais Hóspedes *</label>' +
-              '<input type="text" id="guest-all-names" placeholder="Nome completo de todos os acompanhantes" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
+              '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">Nome do Segundo Hóspede *</label>' +
+              '<input type="text" id="guest-all-names" placeholder="Nome completo do segundo hóspede" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
             '</div>' +
             '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">' +
               '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">CPF *</label>' +
@@ -1055,15 +1243,20 @@ function renderCartModalContent() {
           '</div>' +
         '</div>' +
 
-        // Bloco: Pagamento
+        // Bloco: Hóspede Extra (apenas pernoite)
+        (appState.serviceType === 'pernoite' ?
         '<div>' +
-          '<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-araucaria);margin-bottom:10px">Método de Pagamento</p>' +
-          '<select id="payment-dropdown" onchange="handlePaymentDropdown(this.value)" style="width:100%;padding:12px 36px 12px 16px;border-radius:12px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-weight:600;color:var(--color-araucaria);appearance:none;cursor:pointer;margin-bottom:12px;font-family:var(--font-sans);box-sizing:border-box;background-image:url(\'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 20 20%22 fill=%22%23163A2F%22><path fill-rule=%22evenodd%22 d=%22M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z%22 clip-rule=%22evenodd%22/></svg>\');background-repeat:no-repeat;background-position:right 12px center;background-size:16px">' +
-            '<option value="">Selecione o método de pagamento...</option>' +
-            '<option value="pix">Pix — 50% na reserva + 50% até 24h antes do Check-in</option>' +
-            '<option value="credito">Cartão de Crédito — Mercado Pago, até 4x sem juros</option>' +
-          '</select>' +
-          '<div id="payment-detail-box"></div>' +
+          '<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-araucaria);margin-bottom:8px">Vai viajar com criança ou hóspede extra? <span style="font-size:9px;font-weight:400;text-transform:none;color:var(--color-texto-suave)">(Capacidade máx. 3 pessoas)</span></p>' +
+          editExtraGuestHTML +
+        '</div>' : '') +
+
+        // Bloco: Pagamento & Contrato
+        '<div>' +
+          '<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-araucaria);margin-bottom:8px">Pagamento & Contrato de Hospedagem</p>' +
+          '<div style="padding:14px;background:var(--color-creme);border:1px solid var(--color-champagne);border-radius:12px;font-size:11px;color:var(--color-texto-suave);line-height:1.5">' +
+            '<p style="margin:0 0 6px 0;font-weight:700;color:var(--color-araucaria)">💬 Atendimento Personalizado no WhatsApp</p>' +
+            '<p style="margin:0">Ao enviar sua solicitação, nossa equipe receberá seu pedido no sistema e no e-mail. Você será direcionado ao WhatsApp oficial da Morada para receber os dados do PIX/Cartão e o contrato de hospedagem.</p>' +
+          '</div>' +
         '</div>' +
 
       '</div>'
@@ -1079,8 +1272,8 @@ function renderCartModalContent() {
           '<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-araucaria);margin-bottom:12px">Modalidade & Datas</p>' +
           
           '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">' +
-            '<button onclick="setServiceTypeInCart(\'pernoite\')" style="padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid;font-family:var(--font-sans);background:' + (appState.serviceType === 'pernoite' ? 'var(--color-araucaria)' : '#fff') + ';color:' + (appState.serviceType === 'pernoite' ? '#fff' : 'var(--color-araucaria)') + ';border-color:var(--color-araucaria)">🌙 Hospedagem</button>' +
-            '<button onclick="setServiceTypeInCart(\'dayuse\')" style="padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid;font-family:var(--font-sans);background:' + (appState.serviceType === 'dayuse' ? 'var(--color-araucaria)' : '#fff') + ';color:' + (appState.serviceType === 'dayuse' ? '#fff' : 'var(--color-araucaria)') + ';border-color:var(--color-araucaria)">☀️ Day Use</button>' +
+            '<button onclick="setServiceTypeInCart(\'pernoite\')" style="padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid;font-family:var(--font-sans);background:' + (appState.serviceType === 'pernoite' ? 'var(--color-araucaria)' : '#fff') + ';color:' + (appState.serviceType === 'pernoite' ? '#fff' : 'var(--color-araucaria)') + ';border-color:var(--color-araucaria)">Hospedagem</button>' +
+            '<button onclick="setServiceTypeInCart(\'dayuse\')" style="padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid;font-family:var(--font-sans);background:' + (appState.serviceType === 'dayuse' ? 'var(--color-araucaria)' : '#fff') + ';color:' + (appState.serviceType === 'dayuse' ? '#fff' : 'var(--color-araucaria)') + ';border-color:var(--color-araucaria)">Day Use</button>' +
           '</div>' +
 
           '<div style="display:grid;grid-template-columns:' + (appState.serviceType === 'pernoite' ? '1fr 1fr' : '1fr') + ';gap:10px">' +
@@ -1126,7 +1319,7 @@ function renderCartModalContent() {
         ) +
 
         // Botão voltar ao resumo
-        '<button onclick="setCartTab(\'resumo\')" style="width:100%;margin-top:20px;padding:14px;border-radius:12px;border:2px solid var(--color-araucaria);background:transparent;color:var(--color-araucaria);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;font-family:var(--font-sans)">← Concluir & Ver Resumo</button>' +
+        '<button onclick="setCartTab(\'resumo\')" style="width:100%;margin-top:20px;padding:14px;border-radius:12px;border:2px solid var(--color-araucaria);background:transparent;color:var(--color-araucaria);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;font-family:var(--font-sans)">Concluir & Ver Resumo</button>' +
 
       '</div>'
     ) +
@@ -1137,63 +1330,19 @@ function renderCartModalContent() {
     '<div style="flex-shrink:0;padding:20px 24px;border-top:1px solid var(--color-champagne);background:var(--color-branco-quente)">' +
       '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">' +
         '<span style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-texto-suave)">Total da Reserva</span>' +
-        '<span style="font-family:var(--font-serif);font-weight:700;font-size:22px;color:var(--color-araucaria)">' + formatBRL(total) + '</span>' +
+        '<span id="cart-footer-total" style="font-family:var(--font-serif);font-weight:700;font-size:22px;color:var(--color-araucaria)">' + formatBRL(total) + '</span>' +
       '</div>' +
       '<button onclick="processCheckout()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--color-araucaria);color:#fff;border:none;border-radius:12px;padding:16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;cursor:pointer;font-family:var(--font-sans);margin-bottom:10px" onmouseover="this.style.background=\'var(--color-araucaria-light)\'" onmouseout="this.style.background=\'var(--color-araucaria)\'">' +
         '<svg style="width:16px;height:16px;flex-shrink:0" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>' +
-        'Enviar Reserva via WhatsApp' +
+        'Enviar Solicitação de Reserva' +
       '</button>' +
-      '<p style="text-align:center;font-size:10px;color:var(--color-texto-suave)">Você será redirecionado para confirmar com a equipe.</p>' +
+      '<p style="text-align:center;font-size:10px;color:var(--color-texto-suave)">Sua solicitação será salva no sistema e no WhatsApp.</p>' +
     '</div>' +
 
   '</div>';
-
-  handlePaymentDropdown('');
 }
 
-function handlePaymentDropdown(value) {
-  const box = document.getElementById('payment-detail-box');
-  if (!box) return;
-  const total = appState.cart.total;
-
-  if (value === 'pix') {
-    const metade = total / 2;
-    box.innerHTML =
-      '<div style="border-radius:12px;border:1px solid #a7f3d0;background:#ecfdf5;padding:16px">' +
-        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">' +
-          '<span style="font-size:16px">💚</span>' +
-          '<span style="font-size:12px;font-weight:700;color:#065f46">Pix em 2 momentos</span>' +
-        '</div>' +
-        '<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">' +
-          '<div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:#047857">1ª — na confirmação da reserva</span><span style="font-weight:700;font-family:var(--font-serif);color:#065f46">' + formatBRL(metade) + '</span></div>' +
-          '<div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:#047857">2ª — até 24h antes do Check-in</span><span style="font-weight:700;font-family:var(--font-serif);color:#065f46">' + formatBRL(metade) + '</span></div>' +
-        '</div>' +
-        '<div style="padding-top:12px;border-top:1px solid #a7f3d0">' +
-          '<p style="font-size:11px;color:#047857">Chave Pix: <span style="font-family:monospace;font-weight:700;user-select:all">48991882991</span></p>' +
-          '<p style="font-size:10px;color:#059669;margin-top:2px">Morada Quintal da Serra</p>' +
-        '</div>' +
-      '</div>';
-  } else if (value === 'credito') {
-    box.innerHTML =
-      '<div style="border-radius:12px;border:1px solid var(--color-champagne);background:var(--color-creme);padding:16px">' +
-        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">' +
-          '<span style="font-size:16px">💳</span>' +
-          '<span style="font-size:12px;font-weight:700;color:var(--color-araucaria)">Mercado Pago — sem juros até 4x</span>' +
-        '</div>' +
-        '<div style="border-top:1px solid var(--color-champagne)">' +
-          '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--color-champagne);font-size:12px"><span style="color:var(--color-texto-suave)">1x</span><span style="font-weight:700;font-family:var(--font-serif);color:var(--color-araucaria)">' + formatBRL(total) + '</span></div>' +
-          '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--color-champagne);font-size:12px"><span style="color:var(--color-texto-suave)">2x sem juros</span><span style="font-weight:700;font-family:var(--font-serif);color:var(--color-araucaria)">2x ' + formatBRL(total/2) + '</span></div>' +
-          '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--color-champagne);font-size:12px"><span style="color:var(--color-texto-suave)">3x sem juros</span><span style="font-weight:700;font-family:var(--font-serif);color:var(--color-araucaria)">3x ' + formatBRL(total/3) + '</span></div>' +
-          '<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:12px"><span style="color:var(--color-texto-suave)">4x sem juros</span><span style="font-weight:700;font-family:var(--font-serif);color:var(--color-araucaria)">4x ' + formatBRL(total/4) + '</span></div>' +
-        '</div>' +
-        '<p style="font-size:10px;color:var(--color-texto-suave);margin-top:10px">Link de pagamento enviado após confirmação no WhatsApp.</p>' +
-      '</div>';
-  } else {
-    box.innerHTML = '';
-  }
-}
-
-function processCheckout() {
+async function processCheckout() {
   const name = document.getElementById('guest-name')?.value.trim();
   const allNames = document.getElementById('guest-all-names')?.value.trim();
   const phone = document.getElementById('guest-phone')?.value.trim();
@@ -1201,43 +1350,91 @@ function processCheckout() {
   const email = document.getElementById('guest-email')?.value.trim();
   const petName = document.getElementById('guest-pet-name')?.value.trim();
   const obs = document.getElementById('guest-obs')?.value.trim();
-  const payMethod = document.getElementById('payment-dropdown')?.value;
   const isPetActive = appState.cart.addons.some(function(a){ return a.id === 'add-pet'; });
+  const isExtraGuestActive = appState.extraGuest.active;
 
-  if (!name || !allNames || !phone) {
-    alert('Por favor, preencha o Nome do Titular, o Nome dos Demais Hóspedes e o WhatsApp para continuar.');
+  if (!name || !allNames || !phone || !email) {
+    alert('Por favor, preencha o Nome do Titular, o Nome do Segundo Hóspede, o WhatsApp e o E-mail para continuar.');
     return;
   }
   if (isPetActive && !petName) {
     alert('Por favor, informe o Nome e Raça do Pet (Até 14kg) para prosseguir com a Taxa Pet Amigo.');
     return;
   }
-  if (!payMethod) {
-    alert('Por favor, selecione um método de pagamento.');
+  if (isExtraGuestActive && (!appState.extraGuest.name || !appState.extraGuest.age)) {
+    alert('Por favor, informe o Nome e a Idade do Hóspede Extra para continuar.');
     return;
   }
-
-  const payLabel = payMethod === 'pix'
-    ? 'Pix (50% na reserva + 50% até 24h antes do Check-in)'
-    : 'Cartão de Crédito — Mercado Pago, até 4x sem juros';
 
   const checkIn = formatDateBR(appState.checkIn);
   const checkOut = formatDateBR(appState.checkOut);
   const nights = appState.numNights;
   const guests = appState.guestsCount;
 
+  // Montagem do Objeto de Dados Completo da Reserva para Firestore & Webhook
+  const reservationPayload = {
+    guest: {
+      name: name,
+      secondGuest: allNames,
+      phone: phone,
+      email: email,
+      cpf: cpf || '',
+      obs: obs || '',
+      petName: (isPetActive && petName) ? petName : '',
+      extraGuest: {
+        active: isExtraGuestActive,
+        name: isExtraGuestActive ? appState.extraGuest.name : '',
+        age: isExtraGuestActive ? appState.extraGuest.age : 0,
+        surchargeLabel: isExtraGuestActive ? (appState.extraGuest.label || 'Gratuito') : ''
+      }
+    },
+    stay: {
+      title: appState.cart.stayItem.title,
+      serviceType: appState.serviceType,
+      checkIn: checkIn,
+      checkOut: checkOut,
+      numNights: appState.serviceType === 'pernoite' ? nights : 1,
+      numGuests: guests,
+      stayBaseTotal: appState.cart.stayItem.price
+    },
+    packages: appState.cart.packages.map(p => ({ id: p.id, name: p.name, price: p.price })),
+    addons: appState.cart.addons.map(a => ({ id: a.id, name: a.name, price: a.price })),
+    financials: {
+      stayBaseTotal: appState.cart.stayItem.price,
+      extraGuestAmount: appState.extraGuest.surcharge || 0,
+      packagesTotal: appState.cart.packages.reduce((sum, p) => sum + p.price, 0),
+      addonsTotal: appState.cart.addons.reduce((sum, a) => sum + a.price, 0),
+      grandTotal: appState.cart.total
+    },
+    status: 'pending',
+    paymentStatus: 'unpaid'
+  };
+
+  // 1. Salvar no Firebase Firestore (e localStorage fallback)
+  const resId = await saveReservationToFirestore(reservationPayload);
+  reservationPayload.id = resId;
+
+  // 2. Disparar Webhook para Google Apps Script (E-mails & Agenda)
+  sendReservationWebhook(reservationPayload);
+
+  // 3. Montar Mensagem Formatada para o WhatsApp
   var lines = [];
-  lines.push('*NOVA RESERVA — MORADA QUINTAL DA SERRA*');
+  lines.push('*SOLICITAÇÃO DE RESERVA — MORADA QUINTAL DA SERRA*');
+  lines.push('Código: *' + resId + '*');
   lines.push('');
   lines.push('------------------------------------');
   lines.push('*DADOS DOS HÓSPEDES*');
   lines.push('------------------------------------');
   lines.push('Titular Responsável: ' + name);
-  lines.push('Acompanhantes: ' + allNames);
+  lines.push('Segundo Hóspede: ' + allNames);
   lines.push('WhatsApp: ' + phone);
-  if (cpf) lines.push('CPF: ' + cpf);
   if (email) lines.push('E-mail: ' + email);
+  if (cpf) lines.push('CPF: ' + cpf);
   if (isPetActive && petName) lines.push('🐾 Pet (Até 14kg): ' + petName);
+  if (isExtraGuestActive && appState.extraGuest.name) {
+    lines.push('👶 Hóspede Extra: ' + appState.extraGuest.name + ' (' + appState.extraGuest.age + ' anos)');
+    lines.push('   Acréscimo: ' + (appState.extraGuest.label || 'Gratuito'));
+  }
   if (obs) lines.push('Obs: ' + obs);
   lines.push('');
   lines.push('------------------------------------');
@@ -1271,12 +1468,11 @@ function processCheckout() {
 
   lines.push('');
   lines.push('------------------------------------');
-  lines.push('*PAGAMENTO*');
+  lines.push('*TOTAL DA RESERVA*');
   lines.push('------------------------------------');
-  lines.push('Total: *' + formatBRL(appState.cart.total) + '*');
-  lines.push('Forma: ' + payLabel);
+  lines.push('Total Geral: *' + formatBRL(appState.cart.total) + '*');
   lines.push('');
-  lines.push('Aguardo confirmação!');
+  lines.push('Solicito os dados para pagamento (PIX/Cartão) e contrato de hospedagem!');
 
   var msg = lines.join('\n');
 
@@ -1300,7 +1496,7 @@ function openLightbox(imgSrc, customImagesArray = null) {
     lightboxImagesList = customImagesArray;
   } else {
     // Gather all gallery & structure image sources on page
-    const allGalleryImgs = Array.from(document.querySelectorAll('#galeria .gallery-item img, #estrutura-slider-container img'));
+    const allGalleryImgs = Array.from(document.querySelectorAll('#galeria .gallery-item img, #gallery-full-modal .gallery-item img, #estrutura-slider-container img'));
     const srcs = allGalleryImgs.map(img => img.src).filter(src => src && !src.includes('undefined') && src.length > 5);
     lightboxImagesList = Array.from(new Set(srcs));
   }
@@ -1365,6 +1561,16 @@ function handleLightboxKeyboard(e) {
   } else if (e.key === 'Escape') {
     closeLightbox();
   }
+}
+
+function openFullGalleryModal() {
+  const modal = document.getElementById('gallery-full-modal');
+  if (modal) modal.classList.add('active');
+}
+
+function closeFullGalleryModal() {
+  const modal = document.getElementById('gallery-full-modal');
+  if (modal) modal.classList.remove('active');
 }
 
 function openGuestGuideModal() {
@@ -1456,21 +1662,21 @@ function toggleFullGallery() {
   });
 
   if (btn) {
-    btn.innerHTML = isExpanding ? '▲ Mostrar Menos Fotos' : '✨ Ver Todas as 42 Fotos da Galeria';
+    btn.innerHTML = isExpanding ? 'Mostrar Menos Fotos' : 'Ver Todas as 42 Fotos da Galeria';
   }
 }
 
 // Randomized Auto-Rotating Background Slider for Hero (Changes every 3.5s)
 function initHeroRandomSlider() {
   const HERO_HOME_IMAGES = [
-    'assets/images/Escolhas/Home/DJI_20260505153651_0104_D.jpeg',
-    'assets/images/Escolhas/Home/C110E2FB-EAE4-47FE-A391-8D42EAD1D710.jpeg',
-    'assets/images/Escolhas/Home/IMG_3526.jpeg',
-    'assets/images/Escolhas/Home/IMG_6442.jpeg',
-    'assets/images/Escolhas/Home/P1071337.jpeg',
-    'assets/images/Escolhas/Home/P1071343(1).jpeg',
-    'assets/images/Escolhas/Home/P1071514.jpeg',
-    'assets/images/Escolhas/Home/P1071579.jpeg'
+    'assets/images/vista-aerea-chale-rancho-queimado-serra-catarinense.jpeg',
+    'assets/images/chale-boutique-morada-quintal-da-serra-rancho-queimado.jpeg',
+    'assets/images/interior-chale-madeira-aconchegante-rancho-queimado.jpeg',
+    'assets/images/vista-montanhas-araucarias-rancho-queimado.jpeg',
+    'assets/images/por-do-sol-entre-araucarias-rancho-queimado.jpeg',
+    'assets/images/experiencia-vip-romantica-rancho-queimado.jpeg',
+    'assets/images/pacote-casa-comigo-decoracao-intimista.jpeg',
+    'assets/images/pedido-de-casamento-rancho-queimado.jpeg'
   ];
 
   const img1 = document.getElementById('hero-bg-img-1');
@@ -1511,7 +1717,7 @@ function initHeroRandomSlider() {
 }
 
 // Structure / Nature Section Random Slider & Lightbox Handler
-let currentStructureSrc = 'assets/images/Escolhas/Estrutura/IMG_3530.jpeg';
+let currentStructureSrc = 'assets/images/arquitetura-chale-boutique-rancho-queimado.jpeg';
 
 function handleStructureClick() {
   openLightbox(currentStructureSrc);
@@ -1519,23 +1725,23 @@ function handleStructureClick() {
 
 function initStructureRandomSlider() {
   const ESTRUTURA_IMAGES = [
-    'assets/images/Escolhas/Estrutura/IMG_3530.jpeg',
-    'assets/images/Escolhas/Estrutura/IMG_3545.jpeg',
-    'assets/images/Escolhas/Estrutura/IMG_3549.jpeg',
-    'assets/images/Escolhas/Estrutura/IMG_3551.jpeg',
-    'assets/images/Escolhas/Estrutura/IMG_3553.jpeg',
-    'assets/images/Escolhas/Estrutura/IMG_4043.jpeg',
-    'assets/images/Escolhas/Estrutura/P1071293.jpeg',
-    'assets/images/Escolhas/Estrutura/P1071294.jpeg',
-    'assets/images/Escolhas/Estrutura/P1071299.jpeg',
-    'assets/images/Escolhas/Estrutura/P1071300.jpeg',
-    'assets/images/Escolhas/Estrutura/P1071302.jpeg',
-    'assets/images/Escolhas/Estrutura/P1071304.jpeg',
-    'assets/images/Escolhas/Estrutura/P1071305.jpeg',
-    'assets/images/Escolhas/Estrutura/P1071306.jpeg',
-    'assets/images/Escolhas/Estrutura/P1071309.jpeg',
-    'assets/images/Escolhas/Estrutura/P1071316.jpeg',
-    'assets/images/Escolhas/Estrutura/P1071317.jpeg'
+    'assets/images/arquitetura-chale-boutique-rancho-queimado.jpeg',
+    'assets/images/sala-de-estar-chale-com-lareira-rancho-queimado.jpeg',
+    'assets/images/cozinha-equipada-chale-boutique-rancho-queimado.jpeg',
+    'assets/images/quarto-casal-chale-nas-montanhas-rancho-queimado.jpeg',
+    'assets/images/deck-externo-chale-rancho-queimado.jpeg',
+    'assets/images/lareira-aconchegante-chale-rancho-queimado.jpeg',
+    'assets/images/detalhes-pacote-romantico-chale.jpeg',
+    'assets/images/ambiente-romantico-boas-vindas-chale.jpeg',
+    'assets/images/caminho-de-petalas-pacote-namorados.jpeg',
+    'assets/images/lareira-acesa-noite-romantica-chale.jpeg',
+    'assets/images/brinde-espumante-pacote-romantico.jpeg',
+    'assets/images/tabua-frios-vinhos-rancho-queimado.jpeg',
+    'assets/images/gastronomia-vinhos-serra-catarinense.jpeg',
+    'assets/images/jantar-romantico-chale-rancho-queimado.jpeg',
+    'assets/images/mimos-especiais-casal-chale.jpeg',
+    'assets/images/celebracao-aniversario-de-namoro-chale.jpeg',
+    'assets/images/producao-especial-boas-vindas-casal.jpeg'
   ];
 
   const img1 = document.getElementById('estrutura-bg-img-1');
@@ -1660,6 +1866,110 @@ function closeMobileMenu() {
   if (backdrop) {
     backdrop.classList.remove('opacity-100');
     backdrop.classList.add('opacity-0', 'pointer-events-none');
+  }
+}
+
+// Guia do Hóspede - Tab Switcher
+function switchGuideTab(tabName) {
+  const houseContent = document.getElementById('guide-tab-content-house');
+  const gastronomyContent = document.getElementById('guide-tab-content-gastronomy');
+  const houseBtn = document.getElementById('guide-tab-btn-house');
+  const gastronomyBtn = document.getElementById('guide-tab-btn-gastronomy');
+
+  if (!houseContent || !gastronomyContent || !houseBtn || !gastronomyBtn) return;
+
+  if (tabName === 'house') {
+    houseContent.classList.remove('hidden');
+    gastronomyContent.classList.add('hidden');
+
+    houseBtn.className = 'px-3.5 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider transition-all bg-[var(--color-araucaria)] text-[var(--color-champagne)] shadow-xs';
+    gastronomyBtn.className = 'px-3.5 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider transition-all text-[var(--color-texto-suave)] hover:text-[var(--color-araucaria)]';
+  } else {
+    houseContent.classList.add('hidden');
+    gastronomyContent.classList.remove('hidden');
+
+    gastronomyBtn.className = 'px-3.5 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider transition-all bg-[var(--color-araucaria)] text-[var(--color-champagne)] shadow-xs';
+    houseBtn.className = 'px-3.5 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wider transition-all text-[var(--color-texto-suave)] hover:text-[var(--color-araucaria)]';
+  }
+}
+
+// Control Mobile Floating Bottom Booking Bar Visiblity & WhatsApp Shift
+function initMobileBottomBarScroll() {
+  const bar = document.getElementById('mobile-bottom-bar');
+  const whatsappBtn = document.querySelector('a[aria-label="Falar no WhatsApp"]');
+  if (!bar) return;
+
+  const handleScroll = () => {
+    // Show mobile bottom bar after scrolling past 350px (after hero section)
+    if (window.scrollY > 350 && window.innerWidth < 1024) {
+      bar.classList.remove('translate-y-full');
+      bar.classList.add('translate-y-0');
+      document.body.classList.add('has-bottom-bar');
+      if (whatsappBtn) {
+        whatsappBtn.style.transform = 'translateY(-62px)';
+      }
+    } else {
+      bar.classList.remove('translate-y-0');
+      bar.classList.add('translate-y-full');
+      document.body.classList.remove('has-bottom-bar');
+      if (whatsappBtn) {
+        whatsappBtn.style.transform = 'translateY(0)';
+      }
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleScroll, { passive: true });
+  handleScroll();
+}
+
+// Full Gallery Modal & Interactive Category Filtering
+function openFullGalleryModal() {
+  const modal = document.getElementById('gallery-full-modal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeFullGalleryModal() {
+  const modal = document.getElementById('gallery-full-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function filterFullGallery(category) {
+  const items = document.querySelectorAll('#gallery-full-modal .gallery-full-item');
+  const tabs = document.querySelectorAll('#gallery-full-modal .gallery-filter-tab');
+  
+  // Update active tab styling
+  tabs.forEach(tab => {
+    const filterKey = tab.getAttribute('data-filter');
+    if (filterKey === category) {
+      tab.className = 'gallery-filter-tab px-3.5 py-1.5 rounded-full text-[11px] font-semibold tracking-wider transition-all bg-[var(--color-araucaria)] text-[var(--color-champagne)] shadow-sm cursor-pointer whitespace-nowrap';
+    } else {
+      tab.className = 'gallery-filter-tab px-3.5 py-1.5 rounded-full text-[11px] font-semibold tracking-wider transition-all bg-[var(--color-creme)] text-[var(--color-texto-suave)] hover:text-[var(--color-araucaria)] border border-champagne-subtle cursor-pointer whitespace-nowrap';
+    }
+  });
+
+  // Filter items
+  let visibleCount = 0;
+  items.forEach(item => {
+    const itemCat = item.getAttribute('data-category') || 'all';
+    if (category === 'all' || itemCat === category) {
+      item.style.display = 'block';
+      visibleCount++;
+    } else {
+      item.style.display = 'none';
+    }
+  });
+
+  // Update count indicator
+  const countEl = document.getElementById('full-gallery-count');
+  if (countEl) {
+    countEl.innerText = `(${visibleCount} fotos)`;
   }
 }
 
