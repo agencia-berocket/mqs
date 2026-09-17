@@ -493,6 +493,26 @@ function initDateDefaults() {
   }
 }
 
+function parseDateStringApp(dateStr) {
+  if (!dateStr) return null;
+  if (typeof dateStr !== 'string') dateStr = String(dateStr);
+  dateStr = dateStr.trim();
+  
+  if (dateStr.includes('/')) {
+    const parts = dateStr.split('/');
+    if (parts.length === 3) {
+      return new Date(parseInt(parts[2], 10), parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
+    }
+  } else if (dateStr.includes('-')) {
+    const parts = dateStr.split('-');
+    if (parts.length === 3) {
+      return new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+    }
+  }
+  const d = new Date(dateStr);
+  return isNaN(d.getTime()) ? null : d;
+}
+
 /**
  * Carrega datas bloqueadas pelo admin e reservas ativas para desabilitar no Flatpickr do site
  */
@@ -510,14 +530,16 @@ function syncDisabledDatesOnSite() {
     const localRes = JSON.parse(localStorage.getItem('morada_reservations') || '[]');
     localRes.forEach(r => {
       if ((r.status === 'deposit_paid' || r.status === 'fully_paid') && r.stay?.checkIn && r.stay?.checkOut) {
-        let dt = new Date(r.stay.checkIn + 'T00:00:00');
-        const end = new Date(r.stay.checkOut + 'T00:00:00');
-        while (dt < end) {
-          const year = dt.getFullYear();
-          const month = String(dt.getMonth() + 1).padStart(2, '0');
-          const day = String(dt.getDate()).padStart(2, '0');
-          disabledDates.add(`${year}-${month}-${day}`);
-          dt.setDate(dt.getDate() + 1);
+        let dt = parseDateStringApp(r.stay.checkIn);
+        const end = parseDateStringApp(r.stay.checkOut);
+        if (dt && end) {
+          while (dt < end) {
+            const year = dt.getFullYear();
+            const month = String(dt.getMonth() + 1).padStart(2, '0');
+            const day = String(dt.getDate()).padStart(2, '0');
+            disabledDates.add(`${year}-${month}-${day}`);
+            dt.setDate(dt.getDate() + 1);
+          }
         }
       }
     });
@@ -544,7 +566,7 @@ function syncDisabledDatesOnSite() {
 
   applyDisableToFlatpickr(disabledDates);
 
-  // 3. Se Firestore estiver ativo, escutar atualizações em tempo real
+  // 3. Se Firestore estiver ativo, escutar atualizações em tempo real (blocked_dates e reservations)
   if (typeof db !== 'undefined' && db) {
     try {
       db.collection('blocked_dates').onSnapshot(snapshot => {
@@ -554,8 +576,29 @@ function syncDisabledDatesOnSite() {
         });
         applyDisableToFlatpickr(liveSet);
       });
+
+      db.collection('reservations').onSnapshot(snapshot => {
+        let liveSet = new Set(disabledDates);
+        snapshot.forEach(doc => {
+          const r = doc.data();
+          if ((r.status === 'deposit_paid' || r.status === 'fully_paid') && r.stay?.checkIn && r.stay?.checkOut) {
+            let dt = parseDateStringApp(r.stay.checkIn);
+            const end = parseDateStringApp(r.stay.checkOut);
+            if (dt && end) {
+              while (dt < end) {
+                const year = dt.getFullYear();
+                const month = String(dt.getMonth() + 1).padStart(2, '0');
+                const day = String(dt.getDate()).padStart(2, '0');
+                liveSet.add(`${year}-${month}-${day}`);
+                dt.setDate(dt.getDate() + 1);
+              }
+            }
+          }
+        });
+        applyDisableToFlatpickr(liveSet);
+      });
     } catch (err) {
-      console.warn('Erro escutando blocked_dates em tempo real no site:', err);
+      console.warn('Erro escutando bloqueios e reservas em tempo real no site:', err);
     }
   }
 }

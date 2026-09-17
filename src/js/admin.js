@@ -11,27 +11,36 @@ document.addEventListener('DOMContentLoaded', function() {
   initAdminAuth();
 });
 
+const ALLOWED_ADMIN_EMAIL = "reservasmoradaquintaldaserra@gmail.com";
+
 /**
  * Inicialização e Verificação de Autenticação
  */
 function initAdminAuth() {
   const loginModal = document.getElementById('admin-login-modal');
   
-  // Se Firebase Auth estiver disponível
   if (typeof auth !== 'undefined' && auth) {
     auth.onAuthStateChanged(user => {
       if (user) {
-        console.log('✅ Gestor autenticado no Firebase:', user.email);
-        if (loginModal) loginModal.classList.remove('active');
-        const emailEl = document.getElementById('admin-user-email');
-        if (emailEl) emailEl.innerText = user.email;
-        subscribeReservationsRealtime();
+        if (user.email && user.email.toLowerCase() === ALLOWED_ADMIN_EMAIL.toLowerCase()) {
+          console.log('✅ Gestor autenticado no Firebase:', user.email);
+          if (loginModal) loginModal.classList.remove('active');
+          const emailEl = document.getElementById('admin-user-email');
+          if (emailEl) emailEl.innerText = user.email;
+          subscribeReservationsRealtime();
+        } else {
+          console.warn('⛔ Tentativa de acesso por conta não autorizada:', user.email);
+          alert(`❌ ACESSO NEGADO!\n\nA conta "${user.email}" não possui permissão de acesso ao painel gestor.\n\nApenas a conta oficial (${ALLOWED_ADMIN_EMAIL}) possui acesso.`);
+          auth.signOut();
+          sessionStorage.removeItem('morada_admin_demo');
+          if (loginModal) loginModal.classList.add('active');
+        }
       } else {
         const isDemo = sessionStorage.getItem('morada_admin_demo');
         if (isDemo) {
           if (loginModal) loginModal.classList.remove('active');
           const emailEl = document.getElementById('admin-user-email');
-          if (emailEl) emailEl.innerText = 'Reservasmoradaquintaldaserra@gmail.com';
+          if (emailEl) emailEl.innerText = ALLOWED_ADMIN_EMAIL;
           subscribeReservationsRealtime();
         } else {
           if (loginModal) loginModal.classList.add('active');
@@ -43,6 +52,8 @@ function initAdminAuth() {
     const isDemo = sessionStorage.getItem('morada_admin_demo');
     if (isDemo) {
       if (loginModal) loginModal.classList.remove('active');
+      const emailEl = document.getElementById('admin-user-email');
+      if (emailEl) emailEl.innerText = ALLOWED_ADMIN_EMAIL;
       subscribeReservationsRealtime();
     } else {
       if (loginModal) loginModal.classList.add('active');
@@ -57,26 +68,38 @@ function initAdminAuth() {
 }
 
 /**
- * Submit do Login Admin
+ * Login Administrativo Exclusivo via Google Sign-In
  */
-function handleAdminLoginSubmit(e) {
-  e.preventDefault();
-  const email = document.getElementById('admin-login-email').value.trim();
-  const pass = document.getElementById('admin-login-password').value.trim();
-
-  if (typeof auth !== 'undefined' && auth) {
-    auth.signInWithEmailAndPassword(email, pass)
-      .then(() => {
-        alert('Login efetuado com sucesso!');
-      })
-      .catch(err => {
-        console.warn('Firebase auth signIn error, fallback to demo mode:', err);
-        // Permitir entrar no modo demo se as credenciais forem aceitas
-        enableDemoAdminMode();
-      });
-  } else {
+function handleGoogleAdminLogin() {
+  if (typeof firebase === 'undefined' || typeof auth === 'undefined' || !auth) {
+    alert('O Firebase SDK não está disponível no momento. Utilizando modo de demonstração local.');
     enableDemoAdminMode();
+    return;
   }
+
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(result => {
+      const user = result.user;
+      if (user && user.email && user.email.toLowerCase() === ALLOWED_ADMIN_EMAIL.toLowerCase()) {
+        console.log('✅ Acesso autorizado para a conta oficial:', user.email);
+        alert('Bem-vindo(a) ao Painel de Gestão!');
+      } else {
+        const emailAttempted = user ? user.email : 'desconhecida';
+        alert(`❌ ACESSO NEGADO!\n\nA conta "${emailAttempted}" não é autorizada a gerenciar este painel.\n\nApenas a conta oficial (${ALLOWED_ADMIN_EMAIL}) pode acessar.`);
+        auth.signOut();
+        sessionStorage.removeItem('morada_admin_demo');
+        const loginModal = document.getElementById('admin-login-modal');
+        if (loginModal) loginModal.classList.add('active');
+      }
+    })
+    .catch(err => {
+      console.warn('Erro no Google Sign-In:', err);
+      if (err.code === 'auth/popup-closed-by-user') {
+        return;
+      }
+      alert('Erro ao realizar login via Google: ' + (err.message || err));
+    });
 }
 
 function enableDemoAdminMode() {
@@ -566,16 +589,23 @@ async function updateReservationStatus(resId, newStatus) {
         const dStr = `${year}-${month}-${day}`;
 
         if (newStatus === 'deposit_paid' || newStatus === 'fully_paid') {
+          const blockItem = {
+            date: dStr,
+            reason: `Reserva ${res.id} (${res.guest?.name || 'Hóspede'})`,
+            createdBy: 'system_reservation',
+            createdAt: new Date().toISOString()
+          };
           if (!localBlocks.some(b => b.date === dStr)) {
-            localBlocks.push({
-              date: dStr,
-              reason: `Reserva ${res.id} (${res.guest?.name || 'Hóspede'})`,
-              createdBy: 'system_reservation',
-              createdAt: new Date().toISOString()
-            });
+            localBlocks.push(blockItem);
+          }
+          if (typeof db !== 'undefined' && db) {
+            try { db.collection('blocked_dates').doc(dStr).set(blockItem); } catch (e) {}
           }
         } else if (newStatus === 'cancelled') {
           localBlocks = localBlocks.filter(b => b.date !== dStr || b.createdBy !== 'system_reservation');
+          if (typeof db !== 'undefined' && db) {
+            try { db.collection('blocked_dates').doc(dStr).delete(); } catch (e) {}
+          }
         }
 
         dt.setDate(dt.getDate() + 1);
@@ -1371,7 +1401,7 @@ function printReservationPDF(resId) {
         .meta-info { text-align: right; }
         .res-id { font-family: monospace; font-size: 16px; font-weight: bold; color: #163A2F; }
         .status-pill { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: bold; text-transform: uppercase; margin-top: 5px; border: 1px solid currentColor; }
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .cards-vertical { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
         .box { background: #FAF8F2; border: 1px solid #CBB98B; border-radius: 8px; padding: 14px; }
         .box-title { font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #163A2F; margin-bottom: 8px; border-bottom: 1px solid #CBB98B; padding-bottom: 4px; }
         table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 20px; }
@@ -1404,7 +1434,7 @@ function printReservationPDF(resId) {
         </div>
       </div>
 
-      <div class="grid-2">
+      <div class="cards-vertical">
         <div class="box">
           <div class="box-title">👤 Hóspede Responsável & Acompanhantes</div>
           <div><strong>Titular:</strong> ${guest.name || '-'}</div>
