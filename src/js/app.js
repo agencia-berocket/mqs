@@ -23,6 +23,15 @@ const appState = {
     surcharge: 0,
     label: ''
   },
+  cartFormValues: {
+    name: '',
+    secondGuest: '',
+    cpf: '',
+    phone: '',
+    email: '',
+    petName: '',
+    obs: ''
+  },
   cart: {
     stayItem: null,
     packages: [],
@@ -1023,10 +1032,39 @@ function setNightsInCart(val) {
   renderCartModalContent();
 }
 
+function captureCartFormValues() {
+  const nameEl = document.getElementById('guest-name');
+  const secondGuestEl = document.getElementById('guest-all-names');
+  const cpfEl = document.getElementById('guest-cpf');
+  const phoneEl = document.getElementById('guest-phone');
+  const emailEl = document.getElementById('guest-email');
+  const petEl = document.getElementById('guest-pet-name');
+  const obsEl = document.getElementById('guest-obs');
+
+  if (!appState.cartFormValues) {
+    appState.cartFormValues = { name: '', secondGuest: '', cpf: '', phone: '', email: '', petName: '', obs: '' };
+  }
+  if (nameEl) appState.cartFormValues.name = nameEl.value;
+  if (secondGuestEl) appState.cartFormValues.secondGuest = secondGuestEl.value;
+  if (cpfEl) appState.cartFormValues.cpf = cpfEl.value;
+  if (phoneEl) appState.cartFormValues.phone = phoneEl.value;
+  if (emailEl) appState.cartFormValues.email = emailEl.value;
+  if (petEl) appState.cartFormValues.petName = petEl.value;
+  if (obsEl) appState.cartFormValues.obs = obsEl.value;
+}
+
+function updateCartFormField(field, val) {
+  if (!appState.cartFormValues) {
+    appState.cartFormValues = { name: '', secondGuest: '', cpf: '', phone: '', email: '', petName: '', obs: '' };
+  }
+  appState.cartFormValues[field] = val;
+}
+
 function renderCartModalContent() {
   const body = document.getElementById('cart-modal-body');
   if (!body) return;
 
+  captureCartFormValues();
   updateCalculation();
   const { stayItem, packages, addons, total } = appState.cart;
 
@@ -1221,25 +1259,25 @@ function renderCartModalContent() {
           '<div style="display:flex;flex-direction:column;gap:10px">' +
             '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">' +
               '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">Nome do Titular *</label>' +
-              '<input type="text" id="guest-name" placeholder="Nome Completo do Responsável" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
+              '<input type="text" id="guest-name" placeholder="Nome Completo do Responsável" value="' + (appState.cartFormValues?.name || '').replace(/"/g, '&quot;') + '" oninput="updateCartFormField(\'name\', this.value)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
               '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">Nome do Segundo Hóspede *</label>' +
-              '<input type="text" id="guest-all-names" placeholder="Nome completo do segundo hóspede" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
+              '<input type="text" id="guest-all-names" placeholder="Nome completo do segundo hóspede" value="' + (appState.cartFormValues?.secondGuest || '').replace(/"/g, '&quot;') + '" oninput="updateCartFormField(\'secondGuest\', this.value)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
             '</div>' +
             '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">' +
               '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">CPF *</label>' +
-              '<input type="text" id="guest-cpf" placeholder="000.000.000-00" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
+              '<input type="text" id="guest-cpf" placeholder="000.000.000-00" value="' + (appState.cartFormValues?.cpf || '').replace(/"/g, '&quot;') + '" oninput="updateCartFormField(\'cpf\', this.value)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
               '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">WhatsApp *</label>' +
-              '<input type="tel" id="guest-phone" placeholder="(48) 9 0000-0000" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
+              '<input type="tel" id="guest-phone" placeholder="(48) 9 0000-0000" value="' + (appState.cartFormValues?.phone || '').replace(/"/g, '&quot;') + '" oninput="updateCartFormField(\'phone\', this.value)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
             '</div>' +
             '<div style="display:grid;grid-template-columns:1fr' + (addons.some(function(a){ return a.id === 'add-pet'; }) ? ' 1fr' : '') + ';gap:10px">' +
               '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">E-mail *</label>' +
-              '<input type="email" id="guest-email" placeholder="email@exemplo.com" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
+              '<input type="email" id="guest-email" placeholder="email@exemplo.com" value="' + (appState.cartFormValues?.email || '').replace(/"/g, '&quot;') + '" oninput="updateCartFormField(\'email\', this.value)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' +
               (addons.some(function(a){ return a.id === 'add-pet'; }) ?
               '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-araucaria);margin-bottom:4px">🐾 Nome e Raça do Pet (Até 14kg) *</label>' +
-              '<input type="text" id="guest-pet-name" placeholder="Ex: Mel (Spitz, 5kg)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' : '') +
+              '<input type="text" id="guest-pet-name" placeholder="Ex: Mel (Spitz, 5kg)" value="' + (appState.cartFormValues?.petName || '').replace(/"/g, '&quot;') + '" oninput="updateCartFormField(\'petName\', this.value)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);box-sizing:border-box;outline:none" /></div>' : '') +
             '</div>' +
             '<div><label style="display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-texto-suave);margin-bottom:4px">Observações (Opcional)</label>' +
-            '<textarea id="guest-obs" rows="2" placeholder="Ex: Aniversário de namoro, pedido de casamento..." style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);resize:none;box-sizing:border-box;outline:none"></textarea></div>' +
+            '<textarea id="guest-obs" rows="2" placeholder="Ex: Aniversário de namoro, pedido de casamento..." oninput="updateCartFormField(\'obs\', this.value)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--color-champagne);background:#fff;font-size:12px;font-family:var(--font-sans);resize:none;box-sizing:border-box;outline:none">' + (appState.cartFormValues?.obs || '') + '</textarea></div>' +
           '</div>' +
         '</div>' +
 
@@ -1343,13 +1381,14 @@ function renderCartModalContent() {
 }
 
 async function processCheckout() {
-  const name = document.getElementById('guest-name')?.value.trim();
-  const allNames = document.getElementById('guest-all-names')?.value.trim();
-  const phone = document.getElementById('guest-phone')?.value.trim();
-  const cpf = document.getElementById('guest-cpf')?.value.trim();
-  const email = document.getElementById('guest-email')?.value.trim();
-  const petName = document.getElementById('guest-pet-name')?.value.trim();
-  const obs = document.getElementById('guest-obs')?.value.trim();
+  captureCartFormValues();
+  const name = (document.getElementById('guest-name')?.value || appState.cartFormValues?.name || '').trim();
+  const allNames = (document.getElementById('guest-all-names')?.value || appState.cartFormValues?.secondGuest || '').trim();
+  const phone = (document.getElementById('guest-phone')?.value || appState.cartFormValues?.phone || '').trim();
+  const cpf = (document.getElementById('guest-cpf')?.value || appState.cartFormValues?.cpf || '').trim();
+  const email = (document.getElementById('guest-email')?.value || appState.cartFormValues?.email || '').trim();
+  const petName = (document.getElementById('guest-pet-name')?.value || appState.cartFormValues?.petName || '').trim();
+  const obs = (document.getElementById('guest-obs')?.value || appState.cartFormValues?.obs || '').trim();
   const isPetActive = appState.cart.addons.some(function(a){ return a.id === 'add-pet'; });
   const isExtraGuestActive = appState.extraGuest.active;
 

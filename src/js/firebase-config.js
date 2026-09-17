@@ -107,11 +107,11 @@ async function sendReservationWebhook(reservationData, webhookUrl = null) {
   try {
     const resp = await fetch(targetUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(reservationData),
       mode: 'no-cors'
     });
-    console.log('📧 Webhook de reserva disparado para Google Apps Script.');
+    console.log('📧 Webhook de reserva disparado com sucesso para Google Apps Script.');
     return true;
   } catch (err) {
     console.warn('⚠️ Falha ao disparar webhook:', err);

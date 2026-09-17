@@ -300,6 +300,9 @@ function renderReservationsTable() {
             <button onclick="viewReservationDetails('${res.id}')" class="px-2.5 py-1.5 rounded-lg bg-[var(--color-araucaria)] text-white text-[10px] font-bold hover:bg-[var(--color-araucaria-dark)] transition-all" title="Ver Detalhes">
               📋 Detalhes
             </button>
+            <button onclick="printReservationPDF('${res.id}')" class="px-2.5 py-1.5 rounded-lg bg-amber-700 text-white text-[10px] font-bold hover:bg-amber-800 transition-all" title="Imprimir PDF">
+              🖨️ PDF
+            </button>
             <button onclick="sendWhatsAppContract('${res.id}')" class="px-2.5 py-1.5 rounded-lg bg-emerald-600 text-white text-[10px] font-bold hover:bg-emerald-700 transition-all" title="Enviar WhatsApp">
               💬 WhatsApp
             </button>
@@ -442,6 +445,9 @@ function viewReservationDetails(resId) {
 
       <!-- Botões de Ação Final -->
       <div class="flex flex-wrap gap-3 pt-2">
+        <button onclick="printReservationPDF('${res.id}')" class="btn-araucaria py-3 px-4 text-xs font-bold uppercase flex items-center justify-center gap-1.5 shadow-sm">
+          <span>🖨️</span> Imprimir Reserva (PDF)
+        </button>
         <button onclick="sendWhatsAppContract('${res.id}')" class="flex-1 btn-araucaria py-3 text-xs uppercase font-bold flex items-center justify-center gap-2">
           <span>💬</span> Chamar no WhatsApp com Modelo
         </button>
@@ -546,6 +552,38 @@ async function updateReservationStatus(resId, newStatus) {
   }
 
   localStorage.setItem('morada_reservations', JSON.stringify(currentReservationsList));
+
+  // Sincronizar bloqueio de datas se a reserva for confirmada ou cancelada
+  if (res.stay?.checkIn && res.stay?.checkOut) {
+    let dt = parseDateString(res.stay.checkIn);
+    const end = parseDateString(res.stay.checkOut);
+    if (dt && end) {
+      let localBlocks = JSON.parse(localStorage.getItem('morada_blocked_dates') || '[]');
+      while (dt < end) {
+        const year = dt.getFullYear();
+        const month = String(dt.getMonth() + 1).padStart(2, '0');
+        const day = String(dt.getDate()).padStart(2, '0');
+        const dStr = `${year}-${month}-${day}`;
+
+        if (newStatus === 'deposit_paid' || newStatus === 'fully_paid') {
+          if (!localBlocks.some(b => b.date === dStr)) {
+            localBlocks.push({
+              date: dStr,
+              reason: `Reserva ${res.id} (${res.guest?.name || 'Hóspede'})`,
+              createdBy: 'system_reservation',
+              createdAt: new Date().toISOString()
+            });
+          }
+        } else if (newStatus === 'cancelled') {
+          localBlocks = localBlocks.filter(b => b.date !== dStr || b.createdBy !== 'system_reservation');
+        }
+
+        dt.setDate(dt.getDate() + 1);
+      }
+      localStorage.setItem('morada_blocked_dates', JSON.stringify(localBlocks));
+    }
+  }
+
   renderAdminDashboard();
   viewReservationDetails(resId);
   alert('Status alterado para: ' + getStatusLabelText(newStatus));
@@ -945,13 +983,18 @@ function renderAdminCalendarGrid() {
   // Mapear datas reservadas ativas
   const reservedDatesMap = {};
   currentReservationsList.forEach(r => {
-    if ((r.status === 'deposit_paid' || r.status === 'fully_paid') && r.stay?.checkIn && r.stay?.checkOut) {
-      let dt = new Date(r.stay.checkIn + 'T00:00:00');
-      const end = new Date(r.stay.checkOut + 'T00:00:00');
-      while (dt < end) {
-        const dStr = dt.toISOString().split('T')[0];
-        reservedDatesMap[dStr] = r.guest?.name || 'Hóspede';
-        dt.setDate(dt.getDate() + 1);
+    if ((r.status === 'deposit_paid' || r.status === 'fully_paid' || r.status === 'completed') && r.stay?.checkIn && r.stay?.checkOut) {
+      let dt = parseDateString(r.stay.checkIn);
+      const end = parseDateString(r.stay.checkOut);
+      if (dt && end) {
+        while (dt < end) {
+          const year = dt.getFullYear();
+          const month = String(dt.getMonth() + 1).padStart(2, '0');
+          const day = String(dt.getDate()).padStart(2, '0');
+          const dStr = `${year}-${month}-${day}`;
+          reservedDatesMap[dStr] = r.guest?.name || 'Hóspede';
+          dt.setDate(dt.getDate() + 1);
+        }
       }
     }
   });
@@ -1262,6 +1305,192 @@ function formatDateBRStr(yyyyMmDd) {
     return `${parts[2]}/${parts[1]}/${parts[0]}`;
   }
   return yyyyMmDd;
+}
+
+function parseDateString(dateStr) {
+  if (!dateStr) return null;
+  if (typeof dateStr !== 'string') dateStr = String(dateStr);
+  dateStr = dateStr.trim();
+  
+  if (dateStr.includes('/')) {
+    const parts = dateStr.split('/');
+    if (parts.length === 3) {
+      const day = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1;
+      const year = parseInt(parts[2], 10);
+      return new Date(year, month, day);
+    }
+  } else if (dateStr.includes('-')) {
+    const parts = dateStr.split('-');
+    if (parts.length === 3) {
+      const year = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1;
+      const day = parseInt(parts[2], 10);
+      return new Date(year, month, day);
+    }
+  }
+  const d = new Date(dateStr);
+  return isNaN(d.getTime()) ? null : d;
+}
+
+/**
+ * Geração e Impressão de PDF da Reserva
+ */
+function printReservationPDF(resId) {
+  const res = currentReservationsList.find(r => r.id === resId);
+  if (!res) {
+    alert('Reserva não encontrada.');
+    return;
+  }
+
+  const printWindow = window.open('', '_blank', 'width=900,height=800');
+  if (!printWindow) {
+    alert('Por favor, permita pop-ups no seu navegador para imprimir o PDF da reserva.');
+    return;
+  }
+
+  const guest = res.guest || {};
+  const stay = res.stay || {};
+  const financials = res.financials || {};
+  const packages = res.packages || [];
+  const addons = res.addons || [];
+
+  const html = `
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+      <meta charset="UTF-8">
+      <title>Reserva ${res.id} — Morada Quintal da Serra</title>
+      <style>
+        @page { size: A4; margin: 15mm; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #163A2F; margin: 0; padding: 25px; font-size: 13px; line-height: 1.5; background: #fff; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #163A2F; padding-bottom: 15px; margin-bottom: 20px; }
+        .brand { font-family: Georgia, serif; }
+        .brand h1 { font-size: 24px; color: #163A2F; margin: 0; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .brand p { font-size: 11px; color: #8C7B50; margin: 3px 0 0 0; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; }
+        .meta-info { text-align: right; }
+        .res-id { font-family: monospace; font-size: 16px; font-weight: bold; color: #163A2F; }
+        .status-pill { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: bold; text-transform: uppercase; margin-top: 5px; border: 1px solid currentColor; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .box { background: #FAF8F2; border: 1px solid #CBB98B; border-radius: 8px; padding: 14px; }
+        .box-title { font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; color: #163A2F; margin-bottom: 8px; border-bottom: 1px solid #CBB98B; padding-bottom: 4px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 20px; }
+        th { background: #163A2F; color: #fff; text-align: left; padding: 8px 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { border-bottom: 1px solid #e5e7eb; padding: 8px 12px; font-size: 12px; }
+        .text-right { text-align: right; }
+        .total-row { font-family: Georgia, serif; font-size: 15px; font-weight: bold; color: #163A2F; background: #FAF8F2; }
+        .footer-terms { margin-top: 35px; padding-top: 15px; border-top: 1px dashed #ccc; font-size: 10px; color: #555; display: flex; justify-content: space-between; align-items: flex-end; }
+        .sig-line { width: 220px; border-top: 1px solid #333; text-align: center; padding-top: 4px; margin-top: 40px; font-size: 11px; }
+        @media print {
+          body { padding: 0; }
+          .no-print { display: none !important; }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="no-print" style="margin-bottom:20px; text-align:right;">
+        <button onclick="window.print()" style="background:#163A2F; color:#fff; border:none; padding:10px 20px; border-radius:8px; font-weight:bold; cursor:pointer;">🖨️ Imprimir / Salvar em PDF</button>
+      </div>
+
+      <div class="header">
+        <div class="brand">
+          <h1>Morada Quintal da Serra</h1>
+          <p>Rancho Queimado - SC • Comprovante de Reserva</p>
+        </div>
+        <div class="meta-info">
+          <div class="res-id">${res.id}</div>
+          <div style="font-size:11px; color:#666; margin-top:2px;">Emissão: ${new Date().toLocaleDateString('pt-BR')} ${new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'})}</div>
+          <div class="status-pill">${getStatusLabelText(res.status)}</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="box">
+          <div class="box-title">👤 Hóspede Responsável & Acompanhantes</div>
+          <div><strong>Titular:</strong> ${guest.name || '-'}</div>
+          <div><strong>2º Hóspede:</strong> ${guest.secondGuest || '-'}</div>
+          <div><strong>CPF:</strong> ${guest.cpf || 'Não informado'}</div>
+          <div><strong>WhatsApp:</strong> ${guest.phone || '-'}</div>
+          <div><strong>E-mail:</strong> ${guest.email || '-'}</div>
+          ${guest.petName ? `<div><strong>🐾 Pet:</strong> ${guest.petName}</div>` : ''}
+          ${guest.extraGuest && guest.extraGuest.active ? `<div><strong>👶 Hóspede Extra:</strong> ${guest.extraGuest.name} (${guest.extraGuest.age} anos) — ${guest.extraGuest.surchargeLabel || ''}</div>` : ''}
+          ${guest.obs ? `<div style="margin-top:6px; font-style:italic; color:#444;"><strong>Obs:</strong> ${guest.obs}</div>` : ''}
+        </div>
+
+        <div class="box">
+          <div class="box-title">🌙 Detalhes da Estadia</div>
+          <div><strong>Modalidade:</strong> ${stay.title || 'Hospedagem'}</div>
+          <div><strong>Check-in (Entrada):</strong> ${stay.checkIn || '-'} (A partir das 14h)</div>
+          <div><strong>Check-out (Saída):</strong> ${stay.checkOut || '-'} (Até às 11h)</div>
+          <div><strong>Duração:</strong> ${stay.numNights || 1} ${stay.numNights === 1 ? 'diária' : 'diárias'}</div>
+          <div><strong>Hóspedes:</strong> ${stay.numGuests || 2} pessoas</div>
+          ${res.adminNotes ? `<div style="margin-top:6px; background:#fff; padding:6px; border-radius:4px; border:1px solid #ddd; font-size:11px;"><strong>Observações Internas:</strong> ${res.adminNotes}</div>` : ''}
+        </div>
+      </div>
+
+      <div class="box-title" style="margin-top:10px;">📋 Discriminação dos Serviços & Valores</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Descrição do Item</th>
+            <th class="text-right">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>${stay.title || 'Diária Hospedagem'}</strong> (${stay.numNights || 1} noites)</td>
+            <td class="text-right">${formatBRLAdmin(financials.stayBaseTotal || stay.stayBaseTotal || 0)}</td>
+          </tr>
+          ${guest.extraGuest && guest.extraGuest.active && financials.extraGuestAmount > 0 ? `
+            <tr>
+              <td>Hóspede Extra / Criança: ${guest.extraGuest.name} (${guest.extraGuest.surchargeLabel || ''})</td>
+              <td class="text-right">${formatBRLAdmin(financials.extraGuestAmount)}</td>
+            </tr>
+          ` : ''}
+          ${packages.map(p => `
+            <tr>
+              <td>💍 Pacote Romântico: ${p.name}</td>
+              <td class="text-right">${formatBRLAdmin(p.price)}</td>
+            </tr>
+          `).join('')}
+          ${addons.map(a => `
+            <tr>
+              <td>🧺 Adicional: ${a.name}</td>
+              <td class="text-right">${formatBRLAdmin(a.price)}</td>
+            </tr>
+          `).join('')}
+          <tr class="total-row">
+            <td>TOTAL GERAL DA RESERVA</td>
+            <td class="text-right">${formatBRLAdmin(financials.grandTotal || 0)}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="footer-terms">
+        <div>
+          <p style="margin:0; font-weight:bold;">Morada Quintal da Serra</p>
+          <p style="margin:0;">Estrada Geral - Rancho Queimado / SC</p>
+          <p style="margin:0;">Contato: (48) 99188-2991 • reservasmoradaquintaldaserra@gmail.com</p>
+        </div>
+        <div>
+          <div class="sig-line">Assinatura / Visto do Gestor</div>
+        </div>
+      </div>
+
+      <script>
+        window.onload = function() {
+          setTimeout(function() {
+            window.print();
+          }, 400);
+        };
+      </script>
+    </body>
+    </html>
+  `;
+
+  printWindow.document.open();
+  printWindow.document.write(html);
+  printWindow.document.close();
 }
 
 
