@@ -91,7 +91,7 @@ async function saveReservationToFirestore(reservationData) {
 }
 
 // URL Padrão do Webhook do Google Apps Script (salva permanentemente)
-const DEFAULT_WEBHOOK_URL = ""; 
+const DEFAULT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxUbmTp-t0G8kuDaoVVtuYkR1oN7e2fdbIH9gt-H-DCVxAWqTyNHDcKYqAh-7K_EGM/exec";
 
 /**
  * Disparo de Webhook para Google Apps Script (E-mails & Google Agenda)
