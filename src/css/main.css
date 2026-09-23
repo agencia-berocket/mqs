@@ -53,7 +53,16 @@ body {
   line-height: 1.6;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  will-change: scroll-position;
+}
+
+/* Otimização de Performance & Estabilidade para Renderização Mobile (Zero Flickering) */
+#header,
+#mobile-bottom-bar,
+.modal-backdrop {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 /* Animações Escalonadas e Ultra Suaves para a Hero Section */

@@ -137,9 +137,14 @@ function createGoogleCalendarEvent(data) {
 - Logue com `Reservasmoradaquintaldaserra@gmail.com`.
 - Clique em **"+ Adicionar projeto"** e dê o nome: `Morada Quintal da Serra`.
 
-### 2. Ativar Autenticação
+### 2. Ativar Autenticação & Domínios Autorizados
 - No menu esquerdo, vá em **Build ➔ Authentication**.
-- Clique em **Primeiros passos** ➔ Selecione **E-mail/senha** ➔ Ative a chave e clique em **Salvar**.
+- Na aba **Método de login (Sign-in method)**, ative os provedores:
+  - **E-mail/senha**
+  - **Google** (ative e configure o e-mail de suporte como `Reservasmoradaquintaldaserra@gmail.com`).
+- Na aba **Configurações (Settings)** ➔ **Domínios autorizados (Authorized domains)**:
+  - Clique em **Adicionar domínio**.
+  - Adicione o endereço/domínio de onde você está acessando a aplicação (ex: `localhost`, `127.0.0.1`, ou o domínio final da hospedagem como `suaempresa.vercel.app` ou `moradaquintaldaserra.com.br`).
 - Vá na aba **Users** e clique em **Adicionar usuário**:
   - E-mail: `Reservasmoradaquintaldaserra@gmail.com`
   - Senha: Crie uma senha segura para o gestor.

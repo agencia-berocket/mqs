@@ -1352,9 +1352,9 @@ function renderCartModalContent() {
         '<div style="margin-bottom:24px;background:var(--color-creme);padding:16px;border-radius:12px;border:1px solid var(--color-champagne)">' +
           '<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--color-araucaria);margin-bottom:12px">Modalidade & Datas</p>' +
           
-          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">' +
+          '<div style="display:none;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">' +
             '<button onclick="setServiceTypeInCart(\'pernoite\')" style="padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid;font-family:var(--font-sans);background:' + (appState.serviceType === 'pernoite' ? 'var(--color-araucaria)' : '#fff') + ';color:' + (appState.serviceType === 'pernoite' ? '#fff' : 'var(--color-araucaria)') + ';border-color:var(--color-araucaria)">Hospedagem</button>' +
-            '<button onclick="setServiceTypeInCart(\'dayuse\')" style="padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid;font-family:var(--font-sans);background:' + (appState.serviceType === 'dayuse' ? 'var(--color-araucaria)' : '#fff') + ';color:' + (appState.serviceType === 'dayuse' ? '#fff' : 'var(--color-araucaria)') + ';border-color:var(--color-araucaria)">Day Use</button>' +
+            '<button onclick="setServiceTypeInCart(\'dayuse\')" style="display:none;padding:8px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid;font-family:var(--font-sans);background:' + (appState.serviceType === 'dayuse' ? 'var(--color-araucaria)' : '#fff') + ';color:' + (appState.serviceType === 'dayuse' ? '#fff' : 'var(--color-araucaria)') + ';border-color:var(--color-araucaria)">Day Use</button>' +
           '</div>' +
 
           '<div style="display:grid;grid-template-columns:' + (appState.serviceType === 'pernoite' ? '1fr 1fr' : '1fr') + ';gap:10px">' +
@@ -1695,20 +1695,29 @@ function initHeaderScrollAnimation() {
       header.classList.add('header-transparent');
       header.classList.remove('header-scrolled');
       header.style.transform = 'translateY(0)';
+      lastScrollY = currentScrollY;
+      ticking = false;
+      return;
     } 
-    // 2. Scrolled Down (scrollY > 50): GREEN BG (Verde Araucária)
-    else {
-      header.classList.remove('header-transparent');
-      header.classList.add('header-scrolled');
 
-      // Hide header when scrolling DOWN (past 80px)
-      if (currentScrollY > lastScrollY && currentScrollY > 80) {
-        header.style.transform = 'translateY(-110%)';
-      } 
-      // Reappear smoothly with GREEN background when scrolling UP
-      else if (currentScrollY < lastScrollY) {
-        header.style.transform = 'translateY(0)';
-      }
+    // Evitar pequenos tremores de touch no celular (Scroll Delta Tolerance)
+    const scrollDelta = currentScrollY - lastScrollY;
+    if (Math.abs(scrollDelta) < 8) {
+      ticking = false;
+      return;
+    }
+
+    // 2. Scrolled Down (scrollY > 50): GREEN BG (Verde Araucária)
+    header.classList.remove('header-transparent');
+    header.classList.add('header-scrolled');
+
+    // Hide header when scrolling DOWN (past 80px)
+    if (scrollDelta > 0 && currentScrollY > 80) {
+      header.style.transform = 'translateY(-110%)';
+    } 
+    // Reappear smoothly with GREEN background when scrolling UP
+    else if (scrollDelta < 0) {
+      header.style.transform = 'translateY(0)';
     }
 
     lastScrollY = currentScrollY;
